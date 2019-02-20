@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="100px" height="110px" viewBox="0 0 100 110" enable-background="new 0 0 100 110" xml:space="preserve">
+<g>
+	<rect x="15" y="5" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" width="70" height="100"/>
+	<polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" points="50,7.5 17.5,7.5 17.5,55 	"/>
+	<polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" points="82.5,55 82.5,102.5 50,102.5 	"/>
+	<polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" points="17.5,55 17.5,102.5 50,102.5 	"/>
+	<polyline fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" points="82.5,55 82.5,7.5 50,7.5 	"/>
+	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="7.5" x2="50" y2="55"/>
+	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="102.5" x2="50" y2="55"/>
+	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="55" x2="17.5" y2="55"/>
+	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="82.5" y1="55" x2="50" y2="55"/>
+	<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="82.5" y1="55" x2="83.05" y2="55"/>
+</g>
+</svg>

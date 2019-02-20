@@ -1,0 +1,148 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+    font-size: 1em;
+    text-align: justify;
+    color: #606060;
+    background-color: #F1F1F1;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -125px;
+    visibility: hidden;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 125px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #606060;
+    color: white;
+    z-index: 999;
+}
+
+header .logo {
+    height: 100px;
+}
+
+header nav ul {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+header nav ul li:hover {
+    color: #45B549;
+}
+
+.jumbotron {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.jumbotron img {
+    width: 100%;
+    height: 100vh;
+}
+
+.jumbotron figcaption {
+    position: absolute;
+    bottom: 0;
+    padding: 15px;
+    background-color: rgba(96, 96, 96, 0.9);
+    color: white;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-decoration: underline;
+}
+
+#products div {
+    text-align: center;
+}
+
+#products figure {
+    width: 250px;
+    height: 500px;
+    overflow: hidden;
+    display: inline-block;
+    border: 1px solid #606060;
+    text-align: justify;
+}
+
+#products figure img {
+    display: block;
+    height: 250px;
+    margin: 0 auto;
+    width: 200px;
+    object-fit: contain;
+}
+
+#products figcaption {
+    padding: 5px 15px;
+}
+
+footer {
+    text-align: center;
+    background-color: #606060;
+    color: white;
+    padding: 25px;
+}
+
+footer ul {
+    vertical-align: top;
+    display: inline-block;
+    width: calc(100%/3 - 10px);
+}
+
+footer li {
+    line-height: 2em;
+}
+
+footer li:hover {
+    color: #45B549;
+}
