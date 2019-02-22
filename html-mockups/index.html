@@ -15,9 +15,9 @@
         <nav>
             <ul>
                 <li><a href="#home">Accueil</a></li>
-                <li><a href="#domisep">DomIsep</a></li>
+                <li><a href="#domisep-anchor">DomIsep</a></li>
                 <li><a href="#products-anchor">Produits</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact-anchor">Contact</a></li>
                 <li class="btn-connexion">
                     <i class="fas fa-users"></i> Connexion
                 </li>
@@ -29,7 +29,7 @@
         <figcaption>Cras mattis, metus eu tincidunt pretium, mi leo egestas nibh, pulvinar ultrices est ante vitae lacus. Fusce quis blandit augue, lacinia imperdiet purus. Etiam rhoncus ex at sapien sodales imperdiet. Aenean accumsan accumsan volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus nec consectetur sapien, eget interdum tortor. Vivamus sit amet risus vitae justo ornare pellentesque. Duis a sapien sed ante maximus iaculis. Aenean gravida rutrum odio, sed pharetra arcu tristique eu.</figcaption>
     </figure>
     <div class="container">
-        <a class="anchor" id="domisep"></a>
+        <a class="anchor" id="domisep-anchor"></a>
         <section>
             <h2>DomIsep</h2>
             <p>Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, quod Romae cum ultimo dedecore temptasse aliquando dicitur Gallienus, et adhibitis paucis clam ferro succinctis vesperi per tabernas palabatur et conpita quaeritando Graeco sermone, cuius erat inpendio gnarus, quid de Caesare quisque sentiret. et haec confidenter agebat in urbe ubi pernoctantium luminum claritudo dierum solet imitari fulgorem. postremo agnitus saepe iamque, si prodisset, conspicuum se fore contemplans, non nisi luce palam egrediens ad agenda quae putabat seria cernebatur. et haec quidem medullitus multis gementibus agebantur.Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, quod Romae cum ultimo dedecore temptasse aliquando dicitur Gallienus, et adhibitis paucis clam ferro succinctis vesperi per tabernas palabatur et conpita quaeritando Graeco sermone, cuius erat inpendio gnarus, quid de Caesare quisque sentiret. et haec confidenter agebat in urbe ubi pernoctantium luminum claritudo dierum solet imitari fulgorem. postremo agnitus saepe iamque, si prodisset, conspicuum se fore contemplans, non nisi luce palam egrediens ad agenda quae putabat seria cernebatur. et haec quidem medullitus multis gementibus agebantur.</p>
@@ -56,6 +56,29 @@
                 </figure>
             </div>
         </section>
+        <section>
+            <a class="anchor" id="contact-anchor"></a>
+            <h2>Contact</h2>
+            <form method="POST" action="/contact">
+                <label class="half-length">
+                    <span>Nom</span>
+                    <input type="text" name="name">
+                </label>
+                <label class="half-length">
+                    <span>Prénom</span>
+                    <input type="text" name="firstname">
+                </label>
+                <label class="full-length">
+                    <span>Courriel</span>
+                    <input type="text" name="email">
+                </label>
+                <label class="full-length">
+                    <span>Corps</span>
+                    <textarea name="body"></textarea>
+                </label>
+                <input class="btn-gray" type="submit">
+            </form>
+        </section>
     </div>
     <footer>
         <ul>
@@ -74,7 +97,7 @@
             <li><a href="">Twitter</a></li>
             <li><a href="">Linkedin</a></li>
         </ul>
-        <p>© Dom ISEP - 2019</p>
+        <p>© DomIsep - 2019</p>
     </footer>
 </body>
 </html>
