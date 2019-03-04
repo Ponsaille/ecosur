@@ -129,17 +129,13 @@ section h2 {
 }
 
 footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
     background-color: #606060;
     color: white;
     padding: 25px;
     margin-top: 75px;
-}
-
-footer ul {
-    vertical-align: top;
-    display: inline-block;
-    width: calc(100%/3 - 10px);
 }
 
 footer li {
@@ -148,6 +144,10 @@ footer li {
 
 footer li:hover {
     color: #45B549;
+}
+
+#footer-copyright {
+    grid-column: 2;
 }
 
 form {
