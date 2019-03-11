@@ -18,7 +18,7 @@
                 <li><a href="#domisep-anchor">DomIsep</a></li>
                 <li><a href="#products-anchor">Produits</a></li>
                 <li><a href="#contact-anchor">Contact</a></li>
-                <li class="btn-connexion">
+                <li class="btn-connexion" id="connexion_header">
                     <i class="fas fa-users"></i> Connexion
                 </li>
             </ul>
@@ -76,7 +76,7 @@
                     <span>Corps</span>
                     <textarea name="body"></textarea>
                 </label>
-                <input class="btn-gray" type="submit">
+                <input class="btn-gray" type="submit" value="Envoyer">
             </form>
         </section>
     </div>
@@ -99,5 +99,31 @@
         </ul>
         <p id="footer-copyright">© DomIsep - 2019</p>
     </footer>
+    <div class="overlay" id="login_overlay">
+        <div class="overlay_background overlay_close"></div>
+        <div class="overlay_content">
+            <div class="overlay_header">
+                <i class="fas fa-times overlay_close"></i>
+            </div>
+            <div class="overlay_body">
+                <h2>Connexion</h2>
+                <form action="/connexion" method="POST">
+                    <label class="full-length">
+                        <span>Email</span>
+                        <input type="text" name="email">
+                    </label>
+                    <label class="full-length">
+                        <span>Mot de passe</span>
+                        <input type="password" name="password">
+                    </label>
+                    <input class="btn-gray" type="submit" value="Se connecter">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="javascript/overlay.js"></script>
+    <script>
+        const loginOverlay = new Overlay(document.getElementById('login_overlay'), document.getElementById('connexion_header'));
+    </script>
 </body>
 </html>
