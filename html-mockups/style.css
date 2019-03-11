@@ -171,6 +171,7 @@ label input {
 
 label textarea {
     width: 100%;
+    resize: vertical;
 }
 
 input[type="text"] {
