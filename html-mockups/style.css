@@ -309,3 +309,27 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     text-align: center;
     background-color: #606060;
 }
+
+.custom_checkbox2 input[type=checkbox] + .checkbox2_span {
+    height: 30px;
+    width: 60px;
+    border: 2px solid #606060 ;
+    border-radius: 20px;
+}
+
+.custom_checkbox2 input[type=checkbox] + .checkbox2_span:after {
+    display: block;
+    position: absolute;
+    margin: 2.5px 2.5px;
+    height: 20px ;
+    width: 20px;
+    border-radius: 20px;
+    background-color: #606060;
+    color: #606060;
+    content: "";
+}
+
+.custom_checkbox2 input[type=checkbox]:checked + .checkbox2_span:after {
+    margin: 2.5px 33px;
+
+}
