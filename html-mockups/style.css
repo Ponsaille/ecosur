@@ -103,6 +103,9 @@ section h2 {
     text-decoration: underline;
 }
 
+
+/* Produits disponibles */
+
 #products div {
     text-align: center;
 }
@@ -128,6 +131,9 @@ section h2 {
     padding: 5px 15px;
 }
 
+
+/* Footer */
+
 footer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -150,9 +156,15 @@ footer li:hover {
     grid-column: 2;
 }
 
+
+/* Formulaires */
+
 form {
     text-align: center;
 }
+
+
+/* Labels de formulaires */
 
 label {
     text-align: left;
@@ -174,6 +186,9 @@ label textarea {
     resize: vertical;
 }
 
+
+/* Inputs de tous les formulaires */
+
 input[type="text"] {
     height: 30px;
 }
@@ -191,19 +206,25 @@ input[type="text"], input[type="password"], textarea {
 }
 
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
-    outline: none;
     border-radius: 5px;
-    border-color: #45B549;
 }
 
+
+/* Classes de disposition d'éléments sur toute la largeur du container ou sur la moitié */
+
 .half-length {
-    width: calc(50% - 6px);
+    width: calc(50% - 2px);
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .full-length {
     width: 100%;
     margin: 15px 0;
 }
+
+
+/* Boutons submit des formulaires */
 
 .btn-gray {
     height: 30px;
@@ -221,6 +242,9 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     background-color: #606060;
     color: white;
 }
+
+
+/* Overlay pour les connexions/inscriptions */
 
 .overlay {
     display: none;
@@ -284,9 +308,18 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 }
 
 
+/* Media queries (! A COMPLETER POUR CHAQUE ELEMENT DONT LE VISUEL CHANGE DRASTIQUEMENT SUR UN ECRAN REDUIT !) */
+
 @media screen and (max-width: 1000px) {
+
+    /* L'overlay couvre tout l'écran sur un écran réduit */
     .overlay_content {
         width: 100%;
         height: 100%;
+    }
+
+    section {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
