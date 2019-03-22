@@ -269,6 +269,20 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     width: 100%;
 }
 
+.overlay_body_left {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 40%;
+}
+
+.overlay_body_right {
+    position: absolute;
+    top: 15%;
+    left: 55%;
+    width: 40%;
+}
+
 
 @media screen and (max-width: 1000px) {
     .overlay_content {
