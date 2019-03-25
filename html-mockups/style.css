@@ -313,7 +313,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 .custom_checkbox2 input[type=checkbox] + .checkbox2_span {
     height: 30px;
     width: 60px;
-    border: 2px solid #606060 ;
+    border: 2px solid #606060;
     border-radius: 20px;
 }
 
@@ -333,3 +333,27 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     margin: 2.5px 33px;
 
 }
+
+.bouton_simple{
+    height: 30px;
+    width: 70px;
+    border: 2px solid #606060;
+    border-radius: 5px;
+    font-family: Roboto, sans-serif;
+}
+
+.bouton_simple:active{
+    background-color: #606060;
+    color: #FFFFFF;
+    
+}
+
+select {
+    border: none;
+    border-bottom: 1px solid #606060;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: Roboto, sans-serif;
+}
+
