@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +11,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="side-nav.css">
 </head>
 <body>
-  <aside id="side-nav">
-    <div class="hamburger-button">
+  <aside id="side-nav" class="open">
+    <div class="hamburger-button side_nav_close">
       <span></span>
       <span></span>
       <span></span>
@@ -20,18 +20,19 @@
     <img class="small-logo" src="images/small-logo.png" alt="">
     <nav>
       <ul>
-        <li><a href=""><i class="fas fa-cogs fa-fw"></i></a></li>
-        <li><a href=""><i class="fas fa-home fa-fw"></i></a></li>
-        <li><a href=""><i class="far fa-comment-alt fa-fw"></i></a></li>
-        <li><a href=""><i class="fas fa-user fa-fw"></i></a></li>
+          <li><a href=""><i class="fas fa-cogs fa-fw"></i> <span class="side-nav-text">Capteur/Actionneur</span></a></li>
+        <li><a href=""><i class="fas fa-home fa-fw"></i> <span class="side-nav-text">Gestion de domiciles</span></a></li>
+        <li><a href=""><i class="far fa-comment-alt fa-fw"></i> <span class="side-nav-text">Contacter</span></a></li>
+        <li><a href=""><i class="fas fa-user fa-fw"></i> <span class="side-nav-text">Données personnelles</span></a></li>
       </ul>
     </nav>
-    <span><a href=""><i class="fas fa-sign-out-alt fa-fw"></i></a></span>
+    <span><a href=""><i class="fas fa-sign-out-alt fa-fw"></i> <span>Logout</span></a></span>
   </aside>
 
   <script src="javascript/overlay.js"></script>
+  <script src="javascript/side-navbar.js"></script>
   <script>
-    const loginOverlay = new Overlay(document.getElementById('login_overlay'), document.getElementById('connexion_header'));
+    new SideNavbar(document.getElementById('side-nav'));
   </script>
 </body>
 </html>
