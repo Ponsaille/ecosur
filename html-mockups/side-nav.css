@@ -1,0 +1,82 @@
+#side-nav {
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  width: 100px;
+  font-size: 30px;
+  background-color: #606060;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: white;
+}
+
+#side-nav i {
+  font-size: 50px;
+}
+
+.side-nav-text {
+  display: none;
+}
+
+#side-nav.open .side-nav-text {
+  display: inline-block;
+}
+
+#side-nav.open  {
+  width: auto;
+  align-items: flex-start;
+}
+
+.small-logo {
+  width: 70px;
+  height: auto;
+}
+
+#side-nav a:active, #side-nav a:hover {
+  color: #45B549
+}
+
+.hamburger-button {
+  position: absolute;
+  right: -50px;
+}
+
+.hamburger-button span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  background: #606060;
+  border-radius: 2px;
+  transform-origin: 4px 0;
+  transition: transform 0.5s;
+}
+
+#side-nav li {
+  margin: 5px 0;
+}
+
+.hamburger-button span:first-child
+{
+  transform-origin: 0 0;
+}
+
+.hamburger-button span:nth-last-child(2)
+{
+  transform-origin: 0 100%;
+}
+
+#side-nav.open .hamburger-button span {
+  transform: rotate(-45deg) translate(-3px, 0px);
+}
+
+#side-nav.open .hamburger-button span:nth-last-child(2) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#side-nav.open .hamburger-button span:nth-last-child(3) {
+  transform: rotate(45deg) translate(1px, -1px);
+}
