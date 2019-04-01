@@ -5,7 +5,6 @@ class Overlay {
         this.closeButtons = this.overlay.getElementsByClassName('overlay_close');
         this.button.addEventListener('click', this.open);
         for(let i = 0; i < this.closeButtons.length; i++) {
-            console.log(this.closeButtons[i]);
             this.closeButtons[i].addEventListener('click', this.close);
         }
     }
