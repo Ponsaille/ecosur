@@ -8,18 +8,12 @@ class QueryBuilder {
         $this->pdo = $pdo;
     }
 
-    public function select($table, $columns = ['*'], $whereCol=[]) {
+    public function select($table, $columns = ['*']) {
         $sql = sprintf(
             'SELECT %s FROM %s',
             implode(', ', $columns),
             $table
         );
-
-        if(strlen($whereCol) > 0) {
-            
-        }
-
-        $where =  ?
 
         try {
             $statement = $this->pdo->prepare($sql);

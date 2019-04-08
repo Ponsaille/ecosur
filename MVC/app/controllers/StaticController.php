@@ -11,7 +11,7 @@
 
 namespace App\Controllers;
 
-class PagesController extends Controller
+class StaticController extends Controller
 {
 
     /**
@@ -24,23 +24,4 @@ class PagesController extends Controller
         return $this->view('index', compact('title'));
     }
 
-    /**
-     * Permet de renvoyer vers la page de description d'Ecosur (on adapte la variable $titre)
-     * @return mixed
-     */
-    public function about()
-    {
-        $title = "Sur nous";
-        return $this->view('about', compact('title'));
-    }
-
-    /**
-     * Permet de renvoyer vers la page de contact (on adapte la variable $titre)
-     * @return mixed
-     */
-    public function contact()
-    {
-        $title = "Nous contacter";
-        return $this->view('contact', compact('title'));
-    }
 }

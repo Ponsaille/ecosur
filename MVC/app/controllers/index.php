@@ -7,5 +7,5 @@
  */
 
 require 'Controller.php';
-require 'PagesController.php';
+require 'StaticController.php';
 require 'UsersController.php';

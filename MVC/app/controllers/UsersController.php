@@ -17,7 +17,7 @@ use \App\Core\App;
 class UsersController extends Controller
 {
     /**
-     * Permet de renvoyer vers la page d'accueil d'utilisateur connecté (on adapte la variable $titre)
+     * Permet de renvoyer vers le dashboard de base de l'utilisateur (on adapte la variable $titre)
      * @return mixed
      */
     public function index()
@@ -27,15 +27,4 @@ class UsersController extends Controller
         return $this->view('users', compact('users'));
     }
 
-    /**
-     * A MODIFIER
-     */
-    public function store()
-    {
-        App::get('database')->insert('users', [
-            'name' => $_POST['name']
-        ]);
-
-        return $this->redirect('users');
-    }
 }
