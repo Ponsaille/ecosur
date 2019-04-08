@@ -1,0 +1,434 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+    font-size: 1em;
+    text-align: justify;
+    color: #606060;
+    background-color: #F1F1F1;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -125px;
+    visibility: hidden;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 125px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #606060;
+    color: white;
+    z-index: 900;
+}
+
+header .logo {
+    height: 100px;
+}
+
+header nav ul {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+header nav ul li:hover {
+    color: #45B549;
+}
+
+.jumbotron {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    margin-bottom: 75px;
+}
+
+.jumbotron img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.jumbotron figcaption {
+    position: absolute;
+    bottom: 0;
+    padding: 15px;
+    background-color: rgba(96, 96, 96, 0.9);
+    color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section h2 {
+    font-size: 1.7em;
+    text-decoration: underline;
+}
+
+
+/* Produits disponibles */
+
+#products div {
+    text-align: center;
+}
+
+#products figure {
+    width: 250px;
+    height: 500px;
+    overflow: hidden;
+    display: inline-block;
+    border: 1px solid #606060;
+    text-align: justify;
+}
+
+#products figure img {
+    display: block;
+    height: 250px;
+    margin: 0 auto;
+    width: 200px;
+    object-fit: contain;
+}
+
+#products figcaption {
+    padding: 5px 15px;
+}
+
+
+/* Footer */
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    background-color: #606060;
+    color: white;
+    padding: 25px;
+    margin-top: 75px;
+}
+
+footer li {
+    line-height: 2em;
+}
+
+footer li:hover {
+    color: #45B549;
+}
+
+#footer-copyright {
+    grid-column: 2;
+}
+
+
+/* Formulaires */
+
+form {
+    text-align: center;
+}
+
+
+/* Labels de formulaires */
+
+label {
+    text-align: left;
+    display: inline-block;
+    margin: 15px 2px;
+}
+
+label span {
+    display: block;
+    font-size: 20px;
+}
+
+label input {
+    width: 100%;
+}
+
+label textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+
+/* Inputs de tous les formulaires */
+
+input[type="text"] {
+    height: 30px;
+}
+
+textarea {
+    height: 150px;
+}
+
+input[type="text"], input[type="password"], textarea {
+    background: white;
+    padding: 5px 7px;
+    border: 1px solid #606060;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border-radius: 5px;
+}
+
+
+/* Classes de disposition d'éléments sur toute la largeur du container ou sur la moitié */
+
+.half-length {
+    width: calc(50% - 2px);
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.full-length {
+    width: 100%;
+    margin: 15px 0;
+}
+
+
+/* Boutons submit des formulaires */
+
+.btn-gray {
+    height: 30px;
+    background: transparent;
+    color: #606060;
+    border: 2px solid #606060;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 15px;
+    cursor: pointer;
+}
+
+.btn-gray:hover {
+    background-color: #606060;
+    color: white;
+}
+
+
+/* Overlay pour les connexions/inscriptions */
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.overlay.open {
+    display: block;
+}
+
+.overlay_background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.overlay_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
+    overflow-y: scroll;
+    background-color: white;
+    padding: 10px;
+}
+
+.overlay_header {
+    width: 100%;
+    text-align: right;
+    border-bottom: 1px solid black;
+    padding: 15px;
+}
+
+.overlay_close {
+    cursor: pointer;
+}
+
+.overlay_body {
+    width: 100%;
+}
+
+.overlay_body_left {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 40%;
+}
+
+.overlay_body_right {
+    position: absolute;
+    top: 15%;
+    left: 55%;
+    width: 40%;
+}
+
+
+/* Media queries (! A COMPLETER POUR CHAQUE ELEMENT DONT LE VISUEL CHANGE DRASTIQUEMENT SUR UN ECRAN REDUIT !) */
+
+@media screen and (max-width: 1000px) {
+
+    /* L'overlay couvre tout l'écran sur un écran réduit */
+    .overlay_content {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Bouttons */
+
+.hidden {
+    display: none;
+}
+
+.custom_checkbox input[type=checkbox] + .checkbox_span {
+    height: 20px;
+    width: 20px;
+    border: 2px solid #606060;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.custom_checkbox input[type=checkbox] + .checkbox_span i {
+    position: absolute;
+    top: -1;
+    left: 5px;
+    opacity: 0;
+}
+
+.custom_checkbox input[type=checkbox]:checked + .checkbox_span i {
+    opacity: 1;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+.custom_checkbox input[type=checkbox]:checked + .checkbox_span {
+    text-align: center;
+    background-color: #606060;
+}
+
+.custom_checkbox2_grey input[type=checkbox] + .checkbox2_span_grey {
+    height: 30px;
+    width: 60px;
+    border: 2px solid #606060;
+    border-radius: 20px;
+}
+
+.custom_checkbox2_grey input[type=checkbox] + .checkbox2_span_grey:after {
+    display: block;
+    position: absolute;
+    margin: 2.5px 2.5px;
+    height: 20px ;
+    width: 20px;
+    border-radius: 20px;
+    background-color: #606060;
+    color: #606060;
+    content: "";
+    transition-duration: 0.5s;
+}
+
+.custom_checkbox2_grey input[type=checkbox]:checked + .checkbox2_span_grey:after {
+    margin: 2.5px 33px;
+    background-color: #45B549;
+
+}
+
+.custom_checkbox2_white input[type=checkbox] + .checkbox2_span_white {
+    height: 30px;
+    width: 60px;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+}
+
+.custom_checkbox2_white input[type=checkbox] + .checkbox2_span_white:after {
+    display: block;
+    position: absolute;
+    margin: 2.5px 2.5px;
+    height: 20px ;
+    width: 20px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+    content: "";
+    transition-duration: 0.5s;
+}
+
+.custom_checkbox2_white input[type=checkbox]:checked + .checkbox2_span_white:after {
+    margin: 2.5px 33px;
+    background-color: #45B549;
+
+}
+
+.bouton_simple{
+    height: 30px;
+    width: 70px;
+    border: 2px solid #606060;
+    border-radius: 5px;
+    font-family: Roboto, sans-serif;
+}
+
+.bouton_simple:active{
+    background-color: #606060;
+    color: #FFFFFF;
+    
+}
+
+select {
+    border: none;
+    border-bottom: 1px solid #606060;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: Roboto, sans-serif;
+}
+
