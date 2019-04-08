@@ -11,6 +11,7 @@ html, body {
     text-align: justify;
     color: #606060;
     background-color: #F1F1F1;
+
 }
 
 a {
@@ -347,6 +348,10 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     margin:auto;
 }
 
+.maison {
+    padding: 0;
+}
+
 .selection{
     display:flex;
     justify-content:space-between;
@@ -356,6 +361,10 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     margin-top:150px;
     height:50px;
     align-items:center;
+}
+.selectionFleche{
+    display:block;
+    position:relative;
 }
 .interactionCapteur{
     text-align:right;
@@ -379,6 +388,9 @@ article:nth-child(2n+1){
     background-color:#E6E6E6;
     color:#606060;
     font-size:20px;
+}
+.custom_checkbox{
+    padding-top:6px;
 }
 
 /* Media queries (! A COMPLETER POUR CHAQUE ELEMENT DONT LE VISUEL CHANGE DRASTIQUEMENT SUR UN ECRAN REDUIT !) */
@@ -409,7 +421,6 @@ section {
     border: 2px solid #606060;
     border-radius: 5px;
     cursor: pointer;
-    
 }
 
 .custom_checkbox input[type=checkbox] + .checkbox_span i {
