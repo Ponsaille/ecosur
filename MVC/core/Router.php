@@ -7,6 +7,8 @@
 // Un namespace permet d'utiliser les variables/fonctions des fichiers du dossier dans les autres fichiers
 namespace App\Core;
 
+use \Exception;
+
 class Router {
 
     /*
