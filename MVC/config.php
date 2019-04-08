@@ -4,10 +4,10 @@
 
 return [
     'database' => [
-        'name' => 'mytodo',
+        'name' => 'company',
         'username' => 'root',
-        'password' => '',
-        'connection' => 'mysql:host=127.0.0.1:3306',
+        'password' => 'lafeteestfinie',
+        'connection' => 'mysql:host=ponsaille.com:3306',
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]
