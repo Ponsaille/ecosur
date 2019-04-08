@@ -1,5 +1,9 @@
 <?php
 
+/*
+    Ici on charge tout les fichiers
+ */
+
 require 'core/App.php';
 require 'core/Router.php';
 require 'core/Request.php';

@@ -9,14 +9,17 @@
 namespace App\Controllers;
 
 
-class Controller {
-    public static function view($name, $data=[]) {
+class Controller
+{
+    public static function view($name, $data = [])
+    {
         extract($data);
 
         return require "app/views/$name.view.php";
     }
 
-    public static function redirect($uri) {
+    public static function redirect($uri)
+    {
         header("Location: /$uri");
     }
 }

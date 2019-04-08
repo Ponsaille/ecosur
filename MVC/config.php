@@ -1,5 +1,7 @@
 <?php
 
+// C'est ici qu'on connecte notre MVC à notre BDD
+
 return [
     'database' => [
         'name' => 'mytodo',
