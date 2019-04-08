@@ -307,86 +307,79 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     width: 40%;
 }
 
-/* CSS board */
+.iconeImg{
+    padding-left:20px;
+    padding-top:5px;
+}
+.icone{
+    font-size:100px;
+    padding-left:5px;
+}
+.commentaireIcone{
+    padding-left:0;
+    margin-left:0;
+}
 
-.panel{
+.topSection{
+    grid-template-columns: 3fr 0.7fr 0.7fr;
+    display:grid;
+    background-color: #606060;
+    padding:10px 10px;
+    font-size:20px;
+    color:white;
+    margin-top:30px;
+}
+.topSectionIcone{
+    text-align: right;
+}
+
+
+.station{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 10px;
+    font-size:20px;
+
+}
+
+.board{
     width:50%;
     margin:auto;
 }
 
-.ajustement{
-    margin-top:75px;
-}
-.filtrageMaison{
+.selection{
     display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color:#E6E6E6;
-    padding:10px 20px;
+    justify-content:space-between;
+    padding:5px 20px;
     font-size:20px;
+    background-color:#F5F5F5;
+    margin-top:150px;
+    height:50px;
+    align-items:center;
 }
-.filtrageMaison ul li {
-    display: inline-block;
-    margin-left: 10px;
-    padding-left:40px;
+.interactionCapteur{
+    text-align:right;
+    padding-right:5px;
 }
-section .maison{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color:#606060;
-    color:white;
-    padding:10px 20px;
-    margin-top:20px;
-    font-size:25px;
+.ligneDescriptionCapteur{
+    border-top: solid 1px #606060;
+    display:grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    align-items: center;
+    border-collapse: collapse;
 }
 
-.station{
+article{
     background-color:#888888;
     color:white;
     font-size:20px;
 }
 
-.station:nth-child(2n+1){
+article:nth-child(2n+1){
     background-color:#E6E6E6;
     color:#606060;
     font-size:20px;
 }
-
-.station article {
-    display:flex;
-    flex-direction: row;
-    justify-content:space-between;
-    align-items: center;
-    border-top: solid 1px #606060;
-
-}
-
-.station article div {
-    display: inline-block;
-}
-
-.pièce {
-    color: inherit;
-    float:right;
-    padding-right:30px;
-}
-.infoStation{
-    padding: 10px 3px 10px 3px;
-}
-.numeroStation {
-    padding-left:20px;
-}
-.conteneurStation .station .icone {
-    font-size:100px;
-    padding-left:5px;
-}
-
-.descritpionEtat{
-    padding-right:350px;
-}
-
-
 
 /* Media queries (! A COMPLETER POUR CHAQUE ELEMENT DONT LE VISUEL CHANGE DRASTIQUEMENT SUR UN ECRAN REDUIT !) */
 
