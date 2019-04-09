@@ -1,0 +1,21 @@
+
+.TokenQuestionnaire{
+    margin: 20px;
+    margin-left: 170px;
+    width: 50%;
+    height: 600px;
+    display: inline-block;
+    justify-content: center;
+    vertical-align: middle;
+    
+}
+.test{
+    margin-top: 10%;
+    margin-left:5%;
+}
+
+.SF-length {
+    width: calc(75% - 2px);
+    margin-right: 0;
+    margin-left: 0;
+}
