@@ -13,6 +13,8 @@ namespace App\Controllers;
 
 use \App\Core\App;
 
+use \App\Model\Users;
+
 
 class UsersController extends Controller
 {
@@ -22,7 +24,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = App::get('database')->select('users');
+        $users = Users::get();
 
         return $this->view('users', compact('users'));
     }
