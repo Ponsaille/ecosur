@@ -21,7 +21,7 @@ class StaticController extends Controller
     public function home()
     {
         $title = "Accueil";
-        return $this->view('index', compact('title'));
+        return $this->view('public/index', compact('title'));
     }
 
 }

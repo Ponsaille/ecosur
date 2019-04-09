@@ -1,7 +1,5 @@
-<?php require('app/views/partials/head.php'); ?>
+<?php require('partials/head.php'); ?>
 
-<h1>Submit your name!</h1>
+<!-- Contenu de la page d'accueil pour un utilisateur connecté -->
 
-
-
-<?php require('app/views/partials/footer.php'); ?>
+<?php require('partials/footer.php'); ?>
