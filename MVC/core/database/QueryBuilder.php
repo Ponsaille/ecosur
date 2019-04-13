@@ -34,12 +34,14 @@ class QueryBuilder {
             ':' . implode(', :', array_keys($parameters))
         );
 
+
         try {
             $statement = $this->pdo->prepare($sql);
+            
 
             $statement->execute($parameters);
         } catch(Exception $e) {
-            die('Whoops, something went wrong');
+            throw $e;
         }
     }
 

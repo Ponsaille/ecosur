@@ -11,3 +11,6 @@
  */
 
 $router->get('', 'StaticController@home');
+
+
+$router->post('inscription', 'UsersController@inscription');

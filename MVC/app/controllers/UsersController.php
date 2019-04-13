@@ -18,15 +18,8 @@ use \App\Model\Users;
 
 class UsersController extends Controller
 {
-    /**
-     * Permet de renvoyer vers le dashboard de base de l'utilisateur (on adapte la variable $titre)
-     * @return mixed
-     */
-    public function index()
-    {
-        $users = Users::get();
-
-        return $this->view('users', compact('users'));
+    public function inscription() {
+        Users::store($_POST);
+        die('You\'re inscription was sucessfull !');
     }
-
 }
