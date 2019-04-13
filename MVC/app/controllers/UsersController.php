@@ -22,4 +22,28 @@ class UsersController extends Controller
         Users::store($_POST);
         die('You\'re inscription was sucessfull !');
     }
+
+    public function connection() {
+        if(!(array_key_exists('email', $_POST) && array_key_exists('password', $_POST))) {
+            die("Email and passwords are required");
+        }
+        $user = Users::findByEmail($_POST['email']);
+
+        if(!$user) {
+            die("This user doesn't exist");
+        }
+
+        if($user->password == $_POST['password']) {
+            $_SESSION['user_id'] = $user->idPersonne;
+            die('All ok');
+        } else {
+            die('Wrong password');
+        }
+    }
+
+    public function disconnect() {
+        session_destroy();
+
+        static::redirect('');
+    }
 }

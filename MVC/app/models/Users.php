@@ -11,6 +11,26 @@ class Users extends Model {
         return App::get('database')->select('users');
     }
 
+    public static function find($id) {
+        $result = App::get('database')->select('personne', ['*'], ["idPersonne = $id"]);
+
+        if(sizeOf($result) == 1) {
+            return $result[0];
+        } else {
+            return false;
+        }
+    }
+
+    public static function findByEmail($email) {
+        $email = static::parseString($email);
+        $result = App::get('database')->select('personne', ['*'], ["email = '$email'"]);
+        if(sizeOf($result) == 1) {
+            return $result[0];
+        } else {
+            return false;
+        }
+    }
+
     public static function store($data) {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
@@ -46,8 +66,6 @@ class Users extends Model {
             return App::get('database')->insert('personne', $data);
         } catch(Exception $e) {
             die("Your data is invalid");
-        }
-        
-        
+        }  
     }
 }

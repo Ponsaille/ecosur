@@ -14,3 +14,7 @@ $router->get('', 'StaticController@home');
 
 
 $router->post('inscription', 'UsersController@inscription');
+
+$router->post('connection', 'UsersController@connection');
+$router->get('disconnect', 'UsersController@disconnect');
+$router->get('session', 'UsersController@getSession');

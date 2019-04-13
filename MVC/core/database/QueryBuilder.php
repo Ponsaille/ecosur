@@ -8,12 +8,16 @@ class QueryBuilder {
         $this->pdo = $pdo;
     }
 
-    public function select($table, $columns = ['*']) {
+    public function select($table, $columns = ['*'], $where=[]) {
         $sql = sprintf(
             'SELECT %s FROM %s',
             implode(', ', $columns),
             $table
         );
+
+        if(sizeof($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
 
         try {
             $statement = $this->pdo->prepare($sql);
@@ -22,7 +26,7 @@ class QueryBuilder {
 
             return $statement->fetchAll(PDO::FETCH_CLASS);
         } catch(Exception $e) {
-            die('Whoops, something went wrong');
+            throw $e;
         }
     }
 
