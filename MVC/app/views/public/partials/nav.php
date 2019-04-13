@@ -1,5 +1,5 @@
 <header>
-    <img class="logo" src="images/logo.png" alt="ÉcoSûr">
+    <img class="logo" src="app\views\public\images\logo.png" alt="ÉcoSûr">
     <nav>
         <ul>
             <li><a href="#home">Accueil</a></li>

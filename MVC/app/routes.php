@@ -11,3 +11,5 @@
  */
 
 $router->get('', 'StaticController@home');
+
+$router->get('users', 'UsersController@index');

@@ -51,14 +51,14 @@ class Router {
     }
 
     /**
-     * Si la route existe pour la méthode donnée (GET ou POST) alors on passe à l'action (avec call to action, qui fait
-    fonctionner le contrôleur))
+     * Si la route existe pour la méthode donnée (GET ou POST) alors on passe à l'action (avec call to action, qui fait fonctionner le contrôleur))
      * @param $uri
      * @param $requestType
      * @return mixed
      * @throws Exception
      */
     public function direct($uri, $requestType) {
+        
         if(array_key_exists($uri, $this->routes[$requestType])) {
             
             return $this->callAction(
