@@ -518,4 +518,19 @@ article:nth-child(2n+1){
     padding-top:6px;
 }
 
+.error-container {
+    text-align: center;
+    background: #F09186;
+    border-radius: 1rem;
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+}
+
+.error-container p {
+    color: black;
+    font-size: 20px;
+}
 

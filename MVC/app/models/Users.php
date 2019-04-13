@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Core\App;
+use App\Controllers;
 
 use \Exception;
 
@@ -59,13 +60,15 @@ class Users extends Model {
         });
 
         if(sizeof($errors) > 0) {
-            die('The following inputs are wrong : ' . implode(', ', $errors));
+            $title = "Informations erronnées";
+            return require "app/views/users/__input-erronnee.view.php";
         }
 
         try {
             return App::get('database')->insert('personne', $data);
         } catch(Exception $e) {
-            die("Your data is invalid");
+            $title = "Informations invalides";
+            return require "app/views/users/__info-invalide.view.php";
         }  
     }
 }

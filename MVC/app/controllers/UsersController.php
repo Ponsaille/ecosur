@@ -14,29 +14,40 @@ namespace App\Controllers;
 use \App\Core\App;
 use \App\Model\Users;
 
+use \Exception;
+
 
 class UsersController extends Controller
 {
     public function inscription() {
+
         Users::store($_POST);
-        die('You\'re inscription was sucessfull !');
+        
+        $title = "Inscription réussie";
+        return $this->view('users/__inscription-reussie', compact('title'));
+
     }
 
     public function connection() {
         if(!(array_key_exists('email', $_POST) && array_key_exists('password', $_POST))) {
-            die("Email and passwords are required");
+            $title = "Informations manquantes";
+            return $this->view('users/__info-manquantes', compact('title'));
         }
+
         $user = Users::findByEmail($_POST['email']);
 
         if(!$user) {
-            die("This user doesn't exist");
+            $title = "Utilisateur inconnu";
+            return $this->view('users/__user-inconnu', compact('title'));
         }
 
         if($user->password == $_POST['password']) {
             $_SESSION['user_id'] = $user->idPersonne;
-            die('All ok');
+            $title = "Tableau de bord";
+            return $this->view('users/users', compact('title'));
         } else {
-            die('Wrong password');
+            $title = "Mot de passe erroné";
+            return $this->view('users/__mauvais-mdp', compact('title'));
         }
     }
 
