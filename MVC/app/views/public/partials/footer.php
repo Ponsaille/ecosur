@@ -91,4 +91,5 @@
     const loginOverlay = new Overlay(document.getElementById('login_overlay'), document.getElementById('connexion_header'));
 </script>
 </body>
+
 </html>

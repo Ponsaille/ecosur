@@ -13,7 +13,6 @@ namespace App\Controllers;
 
 use \App\Core\App;
 use \App\Model\Users;
-
 use \Exception;
 
 
@@ -55,5 +54,10 @@ class UsersController extends Controller
         session_destroy();
 
         static::redirect('');
+    }
+
+    public function management() {
+        $title = "Management";
+        return $this->view('users/users-management', compact('title'));
     }
 }
