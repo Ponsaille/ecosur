@@ -9,3 +9,5 @@
 require 'Controller.php';
 require 'StaticController.php';
 require 'UsersController.php';
+require 'AuthController.php';
+require 'BoardController.php';

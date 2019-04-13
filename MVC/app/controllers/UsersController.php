@@ -43,8 +43,7 @@ class UsersController extends Controller
 
         if($user->password == $_POST['password']) {
             $_SESSION['user_id'] = $user->idPersonne;
-            $title = "Tableau de bord";
-            return $this->view('users/users', compact('title'));
+            $this->redirect('board');
         } else {
             $title = "Mot de passe erroné";
             return $this->view('users/__mauvais-mdp', compact('title'));
