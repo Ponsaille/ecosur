@@ -336,7 +336,7 @@ section {
     border: 2px solid #606060;
     border-radius: 5px;
     cursor: pointer;
-
+    
 }
 
 .custom_checkbox input[type=checkbox] + .checkbox_span i {
@@ -368,7 +368,7 @@ section {
     display: block;
     position: absolute;
     margin: 2.5px 2.5px;
-    height: 20px;
+    height: 20px ;
     width: 20px;
     border-radius: 20px;
     background-color: #606060;
@@ -394,7 +394,7 @@ section {
     display: block;
     position: absolute;
     margin: 2.5px 2.5px;
-    height: 20px;
+    height: 20px ;
     width: 20px;
     border-radius: 20px;
     background-color: #FFFFFF;
@@ -409,7 +409,7 @@ section {
 
 }
 
-.bouton_simple {
+.bouton_simple{
     height: 30px;
     width: 70px;
     border: 2px solid #606060;
@@ -417,10 +417,10 @@ section {
     font-family: Roboto, sans-serif;
 }
 
-.bouton_simple:active {
+.bouton_simple:active{
     background-color: #606060;
     color: #FFFFFF;
-
+    
 }
 
 select {

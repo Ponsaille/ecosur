@@ -73,6 +73,7 @@ class Router {
      * @param $controller
      * @param $action
      * @return mixed
+     * @throws Exception
      */
     protected function callAction($controller, $action) {
         $controller = "App\Controllers\\$controller";
