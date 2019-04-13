@@ -10,6 +10,7 @@ require 'core/Request.php';
 require 'core/database/Connection.php';
 require 'core/database/QueryBuilder.php';
 require 'app/controllers/index.php';
+require 'app/models/index.php';
 
 use App\Core\App;
 

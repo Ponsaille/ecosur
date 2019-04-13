@@ -8,6 +8,8 @@ use App\Core\{Router, Request};
 // On appelle le fichier bootstrap où sont chargés tous les fichiers
 $query = require 'core/bootstrap.php';
 
+session_start();
+
 /*
     On utilise les classes suivantes :
         - Router : appelle le bon contrôleur
