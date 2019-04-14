@@ -55,8 +55,8 @@ class UsersController extends Controller
         static::redirect('');
     }
 
-    public function management() {
-        $title = "Management";
-        return $this->view('users/users-management', compact('title'));
+    public function gestion() {
+        $title = "Gestion";
+        return $this->view('users/users-gestion', compact('title'));
     }
 }

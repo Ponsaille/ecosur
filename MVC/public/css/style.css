@@ -341,9 +341,8 @@ section {
 }
 
 .custom_checkbox input[type=checkbox] + .checkbox_span i {
-    position: absolute;
-    top: -1;
-    left: 5px;
+    position: relative;
+    top: -5px;
     opacity: 0;
 }
 
