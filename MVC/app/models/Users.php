@@ -9,7 +9,7 @@ use \Exception;
 
 class Users extends Model {
     public static function get() {
-        return App::get('database')->select('users');
+        return App::get('database')->select('personne');
     }
 
     public static function find($id) {
