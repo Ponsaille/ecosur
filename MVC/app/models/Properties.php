@@ -9,29 +9,6 @@ use \Exception;
 
 class Properties extends Model {
 
-    public static function get() {
-        return App::get('database')->select('domicile');
-    }
-
-    public static function find($id) {
-        $result = App::get('database')->select('domicile', ['*'], ["idDomicile = $id"]);
-
-        if(sizeOf($result) == 1) {
-            return $result[0];
-        } else {
-            return false;
-        }
-    }
-
-    public static function findByOwner($IdPersonne) {
-        $owner = static::parseString($IdPersonne);
-        $result = App::get('database')->select('domicile', ['*'], ["IdPersonne = '$idPersonne'"]);
-        if(sizeOf($result) == 1) {
-            return $result[0];
-        } else {
-            return false;
-        }
-    }
 
     public static function store($data) {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {

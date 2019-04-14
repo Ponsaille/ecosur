@@ -13,7 +13,7 @@ namespace App\Controllers;
 
 use \App\Core\App;
 use \Exception;
-use App\Model\Properties;
+use \App\Model\Properties;
 
 class PropertiesController extends Controller
 { 
@@ -22,7 +22,7 @@ class PropertiesController extends Controller
         Properties::store($_POST);
 
         $title = "Propriété bien ajoutée";
-        return $this->view('users/__inscription-reussie', compact('title'));
+        return $this->view('users/__propriete-ajoutee', compact('title'));
     }
 
 
