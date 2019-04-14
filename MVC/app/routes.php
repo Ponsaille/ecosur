@@ -18,4 +18,4 @@ $router->get('disconnect', 'UsersController@disconnect');
 $router->get('session', 'UsersController@getSession');
 $router->get('board', 'BoardController@index');
 
-
+$router->get('test', 'UsersController@test');

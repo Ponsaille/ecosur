@@ -49,6 +49,30 @@ class QueryBuilder {
         }
     }
 
+    public function update($table, $parameters, $where=[]) {
+        $sql = 'UPDATE ' . $table . ' SET ';
+
+        $paramsArray = [];
+        foreach (array_keys($parameters) as $parameter) {
+            $paramsArray[] = $parameter . '=:' . $parameter;
+        }
+
+        $sql .= implode(', ', $paramsArray);
+
+        if(sizeof($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            
+
+            $statement->execute($parameters);
+        } catch(Exception $e) {
+            throw $e;
+        }
+    }
+
     public function query($query) {
         $statement = $this->pdo->prepare($query);
 

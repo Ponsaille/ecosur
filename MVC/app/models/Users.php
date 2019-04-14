@@ -9,7 +9,7 @@ use \Exception;
 
 class Users extends Model {
     public static function get() {
-        return App::get('database')->select('users');
+        return App::get('database')->select('personne');
     }
 
     public static function find($id) {
@@ -32,7 +32,7 @@ class Users extends Model {
         }
     }
 
-    public static function store($data) {
+    public static function filter($data) {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
             return $filtered ? $filtered : false;
@@ -49,7 +49,11 @@ class Users extends Model {
             "pays" => FILTER_SANITIZE_ENCODED
         ];
 
-        $data = filter_var_array($data, $args);
+        return filter_var_array($data, $args);
+    } 
+
+    public static function store($data) {
+        $data = filter($data);
 
         $errors = [];
 
@@ -70,5 +74,37 @@ class Users extends Model {
             $title = "Informations invalides";
             return require "app/views/users/__info-invalide.view.php";
         }  
+    }
+
+    public static function update($data, $id) {
+        $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
+            $filtered = filter_var($input, FILTER_SANITIZE_STRING);
+            return $filtered ? $filtered : false;
+        });
+
+        $args = [
+            "nom" => $filter,
+            "prenom" => FILTER_SANITIZE_ENCODED,
+            "email"=> FILTER_VALIDATE_EMAIL,
+            "adresse"=> FILTER_SANITIZE_ENCODED,
+            "ville" => FILTER_SANITIZE_ENCODED,
+            "code_postal" => FILTER_SANITIZE_ENCODED, //TODO: Check for good code_postal
+            "pays" => FILTER_SANITIZE_ENCODED
+        ];
+
+        $data = filter_var_array($data, $args);
+
+        $data = array_filter($data, function($val) {
+            if(isset($val)) {
+                return $val;
+            }
+        });
+
+        try {
+            return App::get('database')->update('personne', $data, ["idPersonne=$id"]);
+        } catch(Exception $e) {
+            $title = "Informations invalides";
+            return require "app/views/users/__info-invalide.view.php";
+        }
     }
 }

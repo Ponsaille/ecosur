@@ -16,7 +16,6 @@ use \App\Model\Users;
 
 use \Exception;
 
-
 class UsersController extends Controller
 {
     public function inscription() {
