@@ -101,7 +101,7 @@
                 <div class="supprimerCapteur">Supprimer</div>
             </div>
             <div class="ligneDescriptionCapteurManagement">
-                <div class="iconeImg"><img src="images/opened-window.png"></div>
+                <div class="iconeImg"><img src="MVC\app\views\users\images\opened-window.png"></div>
                 <div class="supprimerCapteur">Supprimer</div>
             </div>
             <div class="ligneDescriptionCapteurManagement">
