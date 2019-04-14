@@ -17,6 +17,7 @@ $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'UsersController@disconnect');
 $router->get('session', 'UsersController@getSession');
 $router->get('management', 'UsersController@management');
+$router->get('board', 'UsersController@board');
 
 $router->post('new-property', 'PropertiesController@newProperty');
 

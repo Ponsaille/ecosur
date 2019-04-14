@@ -15,12 +15,12 @@
             <input type="text" name="adresse">
         </label>
         <label class="half-length">
-            <span>Ville</span>
-            <input type="text" name="ville">
+            <span>Code Postal</span>
+            <input type="text" name="code_postal">
         </label>
         <label class="half-length">
-            <span>Code Postal</span>
-            <input type="text" name="codePostal">
+            <span>Ville</span>
+            <input type="text" name="ville">
         </label>
         <label class="half-length">
             <span>Pays</span>
@@ -67,51 +67,52 @@
         </label>
         <input class="btn-gray" type="submit" value="Envoyer">
     </form>
+
     <section class="maison">
         <div class="topSection">
             <div class="topSectionMaison">Maison</div>
         </div>
         <article>
             <div class="station">
-                <div>Station #3644 </div>
+                <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a> </div>
                 <div>Salon</div>
             </div>
             <div>
                 <div class="ligneDescriptionCapteurManagement">
                     <div class="icone"><i class="fas fa-fire fa-fw"></i></div>
-                    <div class="supprimerCapteur">Supprimer</div>
+                    <a href="#" class="supprimerCapteur">Supprimer</a>
                 </div>
                 <div class="ligneDescriptionCapteurManagement">
                     <div class="icone"><i class="fas fa-door-closed fa-fw"></i></div>
-                    <div class="supprimerCapteur">Supprimer</div>
+                    <a href="#" class="supprimerCapteur">Supprimer</a>
                 </div>
                 <div class="ligneDescriptionCapteurManagement">
                     <div></div>
-                    <div class="supprimerCapteur">Ajouter un nouveau capteur</div>
+                    <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
                 </div>
             </div>
         </article>
         <article>
             <div class="station">
-                <div>Station #3644 </div>
+                <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a> </div>
                 <div>Chambre</div>
             </div>
             <div class="ligneDescriptionCapteurManagement">
                 <div class="icone"><i class="far fa-lightbulb fa-fw"></i></div>
-                <div class="supprimerCapteur">Supprimer</div>
+                <a href="#" class="supprimerCapteur">Supprimer</a>
             </div>
             <div class="ligneDescriptionCapteurManagement">
                 <div class="iconeImg"><img src="MVC\app\views\users\images\opened-window.png"></div>
-                <div class="supprimerCapteur">Supprimer</div>
+                <a href="#" class="supprimerCapteur">Supprimer</a>
             </div>
             <div class="ligneDescriptionCapteurManagement">
                 <div></div>
-                <div class="supprimerCapteur">Ajouter un nouveau capteur</div>
+                <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
             </div>
         </article>
         <article>
             <div class="station">
-                <div class="nouvelleStation">Ajouter une nouvelle station</div>
+                <a href="#" class="nouvelleStation">Ajouter une nouvelle station</a>
                 <div></div>
             </div>
         </article>

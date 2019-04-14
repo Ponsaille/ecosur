@@ -19,31 +19,18 @@ class Properties extends Model {
         $args = [
             "titre" => $filter,
             "adresse"=> FILTER_SANITIZE_ENCODED,
-            "ville" => FILTER_SANITIZE_ENCODED,
             "code_postal" => FILTER_SANITIZE_ENCODED, //TODO: Check for good code_postal
+            "ville" => FILTER_SANITIZE_ENCODED,
             "pays" => FILTER_SANITIZE_ENCODED
         ];
 
         $data = filter_var_array($data, $args);
 
-        $errors = [];
-
-        array_walk($data, function($val, $key) use(&$errors) {
-            if(!$val) {
-                $errors[] = $key;
-            }
-        });
-
-        if(sizeof($errors) > 0) {
-            $title = "Informations erronnées";
-            return require "app/views/users/__input-erronnee.view.php";
-        }
-
         try {
             return App::get('database')->insert('domicile', $data);
         } catch(Exception $e) {
             $title = "Informations invalides";
-            return require "app/views/users/__info-invalide.view.php";
+            return die($e->getMessage());//require "app/views/users/__info-invalide.view.php";
         }  
     }
 
