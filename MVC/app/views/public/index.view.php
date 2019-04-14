@@ -2,7 +2,7 @@
 
     <!-- Image principale avec texte en jumbotron -->
     <figure class="jumbotron" id="home">
-        <img src="app\views\public\images\domotique.jpg" alt="" srcset="">
+        <img src="/public/images/domotique.jpg" alt="" srcset="">
         <figcaption>Cras mattis, metus eu tincidunt pretium, mi leo egestas nibh, pulvinar ultrices est ante vitae lacus.
             Fusce quis blandit augue, lacinia imperdiet purus. Etiam rhoncus ex at sapien sodales imperdiet. Aenean accumsan
             accumsan volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
@@ -46,7 +46,7 @@
             <h2>Produits</h2>
             <div>
                 <figure>
-                    <img src="app\views\public\images\logo.png" alt="">
+                    <img src="/public/images/logo.png" alt="">
                     <hr>
                     <figcaption>Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, quod Romae
                         cum ultimo dedecore temptasse aliquando dicitur Gallienus, et adhibitis paucis clam ferro succinctis
@@ -58,7 +58,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="app\views\public\images\logo.png" alt="">
+                    <img src="/public/images/logo.png" alt="">
                     <hr>
                     <figcaption>Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, quod Romae
                         cum ultimo dedecore temptasse aliquando dicitur Gallienus, et adhibitis paucis clam ferro succinctis
@@ -70,7 +70,7 @@
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="app\views\public\images\logo.png" alt="">
+                    <img src="/public/images/logo.png" alt="">
                     <hr>
                     <figcaption>Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, quod Romae
                         cum ultimo dedecore temptasse aliquando dicitur Gallienus, et adhibitis paucis clam ferro succinctis

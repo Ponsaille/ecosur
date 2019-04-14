@@ -4,7 +4,7 @@
         <span></span>
         <span></span>
     </div>
-    <img class="small-logo" src="images/small-logo.png" alt="">
+    <img class="small-logo" src="/public/images/small-logo.png" alt="">
     <nav>
         <ul>
             <li><a href="/session"><i class="fas fa-cogs fa-fw"></i> <span class="side-nav-text">Capteur/Actionneur</span></a></li>
