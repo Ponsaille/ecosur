@@ -60,15 +60,16 @@ class Users extends Model {
         });
 
         if(sizeof($errors) > 0) {
-            $title = "Informations erronnées";
-            return require "app/views/users/__input-erronnee.view.php";
+            die(require "app/views/users/__input-erronnee.view.php");
         }
 
         try {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             return App::get('database')->insert('personne', $data);
         } catch(Exception $e) {
+            die(var_dump($e->getMessage()));
             $title = "Informations invalides";
-            return require "app/views/users/__info-invalide.view.php";
+            die(require "app/views/users/__info-invalide.view.php");
         }  
     }
 }

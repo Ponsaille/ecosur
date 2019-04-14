@@ -41,7 +41,7 @@ class UsersController extends Controller
             return $this->view('users/__user-inconnu', compact('title'));
         }
 
-        if($user->password == $_POST['password']) {
+        if(password_verify($_POST['password'], $user->password)) {
             $_SESSION['user_id'] = $user->idPersonne;
             $this->redirect('board');
         } else {
