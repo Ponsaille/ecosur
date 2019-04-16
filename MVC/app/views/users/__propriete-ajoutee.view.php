@@ -9,10 +9,18 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="/public/css/style.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="/public/css/side-nav.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../public/css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../public/css/side-nav.css"/>
 </head>
 
 <body>
 
-<?php require('side-nav.php'); ?>
+<div class="error-container">
+
+<h1>Propriété ajoutée.</h1>
+
+<a href="/management"><button class="btn-gray">Retour</button></a>
+
+</div>
+
+<?php require('partials/footer.php'); ?>

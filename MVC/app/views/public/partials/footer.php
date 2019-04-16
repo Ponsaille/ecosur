@@ -86,9 +86,10 @@
         </div>
     </div>
 </div>
-<script src="../../../public/javascript/overlay.js"></script>
+<script src="/public/javascript/overlay.js"></script>
 <script>
     const loginOverlay = new Overlay(document.getElementById('login_overlay'), document.getElementById('connexion_header'));
 </script>
 </body>
+
 </html>

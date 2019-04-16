@@ -13,35 +13,46 @@ namespace App\Controllers;
 
 use \App\Core\App;
 use \App\Model\Users;
-
 use \Exception;
 
 
 class UsersController extends Controller
 {
-    public function inscription() {
 
-        Users::store($_POST);
-        
-        $title = "Inscription réussie";
-        return $this->view('users/__inscription-reussie', compact('title'));
-
+    public function board()
+    {
+        $title = "Tableau de bord";
+        return $this->view('users/users', compact('title'));
     }
 
-    public function connection() {
-        if(!(array_key_exists('email', $_POST) && array_key_exists('password', $_POST))) {
+    public function inscription()
+    {
+
+        Users::store($_POST);
+
+        $user = Users::findByEmail($_POST['email']);
+
+        $_SESSION['user_id'] = $user->idPersonne;
+
+        $title = "Inscription réussie";
+        return $this->view('users/__inscription-reussie', compact('title'));
+    }
+
+    public function connection()
+    {
+        if (!(array_key_exists('email', $_POST) && array_key_exists('password', $_POST))) {
             $title = "Informations manquantes";
             return $this->view('users/__info-manquantes', compact('title'));
         }
 
         $user = Users::findByEmail($_POST['email']);
 
-        if(!$user) {
+        if (!$user) {
             $title = "Utilisateur inconnu";
             return $this->view('users/__user-inconnu', compact('title'));
         }
 
-        if($user->password == $_POST['password']) {
+        if(password_verify($_POST['password'], $user->password)) {
             $_SESSION['user_id'] = $user->idPersonne;
             $this->redirect('board');
         } else {
@@ -50,9 +61,15 @@ class UsersController extends Controller
         }
     }
 
-    public function disconnect() {
+    public function disconnect()
+    {
         session_destroy();
 
         static::redirect('');
+    }
+
+    public function gestion() {
+        $title = "Gestion";
+        return $this->view('users/users-gestion', compact('title'));
     }
 }

@@ -19,7 +19,7 @@
     
 <h1>Inscription réussie !</h1>
 
-<a href="/connexion"><button class="btn-gray">Se connecter</button></a>
+<a href="/board"><button class="btn-gray">Se connecter</button></a>
 
 <div>
 
