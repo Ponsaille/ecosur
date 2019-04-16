@@ -23,5 +23,4 @@ class StaticController extends Controller
         $title = "Accueil";
         return $this->view('public/index', compact('title'));
     }
-
 }

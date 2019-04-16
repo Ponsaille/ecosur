@@ -7,32 +7,37 @@ use App\Controllers;
 
 use \Exception;
 
-class Users extends Model {
-    public static function get() {
+class Users extends Model
+{
+    public static function get()
+    {
         return App::get('database')->select('users');
     }
 
-    public static function find($id) {
+    public static function find($id)
+    {
         $result = App::get('database')->select('personne', ['*'], ["idPersonne = $id"]);
 
-        if(sizeOf($result) == 1) {
+        if (sizeOf($result) == 1) {
             return $result[0];
         } else {
             return false;
         }
     }
 
-    public static function findByEmail($email) {
+    public static function findByEmail($email)
+    {
         $email = static::parseString($email);
         $result = App::get('database')->select('personne', ['*'], ["email = '$email'"]);
-        if(sizeOf($result) == 1) {
+        if (sizeOf($result) == 1) {
             return $result[0];
         } else {
             return false;
         }
     }
 
-    public static function store($data) {
+    public static function store($data)
+    {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
             return $filtered ? $filtered : false;
@@ -41,8 +46,8 @@ class Users extends Model {
         $args = [
             "nom" => $filter,
             "prenom" => FILTER_SANITIZE_ENCODED,
-            "email"=> FILTER_VALIDATE_EMAIL,
-            "adresse"=> FILTER_SANITIZE_ENCODED,
+            "email" => FILTER_VALIDATE_EMAIL,
+            "adresse" => FILTER_SANITIZE_ENCODED,
             "ville" => FILTER_SANITIZE_ENCODED,
             "code_postal" => FILTER_SANITIZE_ENCODED, //TODO: Check for good code_postal
             "password" => FILTER_SANITIZE_ENCODED,
@@ -53,23 +58,23 @@ class Users extends Model {
 
         $errors = [];
 
-        array_walk($data, function($val, $key) use(&$errors) {
-            if(!$val) {
+        array_walk($data, function ($val, $key) use (&$errors) {
+            if (!$val) {
                 $errors[] = $key;
             }
         });
 
-        if(sizeof($errors) > 0) {
+        if (sizeof($errors) > 0) {
             die(require "app/views/users/__input-erronnee.view.php");
         }
 
         try {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             return App::get('database')->insert('personne', $data);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             die(var_dump($e->getMessage()));
             $title = "Informations invalides";
             die(require "app/views/users/__info-invalide.view.php");
-        }  
+        }
     }
 }

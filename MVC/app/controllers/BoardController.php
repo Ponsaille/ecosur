@@ -7,8 +7,10 @@ use \App\Model\Users;
 
 use \Exception;
 
-class BoardController extends AuthController {
-    public function index() {
+class BoardController extends AuthController
+{
+    public function index()
+    {
         $title = "Tableau de bord";
         return $this->view('users/users', compact('title'));
     }

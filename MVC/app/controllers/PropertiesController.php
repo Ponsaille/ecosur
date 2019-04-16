@@ -16,14 +16,13 @@ use \Exception;
 use \App\Model\Properties;
 
 class PropertiesController extends Controller
-{ 
-    public function newProperty() {
+{
+    public function newProperty()
+    {
 
         Properties::store($_POST);
 
         $title = "Propriété bien ajoutée";
         return $this->view('users/__propriete-ajoutee', compact('title'));
     }
-
-
 }
