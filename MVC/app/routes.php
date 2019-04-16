@@ -17,5 +17,6 @@ $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'UsersController@disconnect');
 $router->get('session', 'UsersController@getSession');
 $router->get('board', 'BoardController@index');
+$router->get('board', 'BoardController@test');
 
 
