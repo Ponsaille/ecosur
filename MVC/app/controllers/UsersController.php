@@ -30,6 +30,10 @@ class UsersController extends Controller
 
         Users::store($_POST);
 
+        $user = Users::findByEmail($_POST['email']);
+
+        $_SESSION['user_id'] = $user->idPersonne;
+
         $title = "Inscription réussie";
         return $this->view('users/__inscription-reussie', compact('title'));
     }
