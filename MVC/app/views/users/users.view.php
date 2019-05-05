@@ -131,7 +131,7 @@ Station::
                     <div class="interactionCapteur"><label class="custom_checkbox2_grey"><input class="hidden" type="checkbox" name="checkbox"><span class="checkbox2_span_grey"></span></label></div>
                 </div>
                 <div class="ligneDescriptionCapteur">
-                    <div class="iconeImg"><img src="images/opened-window.png"></div>
+                    <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
                     <span class="commentaireIcone">Fenêtre ouverte</span>
                 </div>
             </div>

@@ -52,7 +52,7 @@ class UsersController extends Controller
             return $this->view('users/__user-inconnu', compact('title'));
         }
 
-        if(password_verify($_POST['password'], $user->password)) {
+        if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['user_id'] = $user->idPersonne;
             $this->redirect('board');
         } else {
@@ -68,7 +68,8 @@ class UsersController extends Controller
         static::redirect('');
     }
 
-    public function gestion() {
+    public function gestion()
+    {
         $title = "Gestion";
         return $this->view('users/users-gestion', compact('title'));
     }
