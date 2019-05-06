@@ -19,7 +19,6 @@ class PropertiesController extends Controller
 {
     public function newProperty()
     {
-
         Properties::store($_POST);
 
         $title = "Propriété bien ajoutée";

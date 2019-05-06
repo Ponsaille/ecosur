@@ -27,8 +27,22 @@ class Properties extends Model
 
         $data = filter_var_array($data, $args);
 
+        // $data2 = [
+        //     "DateDebut" => date('Y-m-d'),
+        //     "DateFin" => date(Y-m-d, strtotime(date('Y-m-d') .'+1 years')),
+        // ] LAST_INSERT_ID()
+
         try {
-            return App::get('database')->insert('domicile', $data);
+            //App::get('database')->insert('domicile', $data);
+
+            $data = [
+                "DateDebut" => getDate(),
+                "DateFin" => date(Y - m - d, strtotime(date('Y-m-d') . '+1 years')),
+                "idPersonne" => $_SESSION['user_id'],
+                "idDomicile" => LAST_INSERT_ID()
+            ];
+
+            return App::get('database')->insert('abonnementproprietaire', $data);
         } catch (Exception $e) {
             $title = "Informations invalides";
             return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
