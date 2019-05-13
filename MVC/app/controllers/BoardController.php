@@ -14,12 +14,4 @@ class BoardController extends AuthController
         $title = "Tableau de bord";
         return $this->view('users/users', compact('title'));
     }
-<<<<<<< HEAD
-
-    public function test(){
-        die(var_dump("hey"));
-    }
 }
-=======
-}
->>>>>>> MVC
