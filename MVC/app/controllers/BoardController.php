@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use \App\Core\App;
-use \App\Model\Users;
+use \App\Model\Properties;
 
 use \Exception;
 
@@ -12,6 +12,7 @@ class BoardController extends AuthController
     public function index()
     {
         $title = "Tableau de bord";
+        var_dump(Properties::findPropertiesByConnectedUser());
         return $this->view('users/users', compact('title'));
     }
 }

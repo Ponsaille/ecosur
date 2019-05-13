@@ -19,10 +19,17 @@ class PropertiesController extends Controller
 {
     public function newProperty()
     {
-
         Properties::store($_POST);
 
         $title = "Propriété bien ajoutée";
         return $this->view('users/__propriete-ajoutee', compact('title'));
+    }
+
+    public function edit() {
+
+        $properties = Properties::findPropertiesByConnectedUser();
+
+
+
     }
 }

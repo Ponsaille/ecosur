@@ -12,6 +12,7 @@
 namespace App\Controllers;
 
 use \App\Core\App;
+use App\Model\Properties;
 use \App\Model\Users;
 use \Exception;
 
@@ -70,7 +71,9 @@ class UsersController extends Controller
 
     public function gestion()
     {
+        $properties = Properties::findPropertiesByConnectedUser();
+        var_dump($properties);
         $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title'));
+        return $this->view('users/users-gestion', compact('title', 'properties'));
     }
 }

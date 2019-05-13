@@ -1,5 +1,6 @@
 <?php
 
+
 class QueryBuilder {
 
     protected $pdo;
@@ -56,4 +57,5 @@ class QueryBuilder {
 
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
+
 }
