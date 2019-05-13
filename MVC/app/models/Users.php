@@ -7,17 +7,11 @@ use App\Controllers;
 
 use \Exception;
 
-<<<<<<< HEAD
-class Users extends Model {
-    public static function get() {
-        return App::get('database')->select('personne');
-=======
 class Users extends Model
 {
     public static function get()
     {
         return App::get('database')->select('users');
->>>>>>> MVC
     }
 
     public static function find($id)
