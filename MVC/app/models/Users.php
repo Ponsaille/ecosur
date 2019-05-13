@@ -36,7 +36,7 @@ class Users extends Model
         }
     }
 
-    public static function store($data)
+    public static function store($data, $type=0)
     {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
@@ -67,6 +67,8 @@ class Users extends Model
         if (sizeof($errors) > 0) {
             die(require "app/views/users/__input-erronnee.view.php");
         }
+
+        $data['type'] = $type;
 
         try {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);

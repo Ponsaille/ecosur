@@ -12,3 +12,4 @@ require 'UsersController.php';
 require 'PropertiesController.php';
 require 'AuthController.php';
 require 'BoardController.php';
+require 'PdgController.php';
