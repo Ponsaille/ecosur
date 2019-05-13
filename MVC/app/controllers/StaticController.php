@@ -11,6 +11,8 @@
 
 namespace App\Controllers;
 
+use App\Model\Modifiables;
+
 class StaticController extends Controller
 {
 
