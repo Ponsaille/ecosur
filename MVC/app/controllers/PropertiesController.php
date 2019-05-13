@@ -25,11 +25,9 @@ class PropertiesController extends Controller
         return $this->view('users/__propriete-ajoutee', compact('title'));
     }
 
-    public function edit() {
+    public function editProperty() {
 
-        $properties = Properties::findPropertiesByConnectedUser();
-
-
-
+        Properties::edit($_POST, $_GET);
+        $this->redirect('gestion');
     }
 }
