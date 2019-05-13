@@ -1,5 +1,6 @@
 <?php
 
+
 class QueryBuilder {
 
     protected $pdo;
@@ -49,6 +50,31 @@ class QueryBuilder {
         }
     }
 
+    public function update($table, $parameters, $where=[]) {
+        $sets = [];
+        foreach (array_keys($parameters) as $key) {
+            $sets[] = "'" . $key."' = :".$key;
+        }
+        $sql = sprintf(
+            'UPDATE %s %s',
+            $table,
+            implode(', ', $sets)
+        );
+
+        if(sizeof($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+
+
+            $statement->execute($parameters);
+        } catch(Exception $e) {
+            throw $e;
+        }
+    }
+
     public function query($query) {
         $statement = $this->pdo->prepare($query);
 
@@ -56,4 +82,5 @@ class QueryBuilder {
 
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
+
 }

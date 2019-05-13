@@ -19,6 +19,7 @@ $router->get('session', 'UsersController@getSession');
 $router->get('gestion', 'UsersController@gestion');
 $router->get('board', 'BoardController@index');
 $router->post('new-property', 'PropertiesController@newProperty');
+$router->post('edit-property', 'PropertiesController@editProperty');
 
 $router->get('pdg', 'PdgController@index');
 $router->post('pdg/inscription_admin', 'PdgController@inscription');

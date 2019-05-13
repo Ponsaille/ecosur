@@ -24,4 +24,10 @@ class PropertiesController extends Controller
         $title = "Propriété bien ajoutée";
         return $this->view('users/__propriete-ajoutee', compact('title'));
     }
+
+    public function editProperty() {
+
+        Properties::edit($_POST, $_GET);
+        $this->redirect('gestion');
+    }
 }

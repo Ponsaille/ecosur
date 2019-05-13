@@ -1,126 +1,188 @@
 <?php require('partials/head.php'); ?>
 
-<div class="board">
+    <!-- <script>
+        let changeContent = function (title) {
+            //let titleDom = document.getElementById(title);
+            let AdresseForm = document.getElementsByName('adresse');
+            let villeForm = document.getElementsByName('ville');
+            let codePostalForm = document.getElementsByName('code_postal');
+            let paysForm = document.getElementsByName('pays');
 
-    <div class="selection">
-        <h2>Ajouter un lieu</h2>
-    </div>
-    <form class="full-length form-management" method="POST" action="/new-property">
-        <label class="full-length">
-            <span>Titre</span>
-            <input type="text" name="titre">
-        </label>
-        <label class="half-length">
-            <span>Adresse</span>
-            <input type="text" name="adresse">
-        </label>
-        <label class="half-length">
-            <span>Code Postal</span>
-            <input type="text" name="code_postal">
-        </label>
-        <label class="half-length">
-            <span>Ville</span>
-            <input type="text" name="ville">
-        </label>
-        <label class="half-length">
-            <span>Pays</span>
-            <input type="text" name="pays">
-        </label>
-        <input class="btn-gray" type="submit" value="Envoyer">
-    </form>
+            <?php if (isset($properties)) {
+        foreach ($properties as $property) {
+            ?> if (title === "<?= $property->Titre; ?>") {
+                AdresseForm.placeholder = "<?= $property->Adresse; ?>";
+        }
+        <?php
+        }
+    } ?>
 
-</div>
 
-<div class="board">
+        }
+    </script> -->
 
-    <div class="selection">
-        <h2>Modifier un lieu</h2>
-        <label class="dropButton">
-            <select class="dropdown">
-                <option>Maison</option>
-                <option>Appartement</option>
-                <option>Maison de vacances</option>
-            </select>
-            <i class="fas fa-angle-down"></i>
-        </label>
-    </div>
-    <form class="full-length form-management" method="POST" action="">
-        <label class="full-length">
-            <span>Titre</span>
-            <input type="text" name="titre">
-        </label>
-        <label class="half-length">
-            <span>Adresse</span>
-            <input type="text" name="adresse">
-        </label>
-        <label class="half-length">
-            <span>Ville</span>
-            <input type="text" name="ville">
-        </label>
-        <label class="half-length">
-            <span>Code Postal</span>
-            <input type="text" name="codePostal">
-        </label>
-        <label class="half-length">
-            <span>Pays</span>
-            <input type="text" name="pays">
-        </label>
-        <input class="btn-gray" type="submit" value="Envoyer">
-    </form>
+    <div class="board">
 
-    <section class="maison">
-        <div class="topSection">
-            <div class="topSectionMaison">Maison</div>
+        <div class="selection">
+            <h2>Ajouter un lieu</h2>
         </div>
-        <article>
-            <div class="station">
-                <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a> </div>
-                <div>Salon</div>
+        <form class="full-length form-management" method="POST" action="/new-property">
+            <label class="full-length">
+                <span>Titre</span>
+                <input type="text" name="titre">
+            </label>
+            <label class="half-length">
+                <span>Adresse</span>
+                <input type="text" name="adresse">
+            </label>
+            <label class="half-length">
+                <span>Code Postal</span>
+                <input type="text" name="code_postal">
+            </label>
+            <label class="half-length">
+                <span>Ville</span>
+                <input type="text" name="ville">
+            </label>
+            <label class="half-length">
+                <span>Pays</span>
+                <input type="text" name="pays">
+            </label>
+            <input class="btn-gray" type="submit" value="Envoyer">
+        </form>
+
+    </div>
+
+    <div class="board">
+
+        <!-- <div class="selection">
+            <h2>Modifier un lieu</h2>
+            <label class="dropButton">
+                <select id="select-property" class="dropdown"
+                onchange="changeContent(this.options[this.selectedIndex].text)">
+                <?php
+        /*
+                if (isset($properties)) {
+                    foreach ($properties as $property) {
+                        ?>
+                        <option><?= $property->Titre ?></option><?php
+                    }
+                }
+        */ ?>
+                </select>
+                <i class="fas fa-angle-down"></i>
+            </label>
+        </div> -->
+
+        <?php
+        if (isset($properties)) {
+            foreach ($properties as $property) {
+                ?>
+                <h3><?= $property->Titre ?></h3>
+                <form class="full-length form-management" method="POST" action="/edit-property?idDomicile=<?php $property->idDomicile ?>">
+                    <label class="full-length">
+                        <span>Titre</span>
+                        <input type="text" name="titre" value="<?= $property->Titre ?>">
+                    </label>
+                    <label class="half-length">
+                        <span>Adresse</span>
+                        <input type="text" name="adresse" value="<?= $property->Adresse ?>">
+                    </label>
+                    <label class="half-length">
+                        <span>Ville</span>
+                        <input type="text" name="ville" value="<?= $property->Ville ?>">
+                    </label>
+                    <label class="half-length">
+                        <span>Code Postal</span>
+                        <input type="text" name="code_postal" value="<?= $property->code_postal ?>">
+                    </label>
+                    <label class="half-length">
+                        <span>Pays</span>
+                        <input type="text" name="pays" value="<?= $property->Pays ?>">
+                    </label>
+                    <input class="btn-gray" type="submit" value="Envoyer">
+                </form>
+                <?php
+            }
+        } ?>
+
+
+        <!--<form class="full-length form-management" method="POST" action="">
+            <label class="full-length">
+                <span>Titre</span>
+                <input type="text" name="titre" value="">
+            </label>
+            <label class="half-length">
+                <span>Adresse</span>
+                <input type="text" name="adresse" value="">
+            </label>
+            <label class="half-length">
+                <span>Ville</span>
+                <input type="text" name="ville" value="">
+            </label>
+            <label class="half-length">
+                <span>Code Postal</span>
+                <input type="text" name="code_postal" value="">
+            </label>
+            <label class="half-length">
+                <span>Pays</span>
+                <input type="text" name="pays" value="">
+            </label>
+            <input class="btn-gray" type="submit" value="Envoyer">
+        </form>-->
+
+        <section class="maison">
+            <div class="topSection">
+                <div class="topSectionMaison">Maison</div>
             </div>
-            <div>
+            <article>
+                <div class="station">
+                    <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a></div>
+                    <div>Salon</div>
+                </div>
+                <div>
+                    <div class="ligneDescriptionCapteurManagement">
+                        <div class="icone"><i class="fas fa-fire fa-fw"></i></div>
+                        <a href="#" class="supprimerCapteur">Supprimer</a>
+                    </div>
+                    <div class="ligneDescriptionCapteurManagement">
+                        <div class="icone"><i class="fas fa-door-closed fa-fw"></i></div>
+                        <a href="#" class="supprimerCapteur">Supprimer</a>
+                    </div>
+                    <div class="ligneDescriptionCapteurManagement">
+                        <div></div>
+                        <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <div class="station">
+                    <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a></div>
+                    <div>Chambre</div>
+                </div>
                 <div class="ligneDescriptionCapteurManagement">
-                    <div class="icone"><i class="fas fa-fire fa-fw"></i></div>
+                    <div class="icone"><i class="far fa-lightbulb fa-fw"></i></div>
                     <a href="#" class="supprimerCapteur">Supprimer</a>
                 </div>
                 <div class="ligneDescriptionCapteurManagement">
-                    <div class="icone"><i class="fas fa-door-closed fa-fw"></i></div>
+                    <div class="iconeImg"><img src="app\views\users\images\opened-window.png"></div>
                     <a href="#" class="supprimerCapteur">Supprimer</a>
                 </div>
                 <div class="ligneDescriptionCapteurManagement">
                     <div></div>
                     <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
                 </div>
-            </div>
-        </article>
-        <article>
-            <div class="station">
-                <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a> </div>
-                <div>Chambre</div>
-            </div>
-            <div class="ligneDescriptionCapteurManagement">
-                <div class="icone"><i class="far fa-lightbulb fa-fw"></i></div>
-                <a href="#" class="supprimerCapteur">Supprimer</a>
-            </div>
-            <div class="ligneDescriptionCapteurManagement">
-                <div class="iconeImg"><img src="app\views\users\images\opened-window.png"></div>
-                <a href="#" class="supprimerCapteur">Supprimer</a>
-            </div>
-            <div class="ligneDescriptionCapteurManagement">
-                <div></div>
-                <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
-            </div>
-        </article>
-        <article>
-            <div class="station">
-                <a href="#" class="nouvelleStation">Ajouter une nouvelle station</a>
-                <div></div>
-            </div>
-        </article>
+            </article>
+            <article>
+                <div class="station">
+                    <a href="#" class="nouvelleStation">Ajouter une nouvelle station</a>
+                    <div></div>
+                </div>
+            </article>
 
 
-    </section>
+        </section>
 
 
-</div>
+    </div>
 
 <?php require('partials/footer.php'); ?>
