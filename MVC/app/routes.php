@@ -23,3 +23,5 @@ $router->post('new-property', 'PropertiesController@newProperty');
 $router->get('pdg', 'PdgController@index');
 $router->post('pdg/inscription_admin', 'PdgController@inscription');
 
+$router->get('webmaster', 'WebmasterController@index');
+
