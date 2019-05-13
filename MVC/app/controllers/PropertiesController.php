@@ -24,4 +24,12 @@ class PropertiesController extends Controller
         $title = "Propriété bien ajoutée";
         return $this->view('users/__propriete-ajoutee', compact('title'));
     }
+
+    public function edit() {
+
+        $properties = Properties::findPropertiesByConnectedUser();
+
+
+
+    }
 }

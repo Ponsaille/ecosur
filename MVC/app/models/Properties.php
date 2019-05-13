@@ -3,12 +3,16 @@
 namespace App\Model;
 
 use App\Core\App;
-use App\Controllers;
-
 use \Exception;
 
 class Properties extends Model
 {
+
+    public static function findPropertiesByConnectedUser()
+    {
+        return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $_SESSION['user_id'], ['Titre', 'Adresse', 'code_postal', 'Ville', 'Pays']);
+
+    }
 
     public static function store($data)
     {
@@ -27,19 +31,14 @@ class Properties extends Model
 
         $data = filter_var_array($data, $args);
 
-        // $data2 = [
-        //     "DateDebut" => date('Y-m-d'),
-        //     "DateFin" => date(Y-m-d, strtotime(date('Y-m-d') .'+1 years')),
-        // ] LAST_INSERT_ID()
-
         try {
-            //App::get('database')->insert('domicile', $data);
+            App::get('database')->insert('domicile', $data);
 
             $data = [
                 "DateDebut" => getDate(),
                 "DateFin" => date(Y - m - d, strtotime(date('Y-m-d') . '+1 years')),
                 "idPersonne" => $_SESSION['user_id'],
-                "idDomicile" => LAST_INSERT_ID()
+                "idDomicile" => getLastInsertId()
             ];
 
             return App::get('database')->insert('abonnementproprietaire', $data);
