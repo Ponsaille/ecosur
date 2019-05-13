@@ -18,8 +18,6 @@ $router->get('disconnect', 'UsersController@disconnect');
 $router->get('session', 'UsersController@getSession');
 $router->get('gestion', 'UsersController@gestion');
 $router->get('board', 'BoardController@index');
-
-$router->get('board', 'BoardController@test');
 $router->post('new-property', 'PropertiesController@newProperty');
 
 
