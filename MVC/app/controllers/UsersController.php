@@ -72,8 +72,25 @@ class UsersController extends Controller
     public function gestion()
     {
         $properties = Properties::findPropertiesByConnectedUser();
-        var_dump($properties);
+
+        $idProperties = [];
+        foreach ($properties as $property) {
+            array_push($idProperties, $property->idDomicile);
+        }
+        $rooms = Properties::findRoomsByProperties($idProperties);
+
+        $idRooms = [];
+        foreach ($rooms as $room) {
+
+            if ($room != null) {
+                array_push($idRooms, $room[0]->idPiece);
+            }
+        }
+
+        $cemacs = Properties::findCemacByRooms($idRooms);
+
+
         $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title', 'properties'));
+        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs'));
     }
 }

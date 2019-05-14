@@ -27,7 +27,12 @@ class PropertiesController extends Controller
 
     public function editProperty() {
 
-        Properties::edit($_POST, $_GET);
-        $this->redirect('gestion');
+        try {
+            return Properties::edit($_POST, $_GET["idDomicile"]);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+        //$this->redirect('board');
     }
 }

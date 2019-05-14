@@ -13,9 +13,34 @@ class Properties extends Model
         return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $_SESSION['user_id'], ['domicile.idDomicile', 'Titre', 'Adresse', 'code_postal', 'Ville', 'Pays']);
     }
 
+    public static function findRoomsByProperties($idsProperties)
+    {
+        $rooms = [];
+        foreach ($idsProperties as $idProperty) {
+            $a = App::get('database')->select('piece INNER JOIN domicile ON piece.idDomicile = domicile.idDomicile', ['idPiece', 'nom', 'piece.idDomicile'], ['piece.idDomicile = '. $idProperty]);
+            if ($a != null) {
+                array_push($rooms, $a);
+            }
+        }
+        //var_dump($rooms);
+        return $rooms;
+    }
+
+    public static function findCemacByRooms($idsRooms)
+    {
+        $cemacs = [];
+        foreach ($idsRooms as $idRoom) {
+            $a = App::get('database')->select('cemac INNER JOIN piece ON cemac.idPiece = piece.idPiece', ['idCemac', 'nbObjet', 'cemac.Nom', 'Disponible', 'Descriptif', 'cemac.idPiece'], ['cemac.idPiece = '. $idRoom]);
+            if ($a != null) {
+                array_push($cemacs, $a);
+            }
+        }
+        return $cemacs;
+    }
+
     public static function findById($id)
     {
-        $result = App::get('database')->select('domicile', ['*'], ["idDomicile = '$id'"]);
+        $result = App::get('database')->select('domicile', ['*'], ["'idDomicile' = '$id'"]);
         if (sizeOf($result) == 1) {
             return $result[0];
         } else {
@@ -30,17 +55,18 @@ class Properties extends Model
         });
 
         $args = [
-            "titre" => $filter,
-            "adresse" => FILTER_SANITIZE_ENCODED,
-            "code_postal" => FILTER_SANITIZE_ENCODED, //TODO: Check for good code_postal
-            "ville" => FILTER_SANITIZE_ENCODED,
-            "pays" => FILTER_SANITIZE_ENCODED
+            "Titre" => $filter,
+            "Adresse" => FILTER_SANITIZE_ENCODED,
+            "Ville" => FILTER_SANITIZE_ENCODED,
+            "code_postal" => FILTER_SANITIZE_ENCODED,
+            "Pays" => FILTER_SANITIZE_ENCODED
         ];
 
         $data = filter_var_array($data, $args);
 
         try {
-            return App::get('database')->update('domicile', $data, ['idDomicile = ' . $id]);
+            var_dump($data);
+            return App::get('database')->update('`domicile`', $data, ["('idDomicile' = '" . $id . "')"]);
         } catch (Exception $e) {
             $title = "Informations invalides";
             return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
@@ -75,6 +101,7 @@ class Properties extends Model
             ];
 
             return App::get('database')->insert('abonnementproprietaire', $data);
+
         } catch (Exception $e) {
             $title = "Informations invalides";
             return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
