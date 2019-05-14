@@ -35,4 +35,16 @@ class WebmasterController extends AuthController {
         $title = $modifiable->titre;
         $this->view('users/modifiable', compact('title', 'modifiable'));
     }
+
+    function editModifiables() {
+        if(!isset($_GET['id'])) {
+            die("id manquant");
+        }
+        try {
+            Modifiables::update($_GET['id'], $_POST['contenu']);
+            $this->redirect("webmaster/modifiables?id=".$_GET['id']);
+        } catch(Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

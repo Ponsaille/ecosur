@@ -53,10 +53,10 @@ class QueryBuilder {
     public function update($table, $parameters, $where=[]) {
         $sets = [];
         foreach (array_keys($parameters) as $key) {
-            $sets[] = "'" . $key."' = :".$key;
+            $sets[] = $key." = :".$key;
         }
         $sql = sprintf(
-            'UPDATE %s %s',
+            'UPDATE %s SET %s',
             $table,
             implode(', ', $sets)
         );

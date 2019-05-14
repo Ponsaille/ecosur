@@ -4,7 +4,7 @@
         <span></span>
         <span></span>
     </div>
-    <img class="small-logo" src="/public/images/small-logo.png" alt="">
+    <img class="small-logo" src="<?= $modifiables["logo_short"]->contenu ?>" alt="">
     <nav>
         <?php if($_SESSION['user_type'] == 0) { ?>
         <ul>
