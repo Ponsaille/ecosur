@@ -8,13 +8,15 @@
 
 namespace App\Controllers;
 
+use App\Model\Modifiables;
+
 
 class Controller
 {
     public static function view($name, $data = [])
     {
         extract($data);
-
+        $modifiables = Modifiables::orderedByTitre();
         return require "app/views/$name.view.php";
     }
 

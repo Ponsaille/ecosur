@@ -1,5 +1,5 @@
 <header>
-    <img class="logo" src="/public/images/logo.png" alt="ÉcoSûr">
+    <img class="logo" src="<?= $modifiables["logo_long"]->contenu ?>" alt="ÉcoSûr">
     <nav>
         <ul>
             <li><a href="#home">Accueil</a></li>

@@ -55,7 +55,7 @@ class QueryBuilder
     {
         $sets = [];
         foreach (array_keys($parameters) as $key) {
-            $sets[] = "'" . $key . "'" . " = :" . $key;
+            $sets[] = $key." = :".$key;
         }
         $sql = sprintf(
             'UPDATE %s SET %s',

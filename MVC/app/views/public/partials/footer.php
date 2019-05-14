@@ -11,12 +11,12 @@
         <li><a href="">Commentaire</a></li>
     </ul>
     <ul>
-        <li><a href="">Facebook</a></li>
-        <li><a href="">Instagram</a></li>
-        <li><a href="">Twitter</a></li>
-        <li><a href="">Linkedin</a></li>
+        <li><a href="<?= $modifiables["facebook_link"]->contenu ?>">Facebook</a></li>
+        <li><a href="<?= $modifiables["instagram_link"]->contenu ?>">Instagram</a></li>
+        <li><a href="<?= $modifiables["twitter_link"]->contenu ?>">Twitter</a></li>
+        <li><a href="<?= $modifiables["linkedin_link"]->contenu ?>">Linkedin</a></li>
     </ul>
-    <p id="footer-copyright">© DomIsep - 2019</p>
+    <p id="footer-copyright"><?= $modifiables["footer_copyright"]->contenu ?></p>
 </footer>
 
 <!-- Overlay ouvert lorsqu'on clique sur "Connection" dans la barre de navigation -->

@@ -21,4 +21,11 @@ $router->get('board', 'BoardController@index');
 $router->post('new-property', 'PropertiesController@newProperty');
 $router->post('edit-property', 'PropertiesController@editProperty');
 
+$router->get('pdg', 'PdgController@index');
+$router->post('pdg/inscription_admin', 'PdgController@inscription');
+
+$router->get('webmaster', 'WebmasterController@index');
+$router->get('webmaster/modifiables', 'WebmasterController@modifiables');
+$router->post('webmaster/modifiables', 'WebmasterController@editModifiables');
+
 
