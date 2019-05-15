@@ -96,11 +96,6 @@ class UsersController extends Controller
                 array_push($cemacs, Station::findCemacByRoom($room[0]->idPiece));
             }
         }
-var_dump("Les pieces");
-        var_dump($rooms);
-        var_dump("Les cemacs");
-
-        var_dump($cemacs);
 
         $title = "Gestion";
         return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs'));

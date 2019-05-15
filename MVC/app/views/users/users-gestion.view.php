@@ -1,25 +1,5 @@
 <?php require('partials/head.php'); ?>
 
-    <!-- <script>
-        let changeContent = function (title) {
-            //let titleDom = document.getElementById(title);
-            let AdresseForm = document.getElementsByName('adresse');
-            let villeForm = document.getElementsByName('ville');
-            let codePostalForm = document.getElementsByName('code_postal');
-            let paysForm = document.getElementsByName('pays');
-
-            <?php if (isset($properties)) {
-        foreach ($properties as $property) {
-            ?> if (title === "<?= $property->Titre; ?>") {
-                AdresseForm.placeholder = "<?= $property->Adresse; ?>";
-        }
-        <?php
-        }
-    } ?>
-
-
-        }
-    </script> -->
 
     <div class="board">
 
@@ -54,94 +34,59 @@
 
     <div class="board">
 
-        <!-- <div class="selection">
-            <h2>Modifier un lieu</h2>
-            <label class="dropButton">
-                <select id="select-property" class="dropdown"
-                onchange="changeContent(this.options[this.selectedIndex].text)">
-                <?php
-        /*
-                if (isset($properties)) {
-                    foreach ($properties as $property) {
+        <?php
+        foreach ($properties as $property) {
+            ?>
+            <div class="selection">
+                <h2><?= $property->Titre ?></h2>
+            </div>
+            <form class="full-length form-management" method="POST"
+                  action="/edit-property?idDomicile=<?= $property->idDomicile ?>">
+                <label class="full-length">
+                    <span>Titre</span>
+                    <input type="text" name="Titre" value="<?= $property->Titre ?>">
+                </label>
+                <label class="half-length">
+                    <span>Adresse</span>
+                    <input type="text" name="Adresse" value="<?= $property->Adresse ?>">
+                </label>
+                <label class="half-length">
+                    <span>Ville</span>
+                    <input type="text" name="Ville" value="<?= $property->Ville ?>">
+                </label>
+                <label class="half-length">
+                    <span>Code Postal</span>
+                    <input type="text" name="code_postal" value="<?= $property->code_postal ?>">
+                </label>
+                <label class="half-length">
+                    <span>Pays</span>
+                    <input type="text" name="Pays" value="<?= $property->Pays ?>">
+                </label>
+                <input class="btn-gray" type="submit" value="Envoyer">
+            </form>
+
+            <h3>Modifier les pièces de <?= $property->Titre ?></h3>
+            <?php foreach ($rooms as $room) {
+                if (!empty($room)) {
+
+                    if (($room[0]->idDomicile == $property->idDomicile)) {
                         ?>
-                        <option><?= $property->Titre ?></option><?php
-                    }
-                }
-        */ ?>
-                </select>
-                <i class="fas fa-angle-down"></i>
-            </label>
-        </div> -->
 
-        <?php
-        if (isset($properties)) {
-            foreach ($properties as $property) {
-                ?>
-                <h3><?= $property->Titre ?></h3>
-                <form class="full-length form-management" method="POST"
-                      action="/edit-property?idDomicile=<?= $property->idDomicile ?>">
-                    <label class="full-length">
-                        <span>Titre</span>
-                        <input type="text" name="Titre" value="<?= $property->Titre ?>">
-                    </label>
-                    <label class="half-length">
-                        <span>Adresse</span>
-                        <input type="text" name="Adresse" value="<?= $property->Adresse ?>">
-                    </label>
-                    <label class="half-length">
-                        <span>Ville</span>
-                        <input type="text" name="Ville" value="<?= $property->Ville ?>">
-                    </label>
-                    <label class="half-length">
-                        <span>Code Postal</span>
-                        <input type="text" name="code_postal" value="<?= $property->code_postal ?>">
-                    </label>
-                    <label class="half-length">
-                        <span>Pays</span>
-                        <input type="text" name="Pays" value="<?= $property->Pays ?>">
-                    </label>
-                    <input class="btn-gray" type="submit" value="Envoyer">
-                </form>
-                <?php
-            }
-        } ?>
+                        <form class="full-length form-management" method="POST"
+                              action="/edit-room?idPiece=<?= $room[0]->idPiece ?>">
+                            <label class="full-length">
+                                <input type="text" name="nom" value="<?= $room[0]->nom ?>">
+                            </label>
+                            <input class="btn-gray" type="submit" value="Envoyer">
+                        </form>
 
 
-        <!--<form class="full-length form-management" method="POST" action="">
-            <label class="full-length">
-                <span>Titre</span>
-                <input type="text" name="titre" value="">
-            </label>
-            <label class="half-length">
-                <span>Adresse</span>
-                <input type="text" name="adresse" value="">
-            </label>
-            <label class="half-length">
-                <span>Ville</span>
-                <input type="text" name="ville" value="">
-            </label>
-            <label class="half-length">
-                <span>Code Postal</span>
-                <input type="text" name="code_postal" value="">
-            </label>
-            <label class="half-length">
-                <span>Pays</span>
-                <input type="text" name="pays" value="">
-            </label>
-            <input class="btn-gray" type="submit" value="Envoyer">
-        </form>-->
+                        <section class="maison">
+                        <div class="topSection">
+                            <div class="topSectionMaison">Les stations de la pièces : <?= $room[0]->nom ?></div>
+                        </div>
 
-        <?php
-        if (isset($properties) && isset($rooms) && isset($cemacs)) {
-            foreach ($properties as $property) {
-                ?>
-                <section class="maison">
-                    <div class="topSection">
-                        <div class="topSectionMaison"><?= $property->Titre ?></div>
-                    </div>
-
-                    <?php
-                    foreach ($rooms as $room) {
+                        <?php
                         foreach ($cemacs as $cemac) {
                             if (($room[0]->idDomicile == $property->idDomicile) && ($room[0]->idPiece == $cemac[0]->idPiece)) {
                                 ?>
@@ -150,7 +95,7 @@
                                         <div>Station #<?= $cemac[0]->nbObjet ?> |
                                             <a href="#" class="supprimerCapteur">Supprimer</a>
                                         </div>
-                                        <div><?= $room[0]->nom ?></div>
+                                        <div></div>
                                     </div>
                                     <div>
                                         <div class="ligneDescriptionCapteurManagement">
@@ -171,16 +116,27 @@
                             }
                         }
                     }
-                    ?>
-                    <article>
-                        <div class="station">
-                            <a href="#" class="nouvelleStation">Ajouter une nouvelle station</a>
-                            <div></div>
-                        </div>
-                    </article>
-                </section>
-                <?php
+                }
             }
+            ?>
+
+            <article>
+                <div class="station">
+                    <a href="#" class="nouvelleStation">Ajouter une nouvelle station</a>
+                    <div></div>
+                </div>
+            </article>
+            </section>
+
+            <form class="full-length form-management" method="POST"
+                  action="/new-room">
+                <label class="full-length">
+                    <input type="text" name="nom" placeholder="Ajouter une nouvelle pièce dans <?= $property->Titre ?>">
+                </label>
+                <input class="btn-gray" type="submit" value="Envoyer">
+            </form>
+            <?php
+
         } ?>
 
         <!--

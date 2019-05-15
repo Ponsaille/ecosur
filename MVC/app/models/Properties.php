@@ -23,12 +23,8 @@ class Properties extends Model
      */
     public static function findRoomsByProperty($idProperty)
     {
-        return App::get('database')->select('piece INNER JOIN domicile ON piece.idDomicile = domicile.idDomicile', ['idPiece', 'nom', 'piece.idDomicile'], ['piece.idDomicile = '. $idProperty]);
+        return App::get('database')->select('piece INNER JOIN domicile ON piece.idDomicile = domicile.idDomicile', ['idPiece', 'nom', 'piece.idDomicile'], ['piece.idDomicile = ' . $idProperty]);
     }
-
-
-
-
 
     public static function findById($id)
     {
@@ -40,7 +36,8 @@ class Properties extends Model
         }
     }
 
-    public static function edit($data, $id) {
+    public static function edit($data, $id)
+    {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
             return $filtered ? $filtered : false;
@@ -56,9 +53,9 @@ class Properties extends Model
 
         $data = filter_var_array($data, $args);
 
+
         try {
-            var_dump($data);
-            return App::get('database')->update('`domicile`', $data, ["('idDomicile' = '" . $id . "')"]);
+            return App::get('database')->update('domicile', $data, ["idDomicile=$id"]);
         } catch (Exception $e) {
             $title = "Informations invalides";
             return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
@@ -86,14 +83,57 @@ class Properties extends Model
             App::get('database')->insert('domicile', $data);
 
             $data = [
-                "DateDebut" => getDate(),
-                "DateFin" => date(Y - m - d, strtotime(date('Y-m-d') . '+1 years')),
+                "DateDebut" => date("Y-m-d"),
+                "DateFin" => date("Y-m-d", strtotime(" +1 year")),
                 "idPersonne" => $_SESSION['user_id'],
-                "idDomicile" => getLastInsertId()
+                "idDomicile" => App::get('database')->select('domicile', ['idDomicile'], ['idDomicile=LAST_INSERT_ID()'])[0]->idDomicile
             ];
-
             return App::get('database')->insert('abonnementproprietaire', $data);
+        } catch (Exception $e) {
+            $title = "Informations invalides";
+            return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
+        }
+    }
 
+    public static function storeRoom($data)
+    {
+        $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
+            $filtered = filter_var($input, FILTER_SANITIZE_STRING);
+            return $filtered ? $filtered : false;
+        });
+
+        $args = [
+            "nom" => $filter,
+            "idDomicile" => FILTER_SANITIZE_ENCODED
+        ];
+
+        $data = filter_var_array($data, $args);
+
+        try {
+            return App::get('database')->insert('piece', $data);
+        } catch (Exception $e) {
+            $title = "Informations invalides";
+            return die($e->getMessage());
+        }
+    }
+
+    public static function editOneRoom($data, $id)
+    {
+
+        $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
+            $filtered = filter_var($input, FILTER_SANITIZE_STRING);
+            return $filtered ? $filtered : false;
+        });
+
+        $args = [
+            "nom" => $filter
+        ];
+
+        $data = filter_var_array($data, $args);
+
+
+        try {
+            return App::get('database')->update('piece', $data, ["idPiece=$id"]);
         } catch (Exception $e) {
             $title = "Informations invalides";
             return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";

@@ -69,9 +69,6 @@ class QueryBuilder
 
         try {
             $statement = $this->pdo->prepare($sql);
-            for ($i = 0; $i < count($sets); $i++) {
-                $statement->bindValue($sets[array_keys($parameters)[$i]], $parameters[array_keys($parameters)[$i]]);
-            }
             $statement->execute($parameters);
         } catch (Exception $e) {
             throw $e;

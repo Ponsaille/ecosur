@@ -19,7 +19,9 @@ $router->get('session', 'UsersController@getSession');
 $router->get('gestion', 'UsersController@gestion');
 $router->get('board', 'BoardController@index');
 $router->post('new-property', 'PropertiesController@newProperty');
+$router->post('new-room', 'PropertiesController@newRoom');
 $router->post('edit-property', 'PropertiesController@editProperty');
+$router->post('edit-room', 'PropertiesController@editRoom');
 
 $router->get('pdg', 'PdgController@index');
 $router->post('pdg/inscription_admin', 'PdgController@inscription');
