@@ -7,36 +7,28 @@ use \Exception;
 
 class Properties extends Model
 {
-
+    /**
+     * Trouver les domiciles liés à l'utilisateur connecté
+     * @return mixed
+     */
     public static function findPropertiesByConnectedUser()
     {
         return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $_SESSION['user_id'], ['domicile.idDomicile', 'Titre', 'Adresse', 'code_postal', 'Ville', 'Pays']);
     }
 
-    public static function findRoomsByProperties($idsProperties)
+    /**
+     * Trouver les pièces associées à un domicile
+     * @param $idProperty
+     * @return array
+     */
+    public static function findRoomsByProperty($idProperty)
     {
-        $rooms = [];
-        foreach ($idsProperties as $idProperty) {
-            $a = App::get('database')->select('piece INNER JOIN domicile ON piece.idDomicile = domicile.idDomicile', ['idPiece', 'nom', 'piece.idDomicile'], ['piece.idDomicile = '. $idProperty]);
-            if ($a != null) {
-                array_push($rooms, $a);
-            }
-        }
-        //var_dump($rooms);
-        return $rooms;
+        return App::get('database')->select('piece INNER JOIN domicile ON piece.idDomicile = domicile.idDomicile', ['idPiece', 'nom', 'piece.idDomicile'], ['piece.idDomicile = '. $idProperty]);
     }
 
-    public static function findCemacByRooms($idsRooms)
-    {
-        $cemacs = [];
-        foreach ($idsRooms as $idRoom) {
-            $a = App::get('database')->select('cemac INNER JOIN piece ON cemac.idPiece = piece.idPiece', ['idCemac', 'nbObjet', 'cemac.Nom', 'Disponible', 'Descriptif', 'cemac.idPiece'], ['cemac.idPiece = '. $idRoom]);
-            if ($a != null) {
-                array_push($cemacs, $a);
-            }
-        }
-        return $cemacs;
-    }
+
+
+
 
     public static function findById($id)
     {

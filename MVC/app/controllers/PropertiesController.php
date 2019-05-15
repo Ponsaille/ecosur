@@ -33,6 +33,5 @@ class PropertiesController extends Controller
             die($e->getMessage());
         }
 
-        //$this->redirect('board');
     }
 }

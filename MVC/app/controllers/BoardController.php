@@ -12,7 +12,6 @@ class BoardController extends AuthController
     public function index()
     {
         $title = "Tableau de bord";
-        var_dump(Board::findCapteurbyUser());
         return $this->view('users/users', compact('title'));
     }
 

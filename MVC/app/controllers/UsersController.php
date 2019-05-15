@@ -13,6 +13,7 @@ namespace App\Controllers;
 
 use \App\Core\App;
 use App\Model\Properties;
+use App\Model\Station;
 use \App\Model\Users;
 use \Exception;
 
@@ -84,22 +85,22 @@ class UsersController extends Controller
     {
         $properties = Properties::findPropertiesByConnectedUser();
 
-        $idProperties = [];
+        $rooms = [];
         foreach ($properties as $property) {
-            array_push($idProperties, $property->idDomicile);
+            array_push($rooms, Properties::findRoomsByProperty($property->idDomicile));
         }
-        $rooms = Properties::findRoomsByProperties($idProperties);
 
-        $idRooms = [];
+        $cemacs = [];
         foreach ($rooms as $room) {
-
             if ($room != null) {
-                array_push($idRooms, $room[0]->idPiece);
+                array_push($cemacs, Station::findCemacByRoom($room[0]->idPiece));
             }
         }
+var_dump("Les pieces");
+        var_dump($rooms);
+        var_dump("Les cemacs");
 
-        $cemacs = Properties::findCemacByRooms($idRooms);
-
+        var_dump($cemacs);
 
         $title = "Gestion";
         return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs'));

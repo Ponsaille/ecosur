@@ -7,9 +7,9 @@ use App\Controllers;
 
 use \Exception;
 
-class Properties extends Model
+class Board extends Model
 {
-    public static function findCapteurbyUser($idUtilisateur){
+    //public static function findCapteurbyUser($idUtilisateur){
         // Récup toutes les appartements des utilisateurs
         // Pour chaque appartement (for loop) tu récupère les les stations
         // Pour chaque station tu récupère les capteurs
@@ -25,18 +25,9 @@ class Properties extends Model
              ]
          ]
         */
-    }
+//    }
 
-    public static function findAppartementsByUser(){
-        return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $_SESSION['user_id'], ['Titre', 'Adresse', 'code_postal', 'Ville', 'Pays']);
-
-    }
-    /*
-        [
-            0 => appartement objet (idAppartement)
-        ]
-    */
-
+/*
     public static function findStationsByPiece($idPiece){
         return App::get('database')->select('piece INNER JOIN cemac ON piece.idPiece=cemac.idPiece AND piece.idPiece= ' . $idPiece, ['idCemac', 'nbObjet', 'Nom', 'Disponible', 'Descriptif','idPiece',]);
 
@@ -51,6 +42,6 @@ class Properties extends Model
     public static function findCapteursByStattion($idAppartement){
 
     }
-
+*/
    
 }
