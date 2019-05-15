@@ -75,8 +75,24 @@ class QueryBuilder
         }
     }
 
-    public function query($query)
-    {
+
+    public function delete($table, $where) {
+        $sql = 'DELETE FROM ' . $table;
+
+        if(sizeof($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+
+            $statement->execute();
+        } catch(Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function query($query) {
         $statement = $this->pdo->prepare($query);
 
         $statement->execute();

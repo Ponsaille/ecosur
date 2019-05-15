@@ -7,6 +7,7 @@ use \App\Model\Users;
 use \Exception;
 
 use App\Model\Modifiables;
+use App\Model\TypeComposant;
 
 class WebmasterController extends AuthController {
     function __construct()
@@ -20,7 +21,8 @@ class WebmasterController extends AuthController {
     function index() {
         $title = "Webmaster";
         $modifiables = Modifiables::get();
-        $this->view('users/webmaster', compact('title', 'modifiables'));
+        $typeComposants = TypeComposant::get();
+        $this->view('users/webmaster', compact('title', 'modifiables', 'typeComposants'));
     }
 
     function modifiables() {
@@ -43,6 +45,27 @@ class WebmasterController extends AuthController {
         try {
             Modifiables::update($_GET['id'], $_POST['contenu']);
             $this->redirect("webmaster/modifiables?id=".$_GET['id']);
+        } catch(Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    function addType() {
+        try {
+            TypeComposant::store($_POST['nom'], $_POST['type'], $_POST['icone']);
+            $this->redirect("webmaster");
+        } catch(Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    function editType() {
+        if(!isset($_GET['id'])) {
+            die("id manquant");
+        }
+        try {
+            TypeComposant::update($_GET['id'],$_POST['nom'], $_POST['type'], $_POST['icone']);
+            $this->redirect("webmaster");
         } catch(Exception $e) {
             die($e->getMessage());
         }

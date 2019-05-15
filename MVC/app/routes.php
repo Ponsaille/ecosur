@@ -29,5 +29,7 @@ $router->post('pdg/inscription_admin', 'PdgController@inscription');
 $router->get('webmaster', 'WebmasterController@index');
 $router->get('webmaster/modifiables', 'WebmasterController@modifiables');
 $router->post('webmaster/modifiables', 'WebmasterController@editModifiables');
+$router->post('webmaster/typeComposant/add', 'WebmasterController@addType');
+$router->post('webmaster/typeComposant/edit', 'WebmasterController@editType');
 
 
