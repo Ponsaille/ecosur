@@ -35,7 +35,6 @@ class PropertiesController extends Controller
 
     public function editProperty()
     {
-
         try {
             Properties::edit($_POST, $_GET["idDomicile"]);
             static::redirect('gestion');
@@ -44,7 +43,8 @@ class PropertiesController extends Controller
         }
     }
 
-    public function deleteProperty() {
+    public function deleteProperty()
+    {
         try {
             Properties::delete($_GET["idDomicile"]);
             static::redirect('gestion');
@@ -63,7 +63,8 @@ class PropertiesController extends Controller
         }
     }
 
-    public function deleteRoom() {
+    public function deleteRoom()
+    {
         try {
             Properties::deleteOneRoom($_GET["idPiece"]);
             static::redirect('gestion');

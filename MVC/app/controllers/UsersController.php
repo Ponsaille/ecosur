@@ -93,19 +93,22 @@ class UsersController extends Controller
         $cemacs = [];
         foreach ($rooms as $room) {
             if ($room != null) {
-                array_push($cemacs, Station::findCemacByRoom($room[0]->idPiece));
+                for ($j = 0; $j < count($room); $j++) {
+                    array_push($cemacs, Station::findCemacByRoom($room[$j]->idPiece));
+                }
             }
         }
 
         $composants = [];
         foreach ($cemacs as $cemac) {
             if ($cemac != null) {
+                var_dump($cemac);
                 for ($k = 0; $k < count($cemac); $k++) {
-                    array_push($composants, Station::findComposantByCemac($cemac[0]->idCemac));
+                    array_push($composants, Station::findComposantByCemac($cemac[$k]->idCemac));
+                    var_dump(Station::findComposantByCemac($cemac[$k]->idCemac));
                 }
             }
         }
-
         $title = "Gestion";
         return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants'));
     }

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Core\App;
+use Exception;
 
 class Station extends Model {
 
@@ -22,7 +23,40 @@ class Station extends Model {
 
     public static function delete($id) {
 
-        return App::get('database')->delete('cemac', ['idCemac = '. $id]);
+        return App::get('database')->delete('cemac', ['idCemac = '. $id['idCemac']]);
+    }
+
+    public static function store($data, $id)
+    {
+        $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
+            $filtered = filter_var($input, FILTER_SANITIZE_STRING);
+            return $filtered ? $filtered : false;
+        });
+
+        $data =[
+            "nbObjet" => rand(1000, 9999),
+            "Nom" => $data['Nom'],
+            "Disponible" => 0,
+            "Descriptif" => $data['Descriptif'],
+            "idPiece" => $id['idPiece']
+        ];
+
+        $args =[
+            "nbObjet" => $filter,
+            "Nom" => FILTER_SANITIZE_ENCODED,
+            "Disponible" => FILTER_SANITIZE_NUMBER_INT,
+            "Descriptif" => FILTER_SANITIZE_ENCODED,
+            "idPiece" => FILTER_SANITIZE_ENCODED
+        ];
+
+        $data = filter_var_array($data, $args);
+
+        try {
+            return App::get('database')->insert('cemac', $data);
+        } catch (Exception $e) {
+            $title = "Informations invalides";
+            return die($e->getMessage());
+        }
     }
 
     /*

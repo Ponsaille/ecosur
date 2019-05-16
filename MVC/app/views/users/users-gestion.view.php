@@ -89,13 +89,11 @@
         </form>
 
 
-
         <section class="maison">
             <div class="topSection">
                 <div class="topSectionMaison">Les stations de la pièces
-                    : <?= $room[$i]->nom ?> | <a href="#" class="supprimerCapteur">+</a></div>
+                    : <?= $room[$i]->nom ?> <!--| <a href="#" class="supprimerCapteur">+</a>--></div>
             </div>
-
             <?php
             foreach ($cemacs as $cemac) {
                 if (!empty($cemac)) {
@@ -105,49 +103,60 @@
                             <article>
                                 <div class="station">
                                     <div>Station #<?= $cemac[$j]->nbObjet ?> |
-                                        <a href="#" class="supprimerCapteur">Supprimer</a>
+                                        <a href="/delete-station?idCemac=<?= $cemac[$j]->idCemac ?>">Supprimer</a>
                                     </div>
                                     <div><?= $cemac[$j]->Nom ?> </div>
                                 </div>
-
                                 <div>
+
+
                                     <?php
-                                    foreach ($composants
-
-                                             as $composant) {
-                                        for ($k = 0;
-                                             $k < count($composant);
-                                             $k++) {
-                                            if ($composant[$k]->idCemac == $cemac[$j]->idCemac) { ?>
-                                                <div class="ligneDescriptionCapteurManagement">
-                                                    <div class="icone"><i
-                                                                class="fas <?= $composant[$k]->icone ?> fa-fw"></i>
+                                    foreach ($composants as $composant) {
+                                        if (!empty($composant)) {
+                                            for ($k = 0; $k < count($composant); $k++) {
+                                                if ($composant[$k]->idCemac == $cemac[$j]->idCemac) { ?>
+                                                    <div class="ligneDescriptionCapteurManagement">
+                                                        <div class="icone"><i
+                                                                    class="fas <?= $composant[$k]->icone ?> fa-fw"></i>
+                                                        </div>
+                                                        <a href="#" class="supprimerCapteur">Supprimer</a>
                                                     </div>
-                                                    <a href="#" class="supprimerCapteur">Supprimer</a>
-                                                </div>
-
-                                            <?php }
+                                                    <?php
+                                                }
+                                            }
                                         }
-
-                                        ?>
-
-
-                                        <?php
-
                                     }
                                     ?>
-                                </div>
 
+
+                                </div>
                                 <div class="ligneDescriptionCapteurManagement">
                                     <div></div>
-                                    <a href="#" class="supprimerCapteur" id="btn_new_capteur">Ajouter un nouveau capteur</a>
+                                    <a href="#" class="supprimerCapteur" id="btn_new_capteur">Ajouter un nouveau
+                                        capteur</a>
                                 </div>
                             </article>
                         <?php }
                     }
                 }
-
             }
+            ?>
+            <div class="station">
+                <h3>Nouvelle station</h3>
+                <form class="full-length" method="POST"
+                      action="/new-station?idPiece=<?= $room[$i]->idPiece ?>">
+                    <label class="full-length">
+                        <span>Nom</span>
+                        <input type="text" name="Nom" placeholder="Nom de la station">
+                    </label>
+                    <label class="full-length">
+                        <span>Description</span>
+                        <input type="text" name="Descriptif" placeholder="Description de la station">
+                    </label>
+                    <input class="btn-gray" type="submit" value="Envoyer">
+                </form>
+            </div>
+            <?php
 
             }
             }

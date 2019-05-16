@@ -41,7 +41,7 @@
 </div>
 <script src="/public/javascript/overlay.js"></script>
 <script>
-    const loginOverlay = new Overlay(document.getElementById('new_capteur_overlay'), document.getElementsByClassName('btn_new_capteur'));
+    const loginOverlay = new Overlay2(document.getElementById('new_capteur_overlay'), document.getElementsByClassName('btn_new_capteur'));
 </script>
 </body>
 

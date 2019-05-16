@@ -21,10 +21,14 @@ $router->get('board', 'BoardController@index');
 $router->post('new-property', 'PropertiesController@newProperty');
 $router->get('new-room', 'PropertiesController@newRoom');
 $router->post('new-room', 'PropertiesController@newRoom');
+$router->post('new-station', 'StationController@newStation');
+$router->get('new-station', 'StationController@newStation');
 $router->post('edit-property', 'PropertiesController@editProperty');
 $router->post('edit-room', 'PropertiesController@editRoom');
 $router->get('delete-property', 'PropertiesController@deleteProperty');
 $router->get('delete-room', 'PropertiesController@deleteRoom');
+$router->get('delete-station', 'StationController@deleteStation');
+
 
 $router->get('pdg', 'PdgController@index');
 $router->post('pdg/inscription_admin', 'PdgController@inscription');
