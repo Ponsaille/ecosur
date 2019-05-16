@@ -95,6 +95,11 @@ class Properties extends Model
         }
     }
 
+    public static function delete($id) {
+
+        return App::get('database')->delete('domicile', ['idDomicile = '. $id]);
+    }
+
     public static function storeRoom($data, $id)
     {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
@@ -143,5 +148,10 @@ class Properties extends Model
             $title = "Informations invalides";
             return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
         }
+    }
+
+    public static function deleteOneRoom($id) {
+
+        return App::get('database')->delete('piece', ['idPiece = '. $id]);
     }
 }

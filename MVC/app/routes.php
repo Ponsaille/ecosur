@@ -23,6 +23,8 @@ $router->get('new-room', 'PropertiesController@newRoom');
 $router->post('new-room', 'PropertiesController@newRoom');
 $router->post('edit-property', 'PropertiesController@editProperty');
 $router->post('edit-room', 'PropertiesController@editRoom');
+$router->get('delete-property', 'PropertiesController@deleteProperty');
+$router->get('delete-room', 'PropertiesController@deleteRoom');
 
 $router->get('pdg', 'PdgController@index');
 $router->post('pdg/inscription_admin', 'PdgController@inscription');

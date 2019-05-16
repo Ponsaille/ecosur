@@ -44,10 +44,28 @@ class PropertiesController extends Controller
         }
     }
 
+    public function deleteProperty() {
+        try {
+            Properties::delete($_GET["idDomicile"]);
+            static::redirect('gestion');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function editRoom()
     {
         try {
             Properties::editOneRoom($_POST, $_GET["idPiece"]);
+            static::redirect('gestion');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteRoom() {
+        try {
+            Properties::deleteOneRoom($_GET["idPiece"]);
             static::redirect('gestion');
         } catch (Exception $e) {
             die($e->getMessage());

@@ -65,6 +65,7 @@
                 <input type="text" name="Pays" value="<?= $property->Pays ?>">
             </label>
             <input class="btn-gray" type="submit" value="Envoyer">
+            <a href="/delete-property?idDomicile=<?= $property->idDomicile ?>">Supprimer</a>
         </form>
 
         <h3>Modifier les pièces de <?= $property->Titre ?></h3>
@@ -76,7 +77,6 @@
         $i < count($room);
         $i++) {
         if (($room[$i]->idDomicile == $property->idDomicile)) {
-
         ?>
 
         <form class="full-length form-management" method="POST"
@@ -85,20 +85,22 @@
                 <input type="text" name="nom" value="<?= $room[$i]->nom ?>">
             </label>
             <input class="btn-gray" type="submit" value="Envoyer">
+            <a href="/delete-room?idPiece=<?= $room[$i]->idPiece ?>">Supprimer</a>
         </form>
+
 
 
         <section class="maison">
             <div class="topSection">
                 <div class="topSectionMaison">Les stations de la pièces
-                    : <?= $room[$i]->nom ?></div>
+                    : <?= $room[$i]->nom ?> | <a href="#" class="supprimerCapteur">+</a></div>
             </div>
 
             <?php
             foreach ($cemacs as $cemac) {
                 if (!empty($cemac)) {
                     for ($j = 0; $j < count($cemac); $j++) {
-                        if (($room[$i]->idDomicile == $property->idDomicile) && ($room[$i]->idPiece == $cemac[$j]->idPiece)) {
+                        if ($room[$i]->idPiece == $cemac[$j]->idPiece) {
                             ?>
                             <article>
                                 <div class="station">
@@ -107,27 +109,44 @@
                                     </div>
                                     <div><?= $cemac[$j]->Nom ?> </div>
                                 </div>
+
                                 <div>
-                                    <div class="ligneDescriptionCapteurManagement">
-                                        <div class="icone"><i class="fas fa-fire fa-fw"></i></div>
-                                        <a href="#" class="supprimerCapteur">Supprimer</a>
-                                    </div>
-                                    <div class="ligneDescriptionCapteurManagement">
-                                        <div class="icone"><i class="fas fa-door-closed fa-fw"></i>
-                                        </div>
-                                        <a href="#" class="supprimerCapteur">Supprimer</a>
-                                    </div>
-                                    <div class="ligneDescriptionCapteurManagement">
-                                        <div></div>
-                                        <a href="#" class="supprimerCapteur">Ajouter un nouveau
-                                            capteur</a>
-                                    </div>
+                                    <?php
+                                    foreach ($composants
+
+                                             as $composant) {
+                                        for ($k = 0;
+                                             $k < count($composant);
+                                             $k++) {
+                                            if ($composant[$k]->idCemac == $cemac[$j]->idCemac) { ?>
+                                                <div class="ligneDescriptionCapteurManagement">
+                                                    <div class="icone"><i
+                                                                class="fas <?= $composant[$k]->icone ?> fa-fw"></i>
+                                                    </div>
+                                                    <a href="#" class="supprimerCapteur">Supprimer</a>
+                                                </div>
+
+                                            <?php }
+                                        }
+
+                                        ?>
+
+
+                                        <?php
+
+                                    }
+                                    ?>
+                                </div>
+
+                                <div class="ligneDescriptionCapteurManagement">
+                                    <div></div>
+                                    <a href="#" class="supprimerCapteur" id="btn_new_capteur">Ajouter un nouveau capteur</a>
                                 </div>
                             </article>
-                            <?php
-                        }
+                        <?php }
                     }
                 }
+
             }
 
             }
@@ -135,8 +154,6 @@
             }
             }
             ?>
-
-
             <form class="full-length form-management" method="POST"
                   action="/new-room?idDomicile=<?= $property->idDomicile ?>">
                 <label class="full-length">
@@ -144,61 +161,7 @@
                 </label>
                 <input class="btn-gray" type="submit" value="Envoyer">
             </form>
-            <?php
-
-            } ?>
-
-            <!--
-            <section class="maison">
-                <div class="topSection">
-                    <div class="topSectionMaison">Maison</div>
-                </div>
-                <article>
-                    <div class="station">
-                        <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a></div>
-                        <div>Salon</div>
-                    </div>
-                    <div>
-                        <div class="ligneDescriptionCapteurManagement">
-                            <div class="icone"><i class="fas fa-fire fa-fw"></i></div>
-                            <a href="#" class="supprimerCapteur">Supprimer</a>
-                        </div>
-                        <div class="ligneDescriptionCapteurManagement">
-                            <div class="icone"><i class="fas fa-door-closed fa-fw"></i></div>
-                            <a href="#" class="supprimerCapteur">Supprimer</a>
-                        </div>
-                        <div class="ligneDescriptionCapteurManagement">
-                            <div></div>
-                            <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
-                        </div>
-                    </div>
-                </article>
-                <article>
-                    <div class="station">
-                        <div>Station #3644 | <a href="#" class="supprimerCapteur">Supprimer</a></div>
-                        <div>Chambre</div>
-                    </div>
-                    <div class="ligneDescriptionCapteurManagement">
-                        <div class="icone"><i class="far fa-lightbulb fa-fw"></i></div>
-                        <a href="#" class="supprimerCapteur">Supprimer</a>
-                    </div>
-                    <div class="ligneDescriptionCapteurManagement">
-                        <div class="iconeImg"><img src="app\views\users\images\opened-window.png"></div>
-                        <a href="#" class="supprimerCapteur">Supprimer</a>
-                    </div>
-                    <div class="ligneDescriptionCapteurManagement">
-                        <div></div>
-                        <a href="#" class="supprimerCapteur">Ajouter un nouveau capteur</a>
-                    </div>
-                </article>
-                <article>
-                    <div class="station">
-                        <a href="#" class="nouvelleStation">Ajouter une nouvelle station</a>
-                        <div></div>
-                    </div>
-                </article>
-            </section>
-            -->
+            <?php } ?>
 
     </div>
 
