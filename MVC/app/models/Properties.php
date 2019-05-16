@@ -72,7 +72,7 @@ class Properties extends Model
         $args = [
             "titre" => $filter,
             "adresse" => FILTER_SANITIZE_ENCODED,
-            "code_postal" => FILTER_SANITIZE_ENCODED, //TODO: Check for good code_postal
+            "code_postal" => FILTER_SANITIZE_ENCODED,
             "ville" => FILTER_SANITIZE_ENCODED,
             "pays" => FILTER_SANITIZE_ENCODED
         ];
@@ -95,19 +95,24 @@ class Properties extends Model
         }
     }
 
-    public static function storeRoom($data)
+    public static function storeRoom($data, $id)
     {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
             return $filtered ? $filtered : false;
         });
 
-        $args = [
-            "nom" => $filter,
-            "idDomicile" => FILTER_SANITIZE_ENCODED
+        $data =[
+            "nom" => $data['nom'],
+            "idDomicile" => $id['idDomicile']
         ];
 
-        $data = filter_var_array($data, $args);
+        $args = [
+            "nom" => $filter,
+            "idDomicile" => FILTER_SANITIZE_NUMBER_INT
+        ];
+
+        $data = filter_var_array($data, $args);   // Pk ça marche pas ? Les valeurs ressorties sont nulles
 
         try {
             return App::get('database')->insert('piece', $data);

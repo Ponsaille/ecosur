@@ -27,10 +27,7 @@ class PropertiesController extends Controller
 
     public function newRoom()
     {
-        Properties::storeRoom([
-            $_POST['nom'],
-            //Deuxième arguent id du domicile affilié
-        ]);
+        Properties::storeRoom($_POST, $_GET);
 
         $title = "Pièce bien ajoutée";
         return $this->view('users/__ajout-reussi', compact('title'));
