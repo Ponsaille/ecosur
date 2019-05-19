@@ -18,3 +18,5 @@ class BoardController extends AuthController
     }
 
 }
+
+
