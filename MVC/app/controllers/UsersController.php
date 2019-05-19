@@ -102,14 +102,15 @@ class UsersController extends Controller
         $composants = [];
         foreach ($cemacs as $cemac) {
             if ($cemac != null) {
-                var_dump($cemac);
                 for ($k = 0; $k < count($cemac); $k++) {
                     array_push($composants, Station::findComposantByCemac($cemac[$k]->idCemac));
-                    var_dump(Station::findComposantByCemac($cemac[$k]->idCemac));
                 }
             }
         }
+
+        $nomsTypesComposants = Station::getNomsTypesComposants();
+
         $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants'));
+        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
     }
 }

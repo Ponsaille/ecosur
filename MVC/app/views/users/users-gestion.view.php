@@ -108,8 +108,6 @@
                                     <div><?= $cemac[$j]->Nom ?> </div>
                                 </div>
                                 <div>
-
-
                                     <?php
                                     foreach ($composants as $composant) {
                                         if (!empty($composant)) {
@@ -119,28 +117,44 @@
                                                         <div class="icone"><i
                                                                     class="fas <?= $composant[$k]->icone ?> fa-fw"></i>
                                                         </div>
-                                                        <a href="#" class="supprimerCapteur">Supprimer</a>
+                                                        <a href="/delete-capteur?idComposant=<?= $composant[$k]->idComposant ?>" class="supprimerCapteur">Supprimer</a>
                                                     </div>
                                                     <?php
                                                 }
                                             }
                                         }
-                                    }
-                                    ?>
-
-
-                                </div>
-                                <div class="ligneDescriptionCapteurManagement">
-                                    <div></div>
-                                    <a href="#" class="supprimerCapteur" id="btn_new_capteur">Ajouter un nouveau
-                                        capteur</a>
+                                    } ?>
                                 </div>
                             </article>
+
+                            <div class="">
+                                <!--  Faire un overlay
+                                <div></div>
+                                <a href="#" class="supprimerCapteur" id="btn_new_capteur"> Ajouter un nouveau capteur</a> -->
+                                <h4>Ajouter un capteur</h4>
+                                <form class="full-length" action="/new-capteur?idCemac=<?= $cemac[$j]->idCemac ?>"
+                                      method="POST">
+                                    <label class="full-length dropButton">
+                                        <span>Type</span>
+                                        <select class="dropdown" name="nom">
+                                            <?php
+                                            if (isset($nomsTypesComposants)) {
+                                                foreach ($nomsTypesComposants as $nomTypeComposant) {
+                                                    ?>
+                                                    <option value="<?= $nomTypeComposant->nom ?>"><?= $nomTypeComposant->nom ?></option>
+                                                    <?php
+                                                }
+                                            } ?>
+                                        </select>
+                                        <i class="fas fa-angle-down"></i>
+                                    </label>
+                                    <input class="btn-gray" type="submit" value="Nouveau capteur">
+                                </form>
+                            </div>
                         <?php }
                     }
                 }
-            }
-            ?>
+            } ?>
             <div class="station">
                 <h3>Nouvelle station</h3>
                 <form class="full-length" method="POST"
