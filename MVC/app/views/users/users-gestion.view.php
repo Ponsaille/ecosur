@@ -1,15 +1,16 @@
 <?php require('partials/head.php'); ?>
 
-
     <div class="board">
 
-        <div class="selection">
-            <h2>Ajouter un lieu</h2>
-        </div>
+        <div class="selection"><h2>Ajouter un lieu</h2></div>
         <form class="full-length form-management" method="POST" action="/new-property">
-            <label class="full-length">
+            <label class="half-length">
                 <span>Titre</span>
                 <input type="text" name="titre">
+            </label>
+            <label class="half-length">
+                <span>Surface</span>
+                <input type="int" name="surface">
             </label>
             <label class="half-length">
                 <span>Adresse</span>
@@ -29,7 +30,6 @@
             </label>
             <input class="btn-gray" type="submit" value="Envoyer">
         </form>
-
     </div>
 
     <div class="board">
@@ -44,9 +44,13 @@
         </div>
         <form class="full-length form-management" method="POST"
               action="/edit-property?idDomicile=<?= $property->idDomicile ?>">
-            <label class="full-length">
+            <label class="half-length">
                 <span>Titre</span>
                 <input type="text" name="Titre" value="<?= $property->Titre ?>">
+            </label>
+            <label class="half-length">
+                <span>Surface</span>
+                <input type="number" name="Surface" value="<?= $property->Surface ?>">
             </label>
             <label class="half-length">
                 <span>Adresse</span>
@@ -92,7 +96,41 @@
         <section class="maison">
             <div class="topSection">
                 <div class="topSectionMaison">Les stations de la pièces
-                    : <?= $room[$i]->nom ?> <!--| <a href="#" class="supprimerCapteur">+</a>--></div>
+                    : <?= $room[$i]->nom ?> | <a href="#" class="supprimerCapteur"
+                                                 id="button_capteur_<?= $room[$i]->idPiece ?>">+</a>
+                    <div class="overlay" id="station_overlay_<?= $room[$i]->idPiece ?>">
+                        <div class="overlay_background overlay_close"></div>
+                        <div class="overlay_content">
+                            <div class="overlay_header">
+                                <i class="fas fa-times overlay_close"></i>
+                            </div>
+                            <div class="overlay_body">
+                                <h3>Ajouter une station</h3>
+                                <form class="full-length" method="POST"
+                                      action="/new-station?idPiece=<?= $room[$i]->idPiece ?>">
+                                    <label class="full-length">
+                                        <span>Numéro de station</span>
+                                        <input type="int" name="nbObjet" placeholder="Numéro de la station"
+                                               maxlength="4">
+                                    </label>
+                                    <label class="full-length">
+                                        <span>Nom</span>
+                                        <input type="text" name="Nom" placeholder="Nom de la station">
+                                    </label>
+                                    <label class="full-length">
+                                        <span>Description</span>
+                                        <input type="text" name="Descriptif"
+                                               placeholder="Description de la station">
+                                    </label>
+                                    <input class="btn-gray" type="submit" value="Envoyer">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        const stationOverlay<?= $room[$i]->idPiece ?> = new Overlay(document.getElementById('station_overlay_<?= $room[$i]->idPiece ?>'), document.getElementById('button_capteur_<?= $room[$i]->idPiece ?>'));
+                    </script>
+                </div>
             </div>
             <?php
             foreach ($cemacs as $cemac) {
@@ -117,9 +155,11 @@
                                                         <div class="icone"><i
                                                                     class="fas <?= $composant[$k]->icone ?> fa-fw"></i>
                                                         </div>
-                                                        <a href="/delete-capteur?idComposant=<?= $composant[$k]->idComposant ?>" class="supprimerCapteur">Supprimer</a>
+                                                        <a href="/delete-capteur?idComposant=<?= $composant[$k]->idComposant ?>"
+                                                           class="supprimerCapteur">Supprimer</a>
                                                     </div>
                                                     <?php
+
                                                 }
                                             }
                                         }
@@ -128,49 +168,50 @@
                             </article>
 
                             <div class="">
-                                <!--  Faire un overlay
                                 <div></div>
-                                <a href="#" class="supprimerCapteur" id="btn_new_capteur"> Ajouter un nouveau capteur</a> -->
-                                <h4>Ajouter un capteur</h4>
-                                <form class="full-length" action="/new-capteur?idCemac=<?= $cemac[$j]->idCemac ?>"
-                                      method="POST">
-                                    <label class="full-length dropButton">
-                                        <span>Type</span>
-                                        <select class="dropdown" name="nom">
-                                            <?php
-                                            if (isset($nomsTypesComposants)) {
-                                                foreach ($nomsTypesComposants as $nomTypeComposant) {
-                                                    ?>
-                                                    <option value="<?= $nomTypeComposant->nom ?>"><?= $nomTypeComposant->nom ?></option>
-                                                    <?php
-                                                }
-                                            } ?>
-                                        </select>
-                                        <i class="fas fa-angle-down"></i>
-                                    </label>
-                                    <input class="btn-gray" type="submit" value="Nouveau capteur">
-                                </form>
+                                <a href="#" class="supprimerCapteur" id="button_capteur_<?= $cemac[$j]->idCemac ?>">
+                                    Ajouter un nouveau capteur</a>
+                                <div class="overlay" id="capteur_overlay_<?= $cemac[$j]->idCemac ?>">
+                                    <div class="overlay_background overlay_close"></div>
+                                    <div class="overlay_content">
+                                        <div class="overlay_header">
+                                            <i class="fas fa-times overlay_close"></i>
+                                        </div>
+                                        <div class="overlay_body">
+                                            <!-- Formulaire de connexion -->
+                                            <div class="overlay_body_left">
+                                                <h2>Ajouter un capteur</h2>
+                                                <form class="full-length"
+                                                      action="/new-capteur?idCemac=<?= $cemac[$j]->idCemac ?>"
+                                                      method="POST">
+                                                    <label class="full-length dropButton">
+                                                        <span>Type</span>
+                                                        <select class="dropdown" name="nom">
+                                                            <?php
+                                                            if (isset($nomsTypesComposants)) {
+                                                                foreach ($nomsTypesComposants as $nomTypeComposant) {
+                                                                    ?>
+                                                                    <option value="<?= $nomTypeComposant->nom ?>"><?= $nomTypeComposant->nom ?></option>
+                                                                    <?php
+                                                                }
+                                                            } ?>
+                                                        </select>
+                                                        <i class="fas fa-angle-down"></i>
+                                                    </label>
+                                                    <input class="btn-gray" type="submit" value="Nouveau capteur">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    const capteurOverlay<?= $cemac[$j]->idCemac ?> = new Overlay(document.getElementById('capteur_overlay_<?= $cemac[$j]->idCemac ?>'), document.getElementById('button_capteur_<?= $cemac[$j]->idCemac ?>'));
+                                </script>
                             </div>
                         <?php }
                     }
                 }
-            } ?>
-            <div class="station">
-                <h3>Nouvelle station</h3>
-                <form class="full-length" method="POST"
-                      action="/new-station?idPiece=<?= $room[$i]->idPiece ?>">
-                    <label class="full-length">
-                        <span>Nom</span>
-                        <input type="text" name="Nom" placeholder="Nom de la station">
-                    </label>
-                    <label class="full-length">
-                        <span>Description</span>
-                        <input type="text" name="Descriptif" placeholder="Description de la station">
-                    </label>
-                    <input class="btn-gray" type="submit" value="Envoyer">
-                </form>
-            </div>
-            <?php
+            }
 
             }
             }

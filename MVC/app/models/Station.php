@@ -46,7 +46,7 @@ class Station extends Model
         });
 
         $data = [
-            "nbObjet" => rand(1000, 9999),
+            "nbObjet" => $data['nbObjet'],
             "Nom" => $data['Nom'],
             "Disponible" => 0,
             "Descriptif" => $data['Descriptif'],
@@ -106,17 +106,5 @@ class Station extends Model
             return die($e->getMessage());
         }
     }
-
-
-    /*
-    public static function findByNomLogement($identifiantLogement) {
-        $station = App::get('database')->query("SELECT cemac.idCemac FROM domicile
-        JOIN pièce
-        ON piece.idDomicile=domicile.idDomicile
-        JOIN cemac
-        ON cemac.idPiece=piece.idPiece
-        WHERE cemac.idCemac=$identifiantLogement");
-    }
-    */
 
 }

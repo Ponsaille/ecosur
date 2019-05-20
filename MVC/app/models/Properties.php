@@ -13,7 +13,7 @@ class Properties extends Model
      */
     public static function findPropertiesByConnectedUser()
     {
-        return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $_SESSION['user_id'], ['domicile.idDomicile', 'Titre', 'Adresse', 'code_postal', 'Ville', 'Pays']);
+        return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $_SESSION['user_id'], ['domicile.idDomicile', 'Titre', 'Adresse', 'code_postal', 'Ville', 'Pays', 'Surface']);
     }
 
     /**
@@ -45,6 +45,7 @@ class Properties extends Model
 
         $args = [
             "Titre" => $filter,
+            "Surface" => FILTER_SANITIZE_NUMBER_INT,
             "Adresse" => FILTER_SANITIZE_ENCODED,
             "Ville" => FILTER_SANITIZE_ENCODED,
             "code_postal" => FILTER_SANITIZE_ENCODED,
@@ -71,6 +72,7 @@ class Properties extends Model
 
         $args = [
             "titre" => $filter,
+            "surface" => FILTER_SANITIZE_NUMBER_INT,
             "adresse" => FILTER_SANITIZE_ENCODED,
             "code_postal" => FILTER_SANITIZE_ENCODED,
             "ville" => FILTER_SANITIZE_ENCODED,
