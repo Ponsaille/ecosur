@@ -16,6 +16,9 @@ $router->post('inscription', 'UsersController@inscription');
 $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'UsersController@disconnect');
 $router->get('session', 'UsersController@getSession');
+$router->get('edit-account', 'UsersController@editPage');
+$router->post('edit-user', 'UsersController@edit');
+
 $router->get('gestion', 'UsersController@gestion');
 $router->get('board', 'BoardController@index');
 $router->post('new-property', 'PropertiesController@newProperty');

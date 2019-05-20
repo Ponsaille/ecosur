@@ -29,7 +29,6 @@ class UsersController extends Controller
 
     public function inscription()
     {
-
         Users::store($_POST);
 
         $user = Users::findByEmail($_POST['email']);
@@ -39,6 +38,19 @@ class UsersController extends Controller
         $title = "Inscription réussie";
         return $this->view('users/__inscription-reussie', compact('title'));
     }
+
+    public function editPage() {
+        $user = Users::find($_SESSION['user_id']);
+        $title = "Edition de votre compte";
+        return $this->view('users/users-edit', compact('title', 'user'));
+    }
+
+    public function edit() {
+        Users::edit($_POST);
+        static::redirect('edit-account');
+        return;
+    }
+
 
     public function connection()
     {
