@@ -11,6 +11,8 @@
 
 namespace App\Controllers;
 
+use App\Model\FAQ;
+
 class StaticController extends Controller
 {
 
@@ -22,5 +24,12 @@ class StaticController extends Controller
     {
         $title = "Accueil";
         return $this->view('public/index', compact('title'));
+    }
+
+    public function faq()
+    {
+        $title = "FAQ";
+        $faqs = FAQ::get();
+        return $this->view('public/faq', compact('title', 'faqs'));
     }
 }
