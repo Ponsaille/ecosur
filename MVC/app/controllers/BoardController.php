@@ -12,7 +12,7 @@ class BoardController extends AuthController
 {
     public function index()
     {
-        $title='board';
+        $title='tanleaude bord';
         var_dump(Board::RessourceAppartementByUser());
         return $this->view('users/users', compact('title'));
     }
