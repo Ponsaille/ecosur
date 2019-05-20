@@ -29,5 +29,7 @@ $router->get('webmaster/modifiables', 'WebmasterController@modifiables');
 $router->post('webmaster/modifiables', 'WebmasterController@editModifiables');
 $router->post('webmaster/typeComposant/add', 'WebmasterController@addType');
 $router->post('webmaster/typeComposant/edit', 'WebmasterController@editType');
-
-
+$router->post('webmaster/faqs/add', 'WebmasterController@addFaq');
+$router->get('webmaster/faqs', 'WebmasterController@faqs');
+$router->post('webmaster/faqs', 'WebmasterController@editFaq');
+$router->get('webmaster/faqs/delete', 'WebmasterController@deleteFaq');

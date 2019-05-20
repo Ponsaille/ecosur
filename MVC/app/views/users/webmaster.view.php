@@ -10,6 +10,26 @@
         </ul>
     </section>
     <section>
+        <h2>Foire aux questions</h2>
+        <ul>
+            <?php foreach ($faqs as $faq) { ?>
+                <li><a href="webmaster/faqs?id=<?= $faq->idFAQ ?>"><?= $faq->question ?></a></li>
+            <?php } ?>
+        </ul>
+        <h3>Nouveau:</h3> 
+        <form action="webmaster/faqs/add" method="post">
+            <label>
+                <span>Question: </span>
+                <input type="text" name="question">
+            </label><br>
+            <label>
+                <span>Réponse: </span>
+                <textarea name="reponse"></textarea>
+            </label><br>
+            <input class="btn-gray" type="submit" value="Envoyer">
+        </form>
+    </section>
+    <section>
         <h2>Types de composants</h2>
         <ul>
             <h3>Nouveau:</h3> 
