@@ -34,6 +34,7 @@ class UsersController extends Controller
         $user = Users::findByEmail($_POST['email']);
 
         $_SESSION['user_id'] = $user->idPersonne;
+        $_SESSION['user_type'] = $user->type;
 
         $title = "Inscription réussie";
         return $this->view('users/__inscription-reussie', compact('title'));

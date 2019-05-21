@@ -9,3 +9,4 @@ require 'Modifiables.php';
 require 'Station.php';
 require 'TypeComposant.php';
 require 'FAQ.php';
+require 'IdTemporaire.php';

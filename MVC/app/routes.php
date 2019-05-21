@@ -8,6 +8,7 @@ $router->get('disconnect', 'UsersController@disconnect');
 $router->get('session', 'UsersController@getSession');
 $router->get('edit-account', 'UsersController@editPage');
 $router->post('edit-user', 'UsersController@edit');
+$router->get('generateIdTemporaire', 'BoardController@generateIdTemporaire');
 
 $router->get('gestion', 'UsersController@gestion');
 $router->get('board', 'BoardController@index');

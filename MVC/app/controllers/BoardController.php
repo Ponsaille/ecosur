@@ -8,6 +8,8 @@ use \App\Model\Properties;
 
 use \Exception;
 
+use \App\Model\IdTemporaire;
+
 class BoardController extends AuthController
 {
     function index()
@@ -45,5 +47,15 @@ class BoardController extends AuthController
 
         $title = "Panne";
         $this->view('users/panne', compact('title', 'idPanne', 'messages'));
+    }
+
+    public function generateIdTemporaire()
+    {
+        $idTemporaire = IdTemporaire::generate($_SESSION['user_id']);
+        header('Content-type: application/json');
+        echo json_encode([
+            "code" => 200,
+            "idTemporaire" => $idTemporaire
+        ]);
     }
 }
