@@ -11,6 +11,7 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="/public/css/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/public/css/side-nav.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/css/chatbox.css"/>
 </head>
 
 <body>

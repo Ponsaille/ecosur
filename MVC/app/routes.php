@@ -35,6 +35,13 @@ $router->get('delete-room', 'PropertiesController@deleteRoom');
 $router->get('delete-station', 'StationController@deleteStation');
 $router->get('delete-capteur', 'StationController@deleteCapteur');
 
+
+$router->get('user-sav', 'BoardController@userSav');
+$router->get('user-panne', 'BoardController@userPanne');
+$router->get('user-message', 'BoardController@userSendMessage');
+$router->post('user-message', 'BoardController@userSendMessage');
+
+
 $router->get('pdg', 'PdgController@index');
 $router->post('pdg/inscription_admin', 'PdgController@inscription');
 
@@ -44,4 +51,7 @@ $router->post('webmaster/modifiables', 'WebmasterController@editModifiables');
 $router->post('webmaster/typeComposant/add', 'WebmasterController@addType');
 $router->post('webmaster/typeComposant/edit', 'WebmasterController@editType');
 
-
+$router->get('sav', 'SavController@index');
+$router->get('panne', 'SavController@showPanne');
+$router->get('message', 'SavController@sendMessage');
+$router->post('message', 'SavController@sendMessage');

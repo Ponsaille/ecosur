@@ -14,4 +14,5 @@ require 'PropertiesController.php';
 require 'AuthController.php';
 require 'BoardController.php';
 require 'PdgController.php';
+require 'SavController.php';
 require 'WebmasterController.php';

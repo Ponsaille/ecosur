@@ -79,6 +79,8 @@ class UsersController extends Controller
                 case 5:
                     $this->redirect('pdg');
                     break;
+                case 4:
+                    $this->redirect('sav');
             }
         } else {
             $title = "Mot de passe erroné";
