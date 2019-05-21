@@ -39,40 +39,59 @@ class Board extends Model
     
 
    public static function RessourceAppartementByUser(){
-
+       
     $registre=[];
     
-    $appartement=Board::findAppartementsByUser();
-    foreach ($appartement as $i => $value1){
-        $piece=Board::findPieceByAppartement($appartement[$i]->idDomicile);
-        foreach ($piece as $j => $value2){
-            $station=Board::findStationsByPiece($piece[$j]->idPiece);
-            foreach ($station as $k => $value3){
-                $capteur=Board::findCapteursByStation($station[$k]->idCemac);
-                foreach ($capteur as $l => $value4){
-                    $typeComposant=Board::findTypeComposantByCapteur($capteur[$l]->idtypeComposant);
-                    foreach ($typeComposant as $m => $value5){
-            
-                        $registre+=[$appartement[$i]->idDomicile =>["appartement" => $appartement[$i] , 
-                                                                    "piece" =>[
-                                                                                $piece[$j]->idPiece=>[
-                                                                                                        "piece" => $piece[$j] ,
-                                                                                                        "cemac" =>[
-                                                                                                                    $station[$k]->idCemac=>[
-                                                                                                                                                "camec" => $station[$k], 
-                                                                                                                                                "capteur"=>[$capteur[$l]->idComposant=> [
-                                                                                                                                                                                        "capteur"=>$capteur[$l],
-                                                                                                                                                                                        "typeComposant"=>[
-                                                                                                                                                                                                            $typeComposant[$m]]]]]]]]]];
+    $appartements=Board::findAppartementsByUser();
+    
+    foreach ($appartements as $appartement){
+        $piecesFromBDD=Board::findPieceByAppartement($appartement->idDomicile);
 
-                    }
-                }       
+        $pieces= [];
+
+        foreach ($piecesFromBDD as $piece) {
+
+            $stationsFromBDD=Board::findStationsByPiece($piece->idPiece);
+
+            $stations=[];
+
+            foreach ($stationsFromBDD as $station){
+
+                $capteursFromBDD=Board::findCapteursByStation($station->idCemac);
+
+                $capteurs=[];
+
+                foreach ($capteursFromBDD as $capteur){
+                    $typeComposant=Board::findTypeComposantByCapteur($capteur->idComposant)[0];
+
+                    $capteurs[$capteur->idComposant] = [
+                        "capteur" => $capteur,
+                        "typeComposant" => $typeComposant
+
+                    ];
+                }
+                
+                $stations[$station->idCemac] = [
+                    "cemac" => $station,
+                    "capteurs" => $capteurs
+                ];
             }
+
+            $pieces[$piece->idPiece]=[
+                "piece"=> $piece,
+                "cemac"=>$stations
+            ];
         }
+
+        $registre[$appartement->idDomicile] = [
+            "appartement" => $appartement,
+            "pieces" => $pieces
+        ];
+        
 
 
     }
-
+    
     return $registre;
 
    }
@@ -86,8 +105,10 @@ class Board extends Model
                  "pieces" => [
                         idpièces => [
                             "pice" => Objet de la piece
-                            "cemacs" => [
+                            "cemac" => [
                                 idcemacs => [
+                                    "cemac"=>
+                                    "composant"=>
 
                                 ]
                             ]

@@ -475,6 +475,7 @@ select {
 
 .maison {
     padding: 0;
+    
 }
 
 .selection{
@@ -500,18 +501,21 @@ select {
     grid-template-columns: 0.5fr 1fr 1fr;
     align-items: center;
     border-collapse: collapse;
+  
 }
 
-article{
+.stationComplete{
     background-color:#888888;
     color:white;
     font-size:20px;
+
 }
 
-article:nth-child(2n+1){
+.stationComplete:nth-child(2n+1){
     background-color:#E6E6E6;
     color:#606060;
     font-size:20px;
+
 }
 .custom_checkbox{
     padding-top:6px;
