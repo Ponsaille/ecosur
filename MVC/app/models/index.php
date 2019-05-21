@@ -7,3 +7,4 @@ require 'Board.php';
 require 'Modifiables.php';
 require 'Station.php';
 require 'TypeComposant.php';
+require 'IdTemporaire.php';

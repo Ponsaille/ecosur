@@ -1,6 +1,3 @@
-use \App\Model\Station;
-Station::
-
 <?php require('partials/head.php'); ?>
 
 
