@@ -18,4 +18,12 @@ class IdTemporaire extends Model
         
         return $idTemporaire;
     }
+
+    public static function useKey($idPersonne, $key) {
+        $keys = App::get('database')->select('idtemporaire', ['*'], ["idPersonne == $idPersonne", "value == $value", "used == 0"]);
+        if(count($keys) > 0) {
+            App::get('database')->update('idtemporaire', ['used' => 0], ['idTemporaire == '.$keys[0]->idTemporaire]);
+            return true;
+        }
+    }
 }
