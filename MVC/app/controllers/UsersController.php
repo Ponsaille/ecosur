@@ -13,6 +13,7 @@ namespace App\Controllers;
 
 use \App\Core\App;
 use App\Model\Properties;
+use App\Model\Station;
 use \App\Model\Users;
 use \Exception;
 
@@ -28,16 +29,29 @@ class UsersController extends Controller
 
     public function inscription()
     {
-
         Users::store($_POST);
 
         $user = Users::findByEmail($_POST['email']);
 
         $_SESSION['user_id'] = $user->idPersonne;
+        $_SESSION['user_type'] = $user->type;
 
         $title = "Inscription réussie";
         return $this->view('users/__inscription-reussie', compact('title'));
     }
+
+    public function editPage() {
+        $user = Users::find($_SESSION['user_id']);
+        $title = "Edition de votre compte";
+        return $this->view('users/users-edit', compact('title', 'user'));
+    }
+
+    public function edit() {
+        Users::edit($_POST);
+        static::redirect('edit-account');
+        return;
+    }
+
 
     public function connection()
     {
@@ -56,7 +70,7 @@ class UsersController extends Controller
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['user_id'] = $user->idPersonne;
             $_SESSION['user_type'] = $user->type;
-            switch($user->type) {
+            switch ($user->type) {
                 case 0:
                     $this->redirect('board');
                     break;
@@ -65,7 +79,9 @@ class UsersController extends Controller
                     break;
                 case 5:
                     $this->redirect('pdg');
-                    break; 
+                    break;
+                case 4:
+                    $this->redirect('sav');
             }
         } else {
             $title = "Mot de passe erroné";
@@ -83,8 +99,33 @@ class UsersController extends Controller
     public function gestion()
     {
         $properties = Properties::findPropertiesByConnectedUser();
-        var_dump($properties);
+
+        $rooms = [];
+        foreach ($properties as $property) {
+            array_push($rooms, Properties::findRoomsByProperty($property->idDomicile));
+        }
+
+        $cemacs = [];
+        foreach ($rooms as $room) {
+            if ($room != null) {
+                for ($j = 0; $j < count($room); $j++) {
+                    array_push($cemacs, Station::findCemacByRoom($room[$j]->idPiece));
+                }
+            }
+        }
+
+        $composants = [];
+        foreach ($cemacs as $cemac) {
+            if ($cemac != null) {
+                for ($k = 0; $k < count($cemac); $k++) {
+                    array_push($composants, Station::findComposantByCemac($cemac[$k]->idCemac));
+                }
+            }
+        }
+
+        $nomsTypesComposants = Station::getNomsTypesComposants();
+
         $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title', 'properties'));
+        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
     }
 }

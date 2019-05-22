@@ -437,8 +437,8 @@ section {
 }
 
 .custom_checkbox input[type=checkbox]:checked + .checkbox_span {
-    text-align: center;
-    background-color: #606060;
+      text-align: center;
+      background-color: #606060;
 }
 
 .custom_checkbox2_grey input[type=checkbox] + .checkbox2_span_grey {

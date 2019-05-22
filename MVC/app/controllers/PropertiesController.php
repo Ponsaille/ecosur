@@ -22,12 +22,54 @@ class PropertiesController extends Controller
         Properties::store($_POST);
 
         $title = "Propriété bien ajoutée";
-        return $this->view('users/__propriete-ajoutee', compact('title'));
+        return $this->view('users/__ajout-reussi', compact('title'));
     }
 
-    public function editProperty() {
+    public function newRoom()
+    {
+        Properties::storeRoom($_POST, $_GET);
 
-        Properties::edit($_POST, $_GET);
-        $this->redirect('gestion');
+        $title = "Pièce bien ajoutée";
+        return $this->view('users/__ajout-reussi', compact('title'));
+    }
+
+    public function editProperty()
+    {
+        try {
+            Properties::edit($_POST, $_GET["idDomicile"]);
+            static::redirect('gestion');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteProperty()
+    {
+        try {
+            Properties::delete($_GET["idDomicile"]);
+            static::redirect('gestion');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editRoom()
+    {
+        try {
+            Properties::editOneRoom($_POST, $_GET["idPiece"]);
+            static::redirect('gestion');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteRoom()
+    {
+        try {
+            Properties::deleteOneRoom($_GET["idPiece"]);
+            static::redirect('gestion');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 }
