@@ -80,7 +80,7 @@ class Users extends Model
         }
     }
 
-    public static function edit($data)
+    public static function edit($data, $idUser)
     {
         $filter = array('filter' => FILTER_CALLBACK, 'options' => function ($input) {
             $filtered = filter_var($input, FILTER_SANITIZE_STRING);
@@ -111,7 +111,7 @@ class Users extends Model
         }
 
         try {
-            return App::get('database')->update('personne', $data, ['idPersonne = ' . $_SESSION['user_id']]);
+            return App::get('database')->update('personne', $data, ['idPersonne = ' . $idUser]);
         } catch (Exception $e) {
             die(var_dump($e->getMessage()));
             $title = "Informations invalides";

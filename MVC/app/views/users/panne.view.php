@@ -1,7 +1,12 @@
-<?php require('partials/head.php'); ?>
+<?php require('partials/head.php');
+if (!isset($idPanne)) {
+    $idPanne = $_GET['idPanne'];
+} ?>
 
     <div class="board">
-    <h1>Pannes n°<?= $idPanne ?></h1> <a href="/sav" class="supprimerCapteur">Retour</a>
+    <h1>Pannes n°<?= $idPanne ?></h1>
+    <a href="/sav" class="supprimerCapteur">Retour</a>
+    <a href="/end-panne?idPanne=<?= $idPanne ?>" class="supprimerCapteur">Panne terminée</a>
 
     <div class="gestion-pannes">
     <form action="/message?idPanne=<?= $idPanne ?>" method="POST">

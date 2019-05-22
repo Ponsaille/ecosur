@@ -27,7 +27,8 @@ class SavController extends AuthController
         $this->view('users/sav', compact('title', 'pannes'));
     }
 
-    function showPanne() {
+    function showPanne()
+    {
         $idPanne = $_GET['idPanne'];
 
         $messages = Pannes::findMessagesByPanne($idPanne);
@@ -37,7 +38,8 @@ class SavController extends AuthController
         $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser'));
     }
 
-    function sendMessage() {
+    function sendMessage()
+    {
 
         Pannes::storeMessage($_POST, $_SESSION['user_id'], $_GET['idPanne']);
 
@@ -49,20 +51,31 @@ class SavController extends AuthController
         $this->view('users/panne', compact('title', 'idPanne', 'messages'));
     }
 
-    public function useIdTemporaire() {
-        $changement = IdTemporaire::useKey($_GET['idPersonne'] , $_POST['idTemporaire']);
+    public function useIdTemporaire()
+    {
+        $changement = IdTemporaire::useKey($_GET['idPersonne'], $_POST['idTemporaire']);
 
-        if($changement) {
-            $idPanne = $_GET['idPanne'];
+        if ($changement) {
             $ressource = Board::RessourceAppartementByUser($_GET['idPersonne']);
+            $messages = Pannes::findMessagesByPanne($_GET['idPanne']);
+            $idUser = Pannes::findIdUserByPanne($_GET['idPanne']);
+            $title = "Panne";
+            $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser', 'ressource'));
+        } else {
+
+            $idPanne = $_GET['idPanne'];
             $messages = Pannes::findMessagesByPanne($idPanne);
             $idUser = Pannes::findIdUserByPanne($idPanne);
 
             $title = "Panne";
-            $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser', 'ressource'));
-        } else {
-            static::redirect('panne?idPanne='.$_GET['idPanne']);
+            $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser'));
         }
+    }
+
+    function endPanne()
+    {
+        Pannes::end($_GET['idPanne']);
+        self::redirect('sav');
     }
 
 }

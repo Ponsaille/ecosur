@@ -55,14 +55,13 @@ class QueryBuilder
     {
         $sets = [];
         foreach (array_keys($parameters) as $key) {
-            $sets[] = $key." = :".$key;
+            $sets[] = $key . " = :" . $key;
         }
         $sql = sprintf(
             'UPDATE %s SET %s',
             $table,
             implode(', ', $sets)
         );
-
         if (sizeof($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
@@ -75,10 +74,11 @@ class QueryBuilder
     }
 
 
-    public function delete($table, $where) {
+    public function delete($table, $where)
+    {
         $sql = 'DELETE FROM ' . $table;
 
-        if(sizeof($where) > 0) {
+        if (sizeof($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
 
@@ -86,12 +86,13 @@ class QueryBuilder
             $statement = $this->pdo->prepare($sql);
 
             $statement->execute();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function query($query) {
+    public function query($query)
+    {
         $statement = $this->pdo->prepare($query);
 
         $statement->execute();
