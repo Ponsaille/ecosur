@@ -49,6 +49,9 @@ header {
     background-color: #606060;
     color: white;
     z-index: 900;
+    -webkit-box-shadow: 0px 10px 38px -12px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 38px -12px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 38px -12px rgba(0, 0, 0, 0.7);
 }
 
 header .logo {
@@ -62,20 +65,22 @@ header nav ul {
 
 header nav ul li {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 30px;
     cursor: pointer;
 }
 
 header nav ul li:hover {
     color: #45B549;
+    transition-duration: 250ms;
+    transition-property: color;
 }
 
 .jumbotron {
     width: 100%;
     height: 100vh;
-    margin: 0;
     overflow: hidden;
-    margin-bottom: 75px;
+    margin: 0 0 75px;
+    line-height: 30px;
 }
 
 .jumbotron img {
@@ -87,8 +92,8 @@ header nav ul li:hover {
 .jumbotron figcaption {
     position: absolute;
     bottom: 0;
-    padding: 15px;
-    background-color: rgba(96, 96, 96, 0.9);
+    padding: 20px;
+    background-color: rgba(96, 96, 96, 0.7);
     color: white;
 }
 
@@ -96,6 +101,7 @@ header nav ul li:hover {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
+    line-height: 25px;
 }
 
 section h2 {
@@ -115,8 +121,10 @@ section h2 {
     height: 500px;
     overflow: hidden;
     display: inline-block;
-    border: 1px solid #606060;
+
     text-align: justify;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 #products figure img {
@@ -129,6 +137,11 @@ section h2 {
 
 #products figcaption {
     padding: 5px 15px;
+    text-align: center;
+    background-color: #888888;
+    color: #FFFFFF;
+    border-radius: 15px;
+    min-height: 12.5rem;
 }
 
 
@@ -150,6 +163,8 @@ footer li {
 
 footer li:hover {
     color: #45B549;
+    transition-duration: 250ms;
+    transition-property: color;
 }
 
 #footer-copyright {
@@ -181,9 +196,23 @@ label input {
     width: 100%;
 }
 
+label input:focus {
+    width: 100%;
+    border: #45B549 solid 1px;
+    transition-duration: 250ms;
+    transition-property: border;
+}
+
 label textarea {
     width: 100%;
     resize: vertical;
+}
+
+label textarea:focus {
+    width: 100%;
+    border: #45B549 solid 1px;
+    transition-duration: 250ms;
+    transition-property: border;
 }
 
 
@@ -324,6 +353,10 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 section {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+section p {
+    margin-bottom: 3rem;
 }
 
 /* Bouttons */
@@ -479,7 +512,7 @@ select {
 
 .maison {
     padding: 0;
-    
+
 }
 
 .selection {
@@ -508,10 +541,9 @@ select {
     grid-template-columns: 0.5fr 1fr 1fr;
     align-items: center;
     border-collapse: collapse;
-  
+
 }
 
-<<<<<<< HEAD
 article {
     background-color: #888888;
     color: white;
@@ -522,20 +554,19 @@ article:nth-child(2n+1) {
     background-color: #E6E6E6;
     color: #606060;
     font-size: 20px;
-=======
-.stationComplete{
-    background-color:#888888;
-    color:white;
-    font-size:20px;
+}
+.stationComplete {
+    background-color: #888888;
+    color: white;
+    font-size: 20px;
 
 }
 
-.stationComplete:nth-child(2n+1){
-    background-color:#E6E6E6;
-    color:#606060;
-    font-size:20px;
+.stationComplete:nth-child(2n+1) {
+    background-color: #E6E6E6;
+    color: #606060;
+    font-size: 20px;
 
->>>>>>> origin/board-fonctionnalité
 }
 
 .custom_checkbox {
