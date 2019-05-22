@@ -9,6 +9,8 @@ $router->get('session', 'UsersController@getSession');
 $router->get('edit-account', 'UsersController@editPage');
 $router->post('edit-user', 'UsersController@edit');
 $router->get('generateIdTemporaire', 'BoardController@generateIdTemporaire');
+$router->get('useIdTemporaire', 'SavController@useIdTemporaire');
+$router->post('useIdTemporaire', 'SavController@useIdTemporaire');
 
 $router->get('gestion', 'UsersController@gestion');
 $router->get('board', 'BoardController@index');

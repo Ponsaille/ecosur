@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \App\Core\App;
+use App\Model\IdTemporaire;
 use App\Model\Pannes;
 use \App\Model\Users;
 use \Exception;
@@ -29,9 +30,10 @@ class SavController extends AuthController
         $idPanne = $_GET['idPanne'];
 
         $messages = Pannes::findMessagesByPanne($idPanne);
+        $idUser = Pannes::findIdUserByPanne($_GET['idPanne']);
 
         $title = "Panne";
-        $this->view('users/panne', compact('title', 'idPanne', 'messages'));
+        $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser'));
     }
 
     function sendMessage() {
@@ -44,6 +46,11 @@ class SavController extends AuthController
 
         $title = "Panne";
         $this->view('users/panne', compact('title', 'idPanne', 'messages'));
+    }
+
+    public function useIdTemporaire() {
+        IdTemporaire::useKey($_GET['idPersonne'] , $_POST['idTemporaire']);
+        static::redirect('user-panne?idPanne='.$_GET['idPanne']);
     }
 
 }

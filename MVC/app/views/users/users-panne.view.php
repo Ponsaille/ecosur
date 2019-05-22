@@ -34,6 +34,24 @@
         </div>
     </form>
 
+    <section>
+        <h2>Générer un id temporaire</h2>
+        <span id="id-tempo-span"></span>
+        <button class="btn-gray" id="generate-id-tempo-btn" href="#">Générer</button>
+        <script>
+            const generateIdTempoBtn = document.getElementById("generate-id-tempo-btn");
+            const idTempoSpan = document.getElementById("id-tempo-span");
+            generateIdTempoBtn.addEventListener("click", function (e) {
+                idTempoSpan.innerText = "Generating...";
+                fetch('/generateIdTemporaire')
+                    .then(res => res.json())
+                    .then(json => {
+                        idTempoSpan.innerText = json.idTemporaire;
+                    });
+            })
+        </script>
+    </section>
+
 
 
 

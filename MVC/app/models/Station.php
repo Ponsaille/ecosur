@@ -33,6 +33,7 @@ class Station extends Model
         return App::get('database')->select('(composants INNER JOIN cemac ON composants.idCemac = cemac.idCemac) INNER JOIN typeComposant ON composants.idtypeComposant = typeComposant.idtypeComposant', ['idComposant', 'composants.idCemac', 'typeComposant.nom', 'typeComposant.type', 'typeComposant.icone'], ['composants.idCemac = ' . $idCemac]);
     }
 
+
     public static function delete($id)
     {
         return App::get('database')->delete('cemac', ['idCemac = ' . $id['idCemac']]);

@@ -36,6 +36,18 @@
     </form>
 
 
+    <section>
+        <h2>Utiliser l'id temporaire</h2>
+        <form action="/useIdTemporaire?idPersonne=<?= $idUser[0]->idPersonne ?>&idPanne=<?= $idPanne ?>" method="POST">
+            <label>
+                <input type="text" name="idTemporaire">
+                <span id="id-tempo-span"></span>
+                <button class="btn-gray" id="generate-id-tempo-btn" href="#">Utiliser</button>
+            </label>
+        </form>
+    </section>
+
+
 
 
 

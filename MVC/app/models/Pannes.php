@@ -8,25 +8,35 @@ use \Exception;
 
 class Pannes extends Model
 {
-    public static function get() {
+    public static function get()
+    {
         return App::get('database')->select('panne');
     }
 
-    public static function getById($id) {
+    public static function getById($id)
+    {
         return App::get('database')->select('panne', ['*'], ["idPanne=$id"]);
     }
 
-    public static function getbyUser($id) {
+    public static function getbyUser($id)
+    {
         return App::get('database')->select('((panne INNER JOIN cemac ON panne.idCemac = cemac.idCemac) INNER JOIN piece ON cemac.idPiece = piece.idPiece) INNER JOIN abonnementproprietaire ON piece.idDomicile = abonnementproprietaire.idDomicile', ['panne.idPanne', 'panne.descriptif', 'startDate', 'endDate', 'etat', 'panne.idCemac'], ["abonnementproprietaire.idPersonne = $id"]);
     }
 
-    public static function findMessagesByPanne($id) {
+    public static function findIdUserByPanne($id)
+    {
+        return App::get('database')->select('((abonnementproprietaire INNER JOIN piece ON  piece.idDomicile = abonnementproprietaire.idDomicile ) INNER JOIN cemac ON  cemac.idPiece = piece.idPiece ) INNER JOIN panne ON  panne.idCemac = cemac.idCemac ', ['abonnementproprietaire.idPersonne'], ["panne.idPanne = $id"]);
+    }
+
+    public static function findMessagesByPanne($id)
+    {
         return App::get('database')->select('message', ['*'], ["idPanne=$id"]);
     }
 
-    public static function storeMessage($data, $idPersonne, $idPanne) {
+    public static function storeMessage($data, $idPersonne, $idPanne)
+    {
 
-        $data =[
+        $data = [
             "date" => date("Y-m-d"),
             "content" => $data['message'],
             "idPersonne" => $idPersonne,
