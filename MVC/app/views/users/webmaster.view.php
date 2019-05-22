@@ -5,7 +5,7 @@
         <h2>Eléments modifiables</h2>
         <ul>
             <?php foreach ($modifiables as $modifiable) { ?>
-                <li><a href="webmaster/modifiables?id=<?= $modifiable->idElementsModifiables ?>"><?= $modifiable->titre ?></a></li>
+                <li><a href="/webmaster/modifiables?id=<?= $modifiable->idElementsModifiables ?>"><?= $modifiable->titre ?></a></li>
             <?php } ?>
         </ul>
     </section>
@@ -13,11 +13,11 @@
         <h2>Foire aux questions</h2>
         <ul>
             <?php foreach ($faqs as $faq) { ?>
-                <li><a href="webmaster/faqs?id=<?= $faq->idFAQ ?>"><?= $faq->question ?></a></li>
+                <li><a href="/webmaster/faqs?id=<?= $faq->idFAQ ?>"><?= $faq->question ?></a></li>
             <?php } ?>
         </ul>
         <h3>Nouveau:</h3> 
-        <form action="webmaster/faqs/add" method="post">
+        <form action="/webmaster/faqs/add" method="post">
             <label>
                 <span>Question: </span>
                 <input type="text" name="question">
@@ -33,7 +33,7 @@
         <h2>Types de composants</h2>
         <ul>
             <h3>Nouveau:</h3> 
-            <form action="webmaster/typeComposant/add" method="post">
+            <form action="/webmaster/typeComposant/add" method="post">
                 <label>
                     <span>Nom</span>
                     <input type="text" name="nom">
