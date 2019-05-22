@@ -68,5 +68,4 @@ class UsersController extends Controller
             return $this->view('users/__mauvais-mdp', compact('title'));
         }
     }
-
 }

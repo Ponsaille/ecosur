@@ -53,3 +53,5 @@ $router->get('panne', 'SavController@showPanne');
 $router->get('end-panne', 'SavController@endPanne');
 $router->get('message', 'SavController@sendMessage');
 $router->post('message', 'SavController@sendMessage');
+
+$router->post('ajoutUtilisateurSecondaire', 'BoardController@ajoutUtilisateurSecondaire');

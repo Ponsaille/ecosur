@@ -17,7 +17,8 @@ class BoardController extends AuthController
 {
     function index()
     {
-        $title = 'tableau de bord';
+        $title = 'Tableau de bord';
+
         $ressource = Board::RessourceAppartementByUser($_SESSION['user_id']);
         return $this->view('users/users', compact('title', 'ressource'));
     }
@@ -123,6 +124,24 @@ class BoardController extends AuthController
 
         $title = "Gestion";
         return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
+    }
+
+    public function ajoutUtilisateurSecondaire()
+    {
+        if (!isset($_GET['idDomicile']) || !isset($_POST['email']) || !isset($_POST['allowedTypes'])) {
+            die('Missing arguments');
+        }
+
+        $user = Users::findByEmail($_POST['email']);
+
+        if (!$user) {
+            die("User undefined");
+        }
+
+        Users::addSecondaryUser($_GET['idDomicile'], $user->idPersonne, date("Y-m-d", strtotime(" +100 year")), $_POST['allowedTypes']);
+
+        static::redirect('gestion');
+
     }
 }
 
