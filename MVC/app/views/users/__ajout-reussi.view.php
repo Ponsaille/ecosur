@@ -17,9 +17,9 @@
 
 <div class="error-container">
 
-<h1>Propriété ajoutée.</h1>
+<h1><?= $title ?></h1>
 
-<a href="/management"><button class="btn-gray">Retour</button></a>
+<a href="/gestion"><button class="btn-gray">Retour</button></a>
 
 </div>
 

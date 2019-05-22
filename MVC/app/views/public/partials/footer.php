@@ -1,13 +1,14 @@
 <!-- Footer de la page d'accueil -->
 <footer>
     <ul>
-        <li><a href="#domisep-anchor">Qui sommes nous ?</a></li>
+        <li><a href="/#domisep-anchor">Qui sommes nous ?</a></li>
+        <li><a href="/faq">F.A.Q.</a></li>
         <li><a href="">Condition d'utilisation</a></li>
         <li><a href="">Condition de confidentialité</a></li>
-        <li><a href="#contact-anchor">Nous contacter</a></li>
+        <li><a href="/#contact-anchor">Nous contacter</a></li>
     </ul>
     <ul>
-        <li><a href="#contact-anchor">Nous contacter</a></li>
+        <li><a href="/#contact-anchor">Nous contacter</a></li>
         <li><a href="">Commentaire</a></li>
     </ul>
     <ul>
