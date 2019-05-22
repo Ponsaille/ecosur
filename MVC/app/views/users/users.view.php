@@ -18,13 +18,13 @@
         </label>
         <div>
             <label class="custom_checkbox">
-                <input class="hidden" type="checkbox" name="checkbox">
+                <input class="hidden" type="checkbox" name="checkbox" checked>
                 <span class="checkbox_span"><i class="fas fa-check"></i></span>
             </label>
         </div>
         <div class="selectionFleche">Capteurs</div>
         <div>
-            <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox">
+            <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox" checked>
                 <span class="checkbox_span"><i class="fas fa-check"></i></span>
             </label>
         </div>
@@ -78,7 +78,7 @@
                  
         <?php } ?>
             
-       
+    </section>
 
         <?php } ?>
         
@@ -94,6 +94,7 @@
                     for(maison of maisons) {
                         maison.classList.add('hidden');
                     }
+                    console.log(e.target.value)
                     document.getElementById(`appart-${e.target.value}`).classList.remove('hidden');
                 }
             })
