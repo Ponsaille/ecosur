@@ -120,10 +120,10 @@ class BoardController extends AuthController
             }
         }
 
-        $nomsTypesComposants = Station::getNomsTypesComposants();
+        $typesComposants = Station::getTypesComposants();
 
         $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
+        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'typesComposants'));
     }
 
     public function ajoutUtilisateurSecondaire()
