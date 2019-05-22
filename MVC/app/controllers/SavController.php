@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \App\Core\App;
+use App\Model\Board;
 use App\Model\IdTemporaire;
 use App\Model\Pannes;
 use \App\Model\Users;
@@ -30,7 +31,7 @@ class SavController extends AuthController
         $idPanne = $_GET['idPanne'];
 
         $messages = Pannes::findMessagesByPanne($idPanne);
-        $idUser = Pannes::findIdUserByPanne($_GET['idPanne']);
+        $idUser = Pannes::findIdUserByPanne($idPanne);
 
         $title = "Panne";
         $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser'));
@@ -49,8 +50,19 @@ class SavController extends AuthController
     }
 
     public function useIdTemporaire() {
-        IdTemporaire::useKey($_GET['idPersonne'] , $_POST['idTemporaire']);
-        static::redirect('user-panne?idPanne='.$_GET['idPanne']);
+        $changement = IdTemporaire::useKey($_GET['idPersonne'] , $_POST['idTemporaire']);
+
+        if($changement) {
+            $idPanne = $_GET['idPanne'];
+            $ressource = Board::RessourceAppartementByUser($_GET['idPersonne']);
+            $messages = Pannes::findMessagesByPanne($idPanne);
+            $idUser = Pannes::findIdUserByPanne($idPanne);
+
+            $title = "Panne";
+            $this->view('users/panne', compact('title', 'idPanne', 'messages', 'idUser', 'ressource'));
+        } else {
+            static::redirect('panne?idPanne='.$_GET['idPanne']);
+        }
     }
 
 }

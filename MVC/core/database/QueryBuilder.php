@@ -66,8 +66,6 @@ class QueryBuilder
         if (sizeof($where) > 0) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
-var_dump($parameters);
-        var_dump($sql);
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
