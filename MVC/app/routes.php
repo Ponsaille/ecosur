@@ -52,3 +52,6 @@ $router->get('sav', 'SavController@index');
 $router->get('panne', 'SavController@showPanne');
 $router->get('message', 'SavController@sendMessage');
 $router->post('message', 'SavController@sendMessage');
+
+$router->get('activate','StationController@activate');
+$router->get('desactivate','StationController@desactivate');

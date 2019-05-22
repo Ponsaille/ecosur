@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \App\Core\App;
 use \Exception;
 use \App\Model\Station;
+use \App\Model\Capteur;
 
 class StationController extends Controller
 {
@@ -38,6 +39,20 @@ class StationController extends Controller
             static::redirect('gestion');
         } catch (Exception $e) {
             die($e->getMessage());
+        }
+    }
+    public function activate($idCapteur){
+        try {
+            Capteur::activate($idCapteur);
+        }catch (Exception $e){
+            die($e->getMessage());
+        }
+    }
+    public function desactivate ($idLog){
+        try{
+            Capteur::desactivate($idLog);
+        }catch (Exception $e){
+            die ($e->getMessage());
         }
     }
 }

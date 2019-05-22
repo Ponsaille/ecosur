@@ -10,3 +10,4 @@ require 'Station.php';
 require 'TypeComposant.php';
 require 'FAQ.php';
 require 'IdTemporaire.php';
+require 'Capteur.php';
