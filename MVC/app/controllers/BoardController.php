@@ -18,7 +18,7 @@ class BoardController extends AuthController
     function index()
     {
         $title='tableau de bord';
-        $ressource = Board::RessourceAppartementByUser();
+        $ressource = Board::RessourceAppartementByUser($_SESSION['user_id']);
         return $this->view('users/users', compact('title', 'ressource'));
     }
 

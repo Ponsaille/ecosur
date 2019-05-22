@@ -127,11 +127,11 @@ class Users extends Model
         ];
         
         try {
-            App::get('database')->insert('utilisateursecondaire', $data);
+            $idUtilisateurSecondaireDroits = App::get('database')->insert('utilisateursecondaire', $data);
 
             foreach ($allowedTypes as $allowedType) {
                 App::get('database')->insert('utilisateursecondairedroits_typeComposant', [
-                    'idUtilisateurSecondaireDroits' => $idPersonne,
+                    'idUtilisateurSecondaireDroits' => $idUtilisateurSecondaireDroits,
                     'idtypeComposant' => (int)$allowedType
                 ]);
             }
@@ -142,6 +142,19 @@ class Users extends Model
     }
 
     public static function getSecondaryUsers($idDomicile) {
-        return App::get('database')->get('utilisateursecondaire', ['*'], ['idDomicile = '.$idDomicile]);
+        return App::get('database')->select('utilisateursecondaire', ['*'], ['idDomicile = '.$idDomicile]);
+    }
+
+    public static function getSecondaryHouses($idPersonne) {
+        return App::get('database')->select('domicile JOIN utilisateursecondaire ON domicile.idDomicile = utilisateursecondaire.idDomicile', ['*'], ['idPersonne = '.$idPersonne]);
+    }
+
+    public static function getAllowedTypes($idPersonne, $idDomicile) {
+        $resultsBDD = App::get('database')->select('utilisateursecondairedroits_typeComposant JOIN utilisateursecondaire ON utilisateursecondaire.idUtilisateurSecondaire = utilisateursecondairedroits_typeComposant.idUtilisateurSecondaireDroits', ['*'], ['idPersonne = '.$idPersonne, 'idDomicile = '.$idDomicile]);
+        $allowedTypes = [];
+        foreach ($resultsBDD as $type) {
+            $allowedTypes[] = $type->idtypeComposant;
+        }
+        return $allowedTypes;
     }
 }
