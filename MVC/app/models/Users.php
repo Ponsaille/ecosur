@@ -117,6 +117,31 @@ class Users extends Model
             $title = "Informations invalides";
             die(require "app/views/users/__info-invalide.view.php");
         }
+    }
 
+    public static function addSecondaryUser($idDomicile, $idPersonne, $dateFin, $allowedTypes) {
+        $data = [
+            'idPersonne' => $idPersonne,
+            'idDomicile' => $idDomicile,
+            "dateFin" => $dateFin
+        ];
+        
+        try {
+            App::get('database')->insert('utilisateursecondaire', $data);
+
+            foreach ($allowedTypes as $allowedType) {
+                App::get('database')->insert('utilisateursecondairedroits_typeComposant', [
+                    'idUtilisateurSecondaireDroits' => $idPersonne,
+                    'idtypeComposant' => (int)$allowedType
+                ]);
+            }
+        } catch (Exception $e) {
+            $title = "Informations invalides";
+            return die($e->getMessage()); //require "app/views/users/__info-invalide.view.php";
+        }
+    }
+
+    public static function getSecondaryUsers($idDomicile) {
+        return App::get('database')->get('utilisateursecondaire', ['*'], ['idDomicile = '.$idDomicile]);
     }
 }

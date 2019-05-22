@@ -72,6 +72,23 @@
             <a href="/delete-property?idDomicile=<?= $property->idDomicile ?>">Supprimer</a>
         </form>
 
+        <h3>Ajouter un utilisateur secondaire</h3>
+        <form class="full-length" action="/ajoutUtilisateurSecondaire?idDomicile=<?= $property->idDomicile ?>" method="POST">
+            <label class="full-length">
+                <span>Email</span>
+                <input type="text" name="email">
+            </label>
+            <div>
+                <label><span>Aura accès à:</span></label><br>
+                <?php foreach ($nomsTypesComposants as $typeComposant) { ?>
+                    <label>
+                        <input type="checkbox" name="allowedTypes[]" value="<?= $typeComposant->idtypeComposant ?>"> <?= $typeComposant->nom ?>
+                    </label>
+                <?php } ?>
+            </div>
+            <input class="btn-gray" type="submit" value="Ajouter">
+        </form>
+
         <h3>Modifier les pièces de <?= $property->Titre ?></h3>
         <?php foreach ($rooms
 

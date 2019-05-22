@@ -6,6 +6,7 @@ use \App\Core\App;
 use App\Model\Pannes;
 use \App\Model\Properties;
 use \App\Model\Board;
+use \App\Model\Users;
 
 use App\Model\Station;
 use \Exception;
@@ -54,6 +55,22 @@ class BoardController extends AuthController
             "code" => 200,
             "idTemporaire" => $idTemporaire
         ]);
+    }
+
+    public function ajoutUtilisateurSecondaire() {
+        if(!isset($_GET['idDomicile']) || !isset($_POST['email']) || !isset($_POST['allowedTypes'])) {
+            die('Missing arguments');
+        }
+
+        $user = Users::findByEmail($_POST['email']) ;
+
+        if(!$user) {
+            die("User undefined");
+        }
+
+        Users::addSecondaryUser($_GET['idDomicile'], $user->idPersonne, date("Y-m-d", strtotime(" +100 year")), $_POST['allowedTypes']);
+
+        static::redirect('gestion');
     }
 }
 

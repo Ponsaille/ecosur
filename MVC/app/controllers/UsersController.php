@@ -123,7 +123,7 @@ class UsersController extends Controller
             }
         }
 
-        $nomsTypesComposants = Station::getNomsTypesComposants();
+        $nomsTypesComposants = Station::getTypesComposants();
 
         $title = "Gestion";
         return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
