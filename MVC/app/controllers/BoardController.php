@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \App\Core\App;
 use App\Model\Pannes;
 use \App\Model\Properties;
+use \App\Model\Board;
 
 use App\Model\Station;
 use \Exception;
@@ -15,8 +16,9 @@ class BoardController extends AuthController
 {
     function index()
     {
-        $title = "Tableau de bord";
-        return $this->view('users/users', compact('title'));
+        $title='tableau de bord';
+        $ressource = Board::RessourceAppartementByUser();
+        return $this->view('users/users', compact('title', 'ressource'));
     }
 
     function userSAV()
@@ -54,3 +56,5 @@ class BoardController extends AuthController
         ]);
     }
 }
+
+

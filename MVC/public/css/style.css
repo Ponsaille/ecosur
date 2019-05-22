@@ -479,6 +479,7 @@ select {
 
 .maison {
     padding: 0;
+    
 }
 
 .selection {
@@ -507,8 +508,10 @@ select {
     grid-template-columns: 0.5fr 1fr 1fr;
     align-items: center;
     border-collapse: collapse;
+  
 }
 
+<<<<<<< HEAD
 article {
     background-color: #888888;
     color: white;
@@ -519,6 +522,20 @@ article:nth-child(2n+1) {
     background-color: #E6E6E6;
     color: #606060;
     font-size: 20px;
+=======
+.stationComplete{
+    background-color:#888888;
+    color:white;
+    font-size:20px;
+
+}
+
+.stationComplete:nth-child(2n+1){
+    background-color:#E6E6E6;
+    color:#606060;
+    font-size:20px;
+
+>>>>>>> origin/board-fonctionnalité
 }
 
 .custom_checkbox {
