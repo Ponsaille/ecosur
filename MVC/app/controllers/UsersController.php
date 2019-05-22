@@ -56,7 +56,7 @@ class UsersController extends Controller
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['user_id'] = $user->idPersonne;
             $_SESSION['user_type'] = $user->type;
-            switch($user->type) {
+            switch ($user->type) {
                 case 0:
                     $this->redirect('board');
                     break;
@@ -65,7 +65,7 @@ class UsersController extends Controller
                     break;
                 case 5:
                     $this->redirect('pdg');
-                    break; 
+                    break;
             }
         } else {
             $title = "Mot de passe erroné";
