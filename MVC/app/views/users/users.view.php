@@ -1,105 +1,140 @@
+<?php use App\Model\Board;?>
+
+
 <?php require('partials/head.php'); ?>
 
-    <div class="board">
 
-        <div class="selection">
-            <label class="dropButton">
-                <select class="dropdown" id="appart-dropdown">
-                    <option value="all">All</option>
-                    <?php foreach ($ressource as $appart) { ?>
+<div class="board">
+
+    <div class="selection">
+        <label class="dropButton">
+            <select class="dropdown" id="appart-dropdown">
+                <option value="all">All</option>
+                <?php foreach($ressource as $appart){ ?>
                         <option value="<?= $appart["appartement"]->idDomicile ?>"><?= $appart["appartement"]->Titre ?></option>
-                    <?php } ?>
-                </select>
-                <i class="fas fa-angle-down"></i>
+                <?php } ?>
+            </select>
+            <i class="fas fa-angle-down"></i>
+        </label>
+        <div>
+            <label class="custom_checkbox " id="checkboxCapteur">
+                <input class="hidden" type="checkbox" name="checkboxCapteur" checked>
+                <span class="checkbox_span"><i class="fas fa-check"></i></span>
             </label>
-            <div>
-                <label class="custom_checkbox">
-                    <input class="hidden" type="checkbox" name="checkbox" checked>
-                    <span class="checkbox_span"><i class="fas fa-check"></i></span>
-                </label>
-            </div>
-            <div class="selectionFleche">Capteurs</div>
-            <div>
-                <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox" checked>
-                    <span class="checkbox_span"><i class="fas fa-check"></i></span>
-                </label>
-            </div>
-            <div class="selectionFleche">Actionneurs</div>
-            <div>
-                <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox">
-                    <span class="checkbox_span">
+        </div>
+        <div class="selectionFleche">Capteurs</div>
+        <div>
+            <label class="custom_checkbox" id="checkboxActionneur">
+                <input class="hidden" type="checkbox" name="checkboxActionneur" checked>
+                <span class="checkbox_span"><i class="fas fa-check"></i></span>
+            </label>
+        </div>
+        <div class="selectionFleche">Actionneurs</div>
+        <div>
+            <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox">
+                <span class="checkbox_span">
                     <i class="fas fa-check"></i>
                 </span>
-                </label>
-            </div>
-            <div class="selectionFleche">Statistiques</div>
+            </label>
+        </div>
+        <div class="selectionFleche">Statistiques</div>
+    </div>
+
+    <?php foreach($ressource as $appart){ ?>
+
+    <section class="maison" id="appart-<?= $appart["appartement"]->idDomicile ?>">
+        <div class="topSection">
+            <div class="topSectionMaison"><?= $appart["appartement"]->Titre ?></div>
+            <div class="topSectionIcone">10h30 <i class="fas fa-fire"></i></div>
+            <div class="topSectionIcone">24h04 <i class="far fa-lightbulb fa-fw"></i></div>
         </div>
 
-        <?php foreach ($ressource as $appart) { ?>
+        <?php foreach($appart["pieces"] as $piece){?>
+                    
+            <?php foreach($piece["cemac"] as $cemac ){ ?>
+                <article class="stationComplete">
+                    <div>
+                        <div class="station">
+                            <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
+                            <div><?= $piece['piece']->nom ?></div>
+                        </div>
+                    
+                        <?php foreach($cemac["capteurs"] as $capteur){?>
 
-            <section class="maison" id="appart-<?= $appart["appartement"]->idDomicile ?>">
-                <div class="topSection">
-                    <div class="topSectionMaison"><?= $appart["appartement"]->Titre ?></div>
-                    <div class="topSectionIcone">10h30 <i class="fas fa-fire"></i></div>
-                    <div class="topSectionIcone">24h04 <i class="far fa-lightbulb fa-fw"></i></div>
-                </div>
-
-                <?php foreach ($appart["pieces"] as $piece) { ?>
-
-                    <?php foreach ($piece["cemac"] as $cemac) { ?>
-                        <article class="stationComplete">
-                            <div>
-                                <div class="station">
-                                    <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
-                                    <div><?= $piece['piece']->nom ?></div>
-                                </div>
-
-                                <?php foreach ($cemac["capteurs"] as $capteur) { ?>
-
-                                    <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
-                                        <?php if ($capteur['typeComposant']->icone == "opened-window") { ?>
-                                            <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
-                                        <?php } else { ?>
-                                            <div class="icone"><i
-                                                        class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i>
-                                            </div>
-                                        <?php } ?>
-                                        <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
-                                        <?php if ($capteur['typeComposant']->type == 1) { ?>
-                                            <div class="interactionCapteur"><label class="custom_checkbox2_grey"><input
-                                                            class="hidden" type="checkbox" name="checkbox"><span
-                                                            class="checkbox2_span_grey"></span></label></div>
-                                        <?php } ?>
-                                    </div>
+                            <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
+                                <?php if ($capteur['typeComposant']->icone == "opened-window"){ ?>
+                                    <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
+                                <?php } else { ?>
+                                    <div class="icone"><i class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i></div>
+                                <?php } ?>
+                                <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
+                                <?php if($capteur['typeComposant']->type == 1) { ?>
+                                    <div class="interactionCapteur"><label class="custom_checkbox2_grey"><input class="hidden" type="checkbox" name="checkbox"><span class="checkbox2_span_grey"></span></label></div>
                                 <?php } ?>
                             </div>
-                        </article>
-                    <?php } ?>
-
-                <?php } ?>
-
-            </section>
+                        <?php }?>
+                        </div>    
+                </article>  
+            <?php } ?>
+                 
+        <?php } ?>
+            
+    </section>
 
         <?php } ?>
-
+        
         <script>
             const appartDropdown = document.getElementById('appart-dropdown');
             const maisons = document.getElementsByClassName('maison');
-            appartDropdown.addEventListener('change', function (e) {
-                if (e.target.value == "all") {
-                    for (maison of maisons) {
+            appartDropdown.addEventListener('change', function(e) {
+                if(e.target.value=="all") {
+                    for(maison of maisons) {
                         maison.classList.remove('hidden');
                     }
                 } else {
-                    for (maison of maisons) {
+                    for(maison of maisons) {
                         maison.classList.add('hidden');
                     }
                     console.log(e.target.value)
                     document.getElementById(`appart-${e.target.value}`).classList.remove('hidden');
                 }
             })
+
+            const checkboxCapteur = document.getElementById('checkboxCapteur');
+            const capteurs = document.getElementsByClassName('capteur');
+            
+            checkboxCapteur.addEventListener('change', function(e) {
+                if(e.target.checked) {
+                    for(ligneDescriptionCapteur of capteurs) {
+                        ligneDescriptionCapteur.classList.remove('hidden');
+                        ligneDescriptionCapteur.classList.add('ligneDescriptionCapteur');
+                    }
+                } else {
+                    for(ligneDescriptionCapteur of capteurs) {
+                        ligneDescriptionCapteur.classList.add('hidden');
+                        ligneDescriptionCapteur.classList.remove('ligneDescriptionCapteur');
+                    }
+                }
+            })
+
+            const checkboxActionneur = document.getElementById('checkboxActionneur');
+            const actionneurs = document.getElementsByClassName('actionneur');
+
+            checkboxActionneur.addEventListener('change', function(e) {
+                if(e.target.checked) {
+                    for(ligneDescriptionCapteur of actionneurs) {
+                        ligneDescriptionCapteur.classList.remove('hidden');
+                        ligneDescriptionCapteur.classList.add('ligneDescriptionCapteur');
+                    }
+                } else {
+                    for(ligneDescriptionCapteur of actionneurs) {
+                        ligneDescriptionCapteur.classList.add('hidden');
+                        ligneDescriptionCapteur.classList.remove('ligneDescriptionCapteur');
+                    }
+                }
+            })
         </script>
-        </section>
-    </div>
+    </section>
+</div>
 
 <?php require('partials/footer.php'); ?>
