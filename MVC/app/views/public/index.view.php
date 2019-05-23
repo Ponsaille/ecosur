@@ -38,7 +38,7 @@
                     <img src="<?= $modifiables["produit3_logo"]->contenu ?>" alt="">
                     <!-- <hr> -->
                     <figcaption>
-                        <?= $modifiables["produit2_text"]->contenu ?>
+                        <?= $modifiables["produit3_text"]->contenu ?>
                     </figcaption>
                 </figure>
             </div>

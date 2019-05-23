@@ -39,8 +39,8 @@
 
         as $property) {
         ?>
-        <div class="selection property-title">
-            <h2><?= $property->Titre ?></h2>
+        <div class="selection property-title mt-3">
+            <h2 style="text-decoration: underline"><?= $property->Titre ?></h2>
         </div>
         <form class="full-length form-management" method="POST"
               action="/edit-property?idDomicile=<?= rawurldecode($property->idDomicile) ?>">
@@ -135,7 +135,7 @@
                                       action="/new-station?idPiece=<?= $room[$i]->idPiece ?>">
                                     <label class="full-length">
                                         <span>Numéro de station</span>
-                                        <input type="int" name="nbObjet" placeholder="Numéro de la station"
+                                        <input type="number" name="nbObjet" placeholder="Numéro de la station"
                                                maxlength="4">
                                     </label>
                                     <label class="full-length">

@@ -5,8 +5,8 @@ if (!isset($idPanne)) {
 
     <div class="board">
     <h1>Pannes n°<?= $idPanne ?></h1>
-    <a href="/sav" class="btn-gray"> Retour </a>
-    <a href="/end-panne?idPanne=<?= $idPanne ?>" class="supprimerCapteur">Panne terminée</a>
+    <button class="btn-gray"><a href="/sav"> Retour </a></button>
+    <a href="/end-panne?idPanne=<?= $idPanne ?>" class="supprimerCapteur">   Panne terminée</a>
 
     <div class="gestion-pannes">
     <form action="/message?idPanne=<?= $idPanne ?>" method="POST">
@@ -43,47 +43,11 @@ if (!isset($idPanne)) {
 
     <?php if(isset($ressource)) {
         ?>
-        <div class="board">
-        <div class="selection">
-            <label class="dropButton">
-                <select class="dropdown" id="appart-dropdown">
-                    <option value="all">All</option>
-                    <?php foreach ($ressource as $appart) { ?>
-                        <option value="<?= $appart["appartement"]->idDomicile ?>"><?= $appart["appartement"]->Titre ?></option>
-                    <?php } ?>
-                </select>
-                <i class="fas fa-angle-down"></i>
-            </label>
-            <div>
-                <label class="custom_checkbox">
-                    <input class="hidden" type="checkbox" name="checkbox" checked>
-                    <span class="checkbox_span"><i class="fas fa-check"></i></span>
-                </label>
-            </div>
-            <div class="selectionFleche">Capteurs</div>
-            <div>
-                <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox" checked>
-                    <span class="checkbox_span"><i class="fas fa-check"></i></span>
-                </label>
-            </div>
-            <div class="selectionFleche">Actionneurs</div>
-            <div>
-                <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox">
-                    <span class="checkbox_span">
-                    <i class="fas fa-check"></i>
-                </span>
-                </label>
-            </div>
-            <div class="selectionFleche">Statistiques</div>
-        </div>
-
         <?php foreach ($ressource as $appart) { ?>
 
             <section class="maison" id="appart-<?= $appart["appartement"]->idDomicile ?>">
                 <div class="topSection">
                     <div class="topSectionMaison"><?= $appart["appartement"]->Titre ?></div>
-                    <div class="topSectionIcone">10h30 <i class="fas fa-fire"></i></div>
-                    <div class="topSectionIcone">24h04 <i class="far fa-lightbulb fa-fw"></i></div>
                 </div>
 
                 <?php foreach ($appart["pieces"] as $piece) { ?>
@@ -141,18 +105,17 @@ if (!isset($idPanne)) {
                 }
             })
         </script>
-        </section>
-    </div>
+
         <?php
     } else {
         ?>
     <div class="form-management id-temporaire">
         <h2>Utiliser l'id temporaire</h2>
         <form action="/useIdTemporaire?idPersonne=<?= $idUser[0]->idPersonne ?>&idPanne=<?= $idPanne ?>" method="POST">
-            <label>
+            <label class="use-idTemp">
                 <input type="text" name="idTemporaire">
                 <span id="id-tempo-span"></span>
-                <button class="btn-gray" id="generate-id-tempo-btn" href="#">Utiliser</button>
+                <button class="btn-gray mt-1" id="generate-id-tempo-btn" href="#">Utiliser</button>
             </label>
         </form>
     </div>

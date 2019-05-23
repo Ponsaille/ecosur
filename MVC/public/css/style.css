@@ -141,7 +141,7 @@ section h2 {
     background-color: #888888;
     color: #FFFFFF;
     border-radius: 15px;
-    min-height: 12.5rem;
+    min-height: 13.5rem;
 }
 
 
@@ -250,6 +250,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 .full-length {
     width: 100%;
     margin: 15px 0;
+    margin-top: 2px;
 }
 
 
@@ -305,8 +306,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 1000px;
-    height: 500px;
-    overflow-y: scroll;
+    height: 700px;
     background-color: white;
     padding: 10px;
 }
@@ -338,6 +338,11 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
     top: 15%;
     left: 55%;
     width: 40%;
+}
+
+.overlay_body_right h2, .overlay_body_left h2 {
+    margin-top: 2px;
+    margin-bottom: 10px;
 }
 
 
@@ -584,6 +589,7 @@ article:nth-child(2n+1) {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
     padding: 1.5rem;
 }
 
@@ -623,7 +629,8 @@ article:nth-child(2n+1) {
 .pannes-scroll-list {
     border: #606060 solid 1px;
     height: 30rem;
-    width: 60rem;
+    max-width: 1300px;
+    min-width: 900px;
     overflow: scroll;
     overflow-x: hidden;
     text-align: center;
@@ -663,10 +670,23 @@ article:nth-child(2n+1) {
     padding: 0.1rem 1rem 1rem;
 }
 
+.types-composants {
+    padding-right: 20px;
+}
+
+.types-composants div {
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+}
+
 .types-composants label {
+    text-align: center;
+    width: 130px;
     margin-top: 4px;
     margin-bottom: 20px;
 }
+
 
 .checkbox_add_2ndary_user {
     padding-top: 6px;
@@ -685,9 +705,69 @@ article:nth-child(2n+1) {
 
 .id-temporaire {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 100px;
     min-width: 20rem;
     max-width: 60rem;
     height: auto;
     padding-bottom: 28px;
+}
+
+.use-idTemp {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 3rem;
+}
+
+.faq-new {
+    max-width: 1300px;
+    min-width: 900px;
+}
+
+.label-radio {
+    text-align: center;
+    width: 20rem;
+}
+
+.radio-type {
+    padding-left: 8px;
+    padding-top: 3px;
+}
+
+.label-radio input[type='radio'] {
+    background-color: black;
+}
+
+.label-radio input[type='radio']:hover {
+    background-color: #45B549;
+    border: #45B549;
+}
+
+.radio-pdg-choice label {
+    text-align: center;
+    width: 110px;
+}
+
+.radio-pdg-choice label span {
+    font-size: 1rem;
+}
+
+#FAQ {
+    margin-top: 12rem;
+}
+
+.faq-show {
+    margin-top: 3rem;
+    background-color: #FFFFFF;
+    padding: 10px 30px 6px;
 }
