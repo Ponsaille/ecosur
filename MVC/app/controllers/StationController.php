@@ -5,7 +5,7 @@ namespace App\Controllers;
 use \App\Core\App;
 use \Exception;
 use \App\Model\Station;
-use \App\Model\Capteur;
+use \App\Model\Composant;
 
 class StationController extends Controller
 {
@@ -41,16 +41,40 @@ class StationController extends Controller
             die($e->getMessage());
         }
     }
-    public function activate($idCapteur){
+    public function activate(){
         try {
-            Capteur::activate($idCapteur);
+            header('Content-type: application/json');
+            if(Composant::activate($_GET['id'])) {
+                http_response_code(200);
+                echo json_encode([
+                    'status' => 200
+                ]);
+            } else {
+                http_response_code(403);
+                echo json_encode([
+                    'status' => 403,
+                    'message' => "Déjà activé"
+                ]);
+            }
         }catch (Exception $e){
             die($e->getMessage());
         }
     }
-    public function desactivate ($idLog){
+    public function desactivate (){
         try{
-            Capteur::desactivate($idLog);
+            header('Content-type: application/json');
+            if(Composant::desactivate($_GET['id'])) {
+                http_response_code(200);
+                echo json_encode([
+                    'status' => 200
+                ]);
+            } else {
+                http_response_code(403);
+                echo json_encode([
+                    'status' => 403,
+                    'message' => "Déjà activé"
+                ]);
+            }
         }catch (Exception $e){
             die ($e->getMessage());
         }

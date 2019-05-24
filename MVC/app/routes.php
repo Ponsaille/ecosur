@@ -53,5 +53,7 @@ $router->get('panne', 'SavController@showPanne');
 $router->get('message', 'SavController@sendMessage');
 $router->post('message', 'SavController@sendMessage');
 
-$router->get('activate','StationController@activate');
-$router->get('desactivate','StationController@desactivate');
+$router->get('composant/activate','StationController@activate');
+$router->get('composant/desactivate','StationController@desactivate');
+
+$router->get('getAppartementStats','BoardController@getAppartementStats');
