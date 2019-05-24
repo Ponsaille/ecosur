@@ -449,13 +449,17 @@ select {
 }
 
 .topSection {
-    grid-template-columns: 3fr 0.7fr 0.7fr;
+    grid-template-columns: 3fr 0.3fr 0.3fr;
     display: grid;
     background-color: #606060;
     padding: 10px 10px;
     font-size: 20px;
     color: white;
     margin-top: 30px;
+}
+
+.choixPieces{
+    text-align: right;
 }
 
 .topSectionIcone {
@@ -511,18 +515,6 @@ select {
   
 }
 
-<<<<<<< HEAD
-article {
-    background-color: #888888;
-    color: white;
-    font-size: 20px;
-}
-
-article:nth-child(2n+1) {
-    background-color: #E6E6E6;
-    color: #606060;
-    font-size: 20px;
-=======
 .stationComplete{
     background-color:#888888;
     color:white;
@@ -535,7 +527,6 @@ article:nth-child(2n+1) {
     color:#606060;
     font-size:20px;
 
->>>>>>> origin/board-fonctionnalité
 }
 
 .custom_checkbox {
