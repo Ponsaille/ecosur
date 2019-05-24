@@ -20,13 +20,6 @@ use \Exception;
 
 class UsersController extends Controller
 {
-
-    public function board()
-    {
-        $title = "Tableau de bord";
-        return $this->view('users/users', compact('title'));
-    }
-
     public function inscription()
     {
         Users::store($_POST);
@@ -90,45 +83,5 @@ class UsersController extends Controller
             $title = "Mot de passe erroné";
             return $this->view('users/__mauvais-mdp', compact('title'));
         }
-    }
-
-    public function disconnect()
-    {
-        session_destroy();
-
-        static::redirect('');
-    }
-
-    public function gestion()
-    {
-        $properties = Properties::findPropertiesByConnectedUser();
-
-        $rooms = [];
-        foreach ($properties as $property) {
-            array_push($rooms, Properties::findRoomsByProperty($property->idDomicile));
-        }
-
-        $cemacs = [];
-        foreach ($rooms as $room) {
-            if ($room != null) {
-                for ($j = 0; $j < count($room); $j++) {
-                    array_push($cemacs, Station::findCemacByRoom($room[$j]->idPiece));
-                }
-            }
-        }
-
-        $composants = [];
-        foreach ($cemacs as $cemac) {
-            if ($cemac != null) {
-                for ($k = 0; $k < count($cemac); $k++) {
-                    array_push($composants, Station::findComposantByCemac($cemac[$k]->idCemac));
-                }
-            }
-        }
-
-        $nomsTypesComposants = Station::getNomsTypesComposants();
-
-        $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
     }
 }

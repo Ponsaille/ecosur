@@ -1,7 +1,7 @@
 <?php require('partials/head.php'); ?>
 
     <div class="board">
-    <h1>Pannes n°<?= $idPanne ?></h1> <a href="/user-sav" class="supprimerCapteur">Retour</a>
+    <h1>Pannes n°<?= $idPanne ?></h1> <button href="/user-sav" class="btn-gray">Retour</button>
 
     <div class="gestion-pannes">
     <form action="/user-message?idPanne=<?= $idPanne ?>" method="POST">
@@ -28,13 +28,15 @@
                     }
                 }
                 ?>
+            </div>
+            <div class="input-message-btn">
                 <input class="chatbox-message-input" type="text" name="message">
                 <button class="send-button" type='int' name="type"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </form>
 
-    <section>
+    <div class="form-management id-temporaire">
         <h2>Générer un id temporaire</h2>
         <span id="id-tempo-span"></span>
         <button class="btn-gray" id="generate-id-tempo-btn" href="#">Générer</button>
@@ -50,7 +52,7 @@
                     });
             })
         </script>
-    </section>
+    </div>
 
 
 

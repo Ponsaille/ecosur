@@ -153,7 +153,16 @@ class Properties extends Model
     }
 
     public static function deleteOneRoom($id) {
-
         return App::get('database')->delete('piece', ['idPiece = '. $id]);
+    }
+
+    public static function userAllowedInProperty($idUser, $idDomicile) {
+        $allowed = App::get('database')->select('abonnementproprietaire', ['*'], ['idDomicile = '. $idDomicile, 'idPersonne = ' .$idUser]);
+
+        if (count($allowed)>0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

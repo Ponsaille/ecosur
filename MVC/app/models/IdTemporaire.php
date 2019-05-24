@@ -25,7 +25,7 @@ class IdTemporaire extends Model
             App::get('database')->update('idtemporaire', ["used" => '1'], ["idTemporaire = " . $keys[0]->idTemporaire]);
             return true;
         } else {
-            die("Error, theis key isn't valid anymore");
+            return false;
         }
     }
 }

@@ -81,7 +81,7 @@
                         <span>Mot de passe</span>
                         <input type="password" name="password">
                     </label>
-                    <input class="btn-gray" type="submit" value="Se connecter">
+                    <input class="btn-gray" type="submit" value="S'inscrire">
                 </form>
             </div>
         </div>
