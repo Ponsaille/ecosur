@@ -49,18 +49,21 @@
                             <span>Icone</span>
                             <input type="text" name="icone">
                         </label><br>
-                        <label>
-                            <input type="radio" name="type" value="0"> Capteur
+                        <label class="label-radio">
+                            <input type="radio" name="type" value="0">
+                            <div class="radio-type">Capteur</div>
                         </label>
-                        <label>
-                            <input type="radio" name="type" value="1"> Actionneur
+                        <label class="label-radio">
+                            <input type="radio" name="type" value="1">
+                            <div class="radio-type">Actionneur</div>
                         </label><br>
                         <input class="btn-gray" type="submit" value="Envoyer">
                     </form>
                 </div>
                 <h3>Modifier</h3>
                 <?php foreach ($typeComposants as $typeComposant) { ?>
-                    <form action="webmaster/typeComposant/edit?id=<?= $typeComposant->idtypeComposant ?>" method="post" class="mt-3 faq-new form-management">
+                    <form action="webmaster/typeComposant/edit?id=<?= $typeComposant->idtypeComposant ?>" method="post"
+                          class="mt-3 faq-new form-management">
                         <label class="half-length">
                             <span>Nom</span>
                             <input type="text" name="nom" value="<?= $typeComposant->nom ?>">

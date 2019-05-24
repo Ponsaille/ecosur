@@ -15,7 +15,18 @@ if (!isset($idPanne)) {
                 <h3>Contact</h3>
             </div>
             <div class="chatbox-body">
+
+
+
+
+
+
+
+
+
+
                 <?php
+                /*
                 foreach ($messages as $message) {
                     if ($message->idPanne == $idPanne) {
                         if ($_SESSION['user_id'] != $message->idPersonne) {
@@ -32,7 +43,9 @@ if (!isset($idPanne)) {
                         }
                     }
                 }
+                */
                 ?>
+
             </div>
             <div class="input-message-btn">
                 <input class="chatbox-message-input" type="text" name="message">
