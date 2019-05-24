@@ -2,6 +2,10 @@
 
 $router->get('', 'StaticController@home');
 $router->get('faq', 'StaticController@faq');
+$router->post('contact', 'StaticController@sendMail');
+
+
+
 $router->post('inscription', 'UsersController@inscription');
 $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'UsersController@disconnect');
@@ -52,3 +56,4 @@ $router->get('sav', 'SavController@index');
 $router->get('panne', 'SavController@showPanne');
 $router->get('message', 'SavController@sendMessage');
 $router->post('message', 'SavController@sendMessage');
+
