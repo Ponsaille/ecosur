@@ -143,6 +143,29 @@ class BoardController extends AuthController
         static::redirect('gestion');
 
     }
+
+
+    public function getMsg()
+    {
+        $setMsgUserSav = function ($message) {
+            if ($message->idPersonne === $_SESSION['user_id']) {
+                $message->idPersonne = "1";
+                return $message;
+            } else {
+                $message->idPersonne = "0";
+                return $message;
+            }
+        };
+
+        header('Content-type: application/json');
+
+        echo json_encode(array_map($setMsgUserSav, Pannes::findMessagesByPanne($_GET['idPanne'])));
+    }
+
+    public function sendMsg()
+    {
+        return Pannes::storeMessage($_POST, $_SESSION['user_id'], $_GET['idPanne']);
+    }
 }
 
 

@@ -55,3 +55,9 @@ $router->get('message', 'SavController@sendMessage');
 $router->post('message', 'SavController@sendMessage');
 
 $router->post('ajoutUtilisateurSecondaire', 'BoardController@ajoutUtilisateurSecondaire');
+
+$router->get('api/messages', 'SavController@getMsg');
+$router->post('api/send', 'SavController@sendMsg');
+
+$router->get('api/messagesUser', 'BoardController@getMsg');
+$router->post('api/sendUser', 'BoardController@sendMsg');

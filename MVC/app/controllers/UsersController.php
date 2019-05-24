@@ -12,6 +12,7 @@
 namespace App\Controllers;
 
 use \App\Core\App;
+use App\Model\Pannes;
 use App\Model\Properties;
 use App\Model\Station;
 use \App\Model\Users;
@@ -68,4 +69,5 @@ class UsersController extends Controller
             return $this->view('users/__mauvais-mdp', compact('title'));
         }
     }
+
 }

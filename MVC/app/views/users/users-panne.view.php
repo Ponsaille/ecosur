@@ -1,40 +1,70 @@
 <?php require('partials/head.php'); ?>
 
     <div class="board">
-    <h1>Pannes n°<?= $idPanne ?></h1> <button href="/user-sav" class="btn-gray">Retour</button>
+    <h1>Pannes n°<?= $idPanne ?></h1>
+    <button href="/user-sav" class="btn-gray">Retour</button>
 
     <div class="gestion-pannes">
-    <form action="/user-message?idPanne=<?= $idPanne ?>" method="POST">
+
+    <form action="" method="POST" id="chatForm">
         <div class="chatbox">
             <div class="chatbox-header">
                 <h3>Contact</h3>
             </div>
-            <div class="chatbox-body">
-                <?php
-                foreach ($messages as $message) {
-                    if ($message->idPanne == $idPanne) {
-                        if ($_SESSION['user_id'] != $message->idPersonne) {
-                            ?>
-                            <div class="message recu">
-                                <p><?= rawurldecode($message->content) ?></p>
-                            </div>
-                        <?php } else {
-                            ?>
-                            <div class="message envoye">
-                                <p><?= rawurldecode($message->content) ?></p>
-                            </div>
-                            <?php
-                        }
-                    }
-                }
-                ?>
+            <div class="chatbox-body" id="chat">
             </div>
             <div class="input-message-btn">
                 <input class="chatbox-message-input" type="text" name="message">
-                <button class="send-button" type='int' name="type"><i class="fas fa-paper-plane"></i></button>
+                <button class="send-button" type='int' name="type" id="msg-btn"><i class="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </form>
+
+    <script>
+        function fetchMessages() {
+            fetch('/api/messagesUser?idPanne=<?= $idPanne ?>')
+                .then(res => res.json())
+                .then(json => {
+                        const old = chatBody.innerHTML;
+                        chatBody.innerHTML = "";
+                        json.forEach(message => {
+                            let divMsg = document.createElement('div');
+                            let paragraph = document.createElement('p');
+                            paragraph.innerText = decodeURIComponent(message.content);
+                            divMsg.classList.add("message");
+
+                            if (message.idPersonne === "1") {
+                                divMsg.classList.add("envoye");
+                            } else {
+                                divMsg.classList.add("recu");
+                            }
+
+                            divMsg.appendChild(paragraph);
+                            chatBody.appendChild(divMsg);
+                        })
+                        if (old != chatBody.innerHTML) {
+                            chatBody.scrollTop = chatBody.scrollHeight;
+                        }
+                    }
+                )
+        }
+
+        const chatBody = document.getElementById("chat");
+        const button = document.getElementById("msg-btn");
+
+        setInterval(fetchMessages, 500);
+
+        const formulaire = document.getElementById("chatForm");
+        formulaire.addEventListener("submit", function (e) {
+            let varForm = new FormData(formulaire);
+            e.preventDefault();
+            fetch('/api/sendUser?idPanne=<?= $idPanne ?>', {
+                method: 'POST',
+                body: varForm
+            }).then(fetchMessages)
+        });
+    </script>
 
     <div class="form-management id-temporaire">
         <h2>Générer un id temporaire</h2>

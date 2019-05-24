@@ -8,8 +8,8 @@
     <nav>
         <?php if($_SESSION['user_type'] == 0) { ?>
         <ul>
-            <li><a href="/board"><i class="fas fa-cogs fa-fw"></i> <span class="side-nav-text">Board</span></a></li>
-            <li><a href="/gestion"><i class="fas fa-home fa-fw"></i> <span class="side-nav-text">Gestion</span></a></li>
+            <li><a href="/board"><i class="fas fa-home fa-fw"></i> <span class="side-nav-text">Board</span></a></li>
+            <li><a href="/gestion"><i class="fas fa-cogs fa-fw"></i> <span class="side-nav-text">Gestion</span></a></li>
             <li><a href="/user-sav"><i class="far fa-comment-alt fa-fw"></i> <span class="side-nav-text">SAV</span></a></li>
             <li><a href="/edit-account"><i class="fas fa-user fa-fw"></i> <span class="side-nav-text">Mon compte</span></a></li>
         </ul>

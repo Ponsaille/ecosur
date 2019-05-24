@@ -31,7 +31,7 @@ class SavController extends AuthController
     {
         $idPanne = $_GET['idPanne'];
 
-        $messages = Pannes::findMessagesByPanne($idPanne);
+        $messages = json_encode(Pannes::findMessagesByPanne($idPanne));
         $idUser = Pannes::findIdUserByPanne($idPanne);
 
         $title = "Panne";
@@ -40,7 +40,6 @@ class SavController extends AuthController
 
     function sendMessage()
     {
-
         Pannes::storeMessage($_POST, $_SESSION['user_id'], $_GET['idPanne']);
 
         $idPanne = $_GET['idPanne'];
@@ -51,7 +50,7 @@ class SavController extends AuthController
         $this->view('users/panne', compact('title', 'idPanne', 'messages'));
     }
 
-    public function useIdTemporaire()
+    function useIdTemporaire()
     {
         $changement = IdTemporaire::useKey($_GET['idPersonne'], $_POST['idTemporaire']);
 
@@ -78,4 +77,25 @@ class SavController extends AuthController
         self::redirect('sav');
     }
 
+    public function getMsg()
+    {
+        $setMsgUserSav = function ($message) {
+            if ($message->idPersonne === $_SESSION['user_id']) {
+                $message->idPersonne = "1";
+                return $message;
+            } else {
+                $message->idPersonne = "0";
+                return $message;
+            }
+        };
+
+        header('Content-type: application/json');
+
+        echo json_encode(array_map($setMsgUserSav, Pannes::findMessagesByPanne($_GET['idPanne'])));
+    }
+
+    public function sendMsg()
+    {
+        return Pannes::storeMessage($_POST, $_SESSION['user_id'], $_GET['idPanne']);
+    }
 }
