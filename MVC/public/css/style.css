@@ -567,7 +567,11 @@ article:nth-child(2n+1) {
     background-color: #888888;
     color: white;
     font-size: 20px;
+}
 
+.stats {
+    overflow-x: scroll;
+    overflow-y: none;
 }
 
 .stationComplete:nth-child(2n+1) {
