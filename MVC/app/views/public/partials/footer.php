@@ -2,7 +2,6 @@
 <footer>
     <ul>
         <li><a href="/#domisep-anchor">Qui sommes nous ?</a></li>
-        <li><a href="/#contact-anchor">Nous contacter</a></li>
         <li><a href="/faq">F.A.Q.</a></li>
     </ul>
     <ul>
