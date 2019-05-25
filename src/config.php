@@ -6,8 +6,8 @@ return [
     'database' => [
         'name' => 'company',
         'username' => 'root',
-        'password' => 'dockercestlavie',
-        'connection' => 'mysql:host=ponsaille.com:3306',
+        'password' => '',
+        'connection' => 'mysql:host=localhost:3306',
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]

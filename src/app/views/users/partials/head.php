@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/public/css/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/public/css/side-nav.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="/public/css/chatbox.css"/>
+    <link rel="icon" href="/public/images/favicon-ecosur.ico" />
 </head>
 
 <body>
