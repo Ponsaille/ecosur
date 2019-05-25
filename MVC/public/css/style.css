@@ -517,6 +517,7 @@ select {
 
 .board {
     width: 50%;
+    min-width: 400px;
     margin: auto;
     padding-top: 150px;
 }
