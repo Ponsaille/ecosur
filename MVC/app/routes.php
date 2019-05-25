@@ -2,6 +2,10 @@
 
 $router->get('', 'StaticController@home');
 $router->get('faq', 'StaticController@faq');
+$router->post('contact', 'StaticController@sendMail');
+
+
+
 $router->post('inscription', 'UsersController@inscription');
 $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'BoardController@disconnect');

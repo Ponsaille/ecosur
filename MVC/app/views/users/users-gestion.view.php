@@ -156,7 +156,14 @@
                         const stationOverlay<?= $room[$i]->idPiece ?> = new Overlay(document.getElementById('station_overlay_<?= $room[$i]->idPiece ?>'), document.getElementById('button_capteur_<?= $room[$i]->idPiece ?>'));
                     </script>
                 </div>
+
+                <div class="choixPieces" id="visible" value="1"><i class="fas fa-times"></div></i><div class="choixPieces" id="invisible" value="0"><i class="fas fa-minus"></i></div>
+                
             </div>
+
+
+
+            
             <?php
             foreach ($cemacs as $cemac) {
                 if (!empty($cemac)) {
@@ -176,7 +183,7 @@
                                         if (!empty($composant)) {
                                             for ($k = 0; $k < count($composant); $k++) {
                                                 if ($composant[$k]->idCemac == $cemac[$j]->idCemac) { ?>
-                                                    <div class="ligneDescriptionCapteurManagement">
+                                                    <div class="ligneDescriptionCapteurManagement capteurStation-<?=$cemac->idCemac?>">
                                                         <div class="icone"><i
                                                                     class="fas <?= $composant[$k]->icone ?> fa-fw"></i>
                                                         </div>
@@ -239,9 +246,11 @@
                                     const capteurOverlay<?= $cemac[$j]->idCemac ?> = new Overlay(document.getElementById('capteur_overlay_<?= $cemac[$j]->idCemac ?>'), document.getElementById('button_capteur_<?= $cemac[$j]->idCemac ?>'));
                                 </script>
                             </div>
-                        <?php }
-                    }
-                }
+                        <?php } ?>
+
+                   <?php }?>
+             
+                <?php }
             }
 
             }
@@ -260,4 +269,12 @@
 
     </div>
 
-<?php require('partials/footer.php'); ?>
+
+ 
+
+
+<?php require('partials/footer.php'); ?>   
+
+
+
+
