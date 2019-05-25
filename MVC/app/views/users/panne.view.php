@@ -20,7 +20,6 @@ if (!isset($idPanne)) {
                 <input class="chatbox-message-input" type="text" name="message" placeholder="Tapez votre message ici...">
                 <button class="send-button" type='int' name="type" id="msg-btn"><i class="fas fa-paper-plane"></i></button>
             </div>
-
         </div>
     </form>
 

@@ -156,9 +156,6 @@
                         const stationOverlay<?= $room[$i]->idPiece ?> = new Overlay(document.getElementById('station_overlay_<?= $room[$i]->idPiece ?>'), document.getElementById('button_capteur_<?= $room[$i]->idPiece ?>'));
                     </script>
                 </div>
-
-                <div class="choixPieces" id="visible" value="1"><i class="fas fa-times"></div></i><div class="choixPieces" id="invisible" value="0"><i class="fas fa-minus"></i></div>
-                
             </div>
 
 
