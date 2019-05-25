@@ -75,6 +75,27 @@ header nav ul li:hover {
     transition-property: color;
 }
 
+
+/* Mobile pour le header */
+
+@media screen and (max-width: 930px) {
+    header {
+        height: auto;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header nav ul li {
+        margin: 5px 10px 0 10px;
+    }
+}
+
+@media screen and (max-height: 600px) and (max-width: 930px) {
+    header .logo {
+        height: 50px;
+    }
+}
+
 .jumbotron {
     width: 100%;
     height: 100vh;
@@ -85,7 +106,7 @@ header nav ul li:hover {
 
 .jumbotron img {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -489,7 +510,7 @@ select {
 }
 
 .topSection {
-    grid-template-columns: 3fr 0.3fr 0.3fr;
+    grid-template-columns: 3fr 0.6fr 0.6fr;
     display: grid;
     background-color: #606060;
     padding: 10px 10px;
@@ -517,8 +538,10 @@ select {
 
 .board {
     width: 50%;
-    margin: auto;
-    padding-top: 150px;
+    min-width: 750px;
+    margin: 0 auto;
+    padding: 30px 0 30px 100px;
+    overflow: hidden;
 }
 
 .maison {
@@ -534,6 +557,27 @@ select {
     height: 50px;
     align-items: center;
     padding: 20px 20px 5px;
+}
+
+@media screen and (max-width: 780px) {
+    .board {
+        min-width: 0px;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .selection {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        height: auto;
+    }
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .selectionFleche {
@@ -591,7 +635,8 @@ article:nth-child(2n+1) {
 }
 
 .custom_checkbox {
-    padding-top: 6px;
+    padding-top: 0px;
+    padding-right: 3px;
 }
 
 .error-container {
@@ -643,7 +688,7 @@ article:nth-child(2n+1) {
     border: #606060 solid 1px;
     height: 30rem;
     max-width: 1300px;
-    min-width: 900px;
+    width: 100%;
     overflow: scroll;
     overflow-x: hidden;
     text-align: center;
@@ -743,8 +788,7 @@ article:nth-child(2n+1) {
 }
 
 .faq-new {
-    max-width: 1300px;
-    min-width: 900px;
+    width:100%
 }
 
 .label-radio {

@@ -80,3 +80,13 @@
 #side-nav.open .hamburger-button span:nth-last-child(3) {
   transform: rotate(45deg) translate(1px, -1px);
 }
+
+@media screen and (max-width: 780px) {
+  #side-nav {
+    margin-left: -100px;
+  }
+
+  #side-nav.open {
+    margin-left: 0px;
+  }
+}

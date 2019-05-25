@@ -16,29 +16,30 @@
             </select>
             <i class="fas fa-angle-down"></i>
         </label>
-        <div>
+
+        <div class="checkbox-container">
             <label class="custom_checkbox " id="checkboxCapteur">
                 <input class="hidden" type="checkbox" name="checkboxCapteur" checked>
                 <span class="checkbox_span"><i class="fas fa-check"></i></span>
             </label>
+            <div class="selectionFleche">Capteurs</div>
         </div>
-        <div class="selectionFleche">Capteurs</div>
-        <div>
+        <div class="checkbox-container">
             <label class="custom_checkbox" id="checkboxActionneur">
                 <input class="hidden" type="checkbox" name="checkboxActionneur" checked>
                 <span class="checkbox_span"><i class="fas fa-check"></i></span>
             </label>
+            <div class="selectionFleche">Actionneurs</div>
         </div>
-        <div class="selectionFleche">Actionneurs</div>
-        <div>
+        <div class="checkbox-container">
             <label class="custom_checkbox" id="checkbox-stats">
                 <input class="hidden" type="checkbox" name="checkbox">
                 <span class="checkbox_span">
                     <i class="fas fa-check"></i>
                 </span>
             </label>
+            <div class="selectionFleche">Statistiques</div>
         </div>
-        <div class="selectionFleche">Statistiques</div>
     </div>
 
     <?php foreach($ressource as $appart){ ?>
