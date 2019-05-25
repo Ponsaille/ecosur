@@ -3,6 +3,7 @@
 $router->get('', 'StaticController@home');
 $router->get('faq', 'StaticController@faq');
 $router->post('contact', 'StaticController@sendMail');
+$router->get('cgu', 'StaticController@cgu');
 
 
 $router->post('inscription', 'UsersController@inscription');

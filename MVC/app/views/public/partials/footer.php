@@ -2,14 +2,12 @@
 <footer>
     <ul>
         <li><a href="/#domisep-anchor">Qui sommes nous ?</a></li>
-        <li><a href="/faq">F.A.Q.</a></li>
-        <li><a href="">Condition d'utilisation</a></li>
-        <li><a href="">Condition de confidentialité</a></li>
         <li><a href="/#contact-anchor">Nous contacter</a></li>
+        <li><a href="/faq">F.A.Q.</a></li>
     </ul>
     <ul>
         <li><a href="/#contact-anchor">Nous contacter</a></li>
-        <li><a href="">Commentaire</a></li>
+        <li><a href="/cgu">Conditions Générales d'Utilisation</a></li>
     </ul>
     <ul>
         <li><a href="<?= $modifiables["facebook_link"]->contenu ?>">Facebook</a></li>

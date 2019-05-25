@@ -14,6 +14,7 @@ namespace App\Controllers;
 
 
 use App\Model\FAQ;
+use App\Model\Modifiables;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -35,6 +36,13 @@ class StaticController extends Controller
         $title = "FAQ";
         $faqs = FAQ::get();
         return $this->view('public/faq', compact('title', 'faqs'));
+    }
+
+    public function cgu()
+    {
+        $modifiables = Modifiables::get();
+        $title = "Conditions Générales d'Utilisation";
+        return $this->view('public/cgu', compact('title', 'modifiables'));
     }
 
     public function sendMail(){
