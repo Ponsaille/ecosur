@@ -34,21 +34,6 @@ class UsersController extends Controller
         return $this->view('users/__inscription-reussie', compact('title'));
     }
 
-    public function editPage()
-    {
-        $user = Users::find($_SESSION['user_id']);
-        $title = "Edition de votre compte";
-        return $this->view('users/users-edit', compact('title', 'user'));
-    }
-
-    public function edit()
-    {
-        Users::edit($_POST);
-        static::redirect('edit-account');
-        return;
-    }
-
-
     public function connection()
     {
         if (!(array_key_exists('email', $_POST) && array_key_exists('password', $_POST))) {
@@ -69,6 +54,9 @@ class UsersController extends Controller
             switch ($user->type) {
                 case 0:
                     $this->redirect('board');
+                    break;
+                case 1:
+                    $this->redirect('gestionnaire/board');
                     break;
                 case 2:
                     $this->redirect('webmaster');

@@ -6,7 +6,7 @@
     </div>
     <img class="small-logo" src="<?= $modifiables["logo_short"]->contenu ?>" alt="">
     <nav>
-        <?php if($_SESSION['user_type'] == 0) { ?>
+        <?php if($_SESSION['user_type'] == 0 || $_SESSION['user_type'] == 1) { ?>
         <ul>
             <li><a href="/board"><i class="fas fa-home fa-fw"></i> <span class="side-nav-text">Board</span></a></li>
             <li><a href="/gestion"><i class="fas fa-cogs fa-fw"></i> <span class="side-nav-text">Gestion</span></a></li>

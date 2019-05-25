@@ -3,7 +3,7 @@
 $router->get('', 'StaticController@home');
 $router->get('faq', 'StaticController@faq');
 $router->post('contact', 'StaticController@sendMail');
-
+$router->get('cgu', 'StaticController@cgu');
 
 
 $router->post('inscription', 'UsersController@inscription');
@@ -15,6 +15,7 @@ $router->get('delete-user', 'BoardController@delete');
 $router->get('generateIdTemporaire', 'BoardController@generateIdTemporaire');
 $router->get('useIdTemporaire', 'SavController@useIdTemporaire');
 $router->post('useIdTemporaire', 'SavController@useIdTemporaire');
+
 
 $router->get('gestion', 'BoardController@gestion');
 $router->get('board', 'BoardController@index');
@@ -71,3 +72,6 @@ $router->post('api/send', 'SavController@sendMsg');
 
 $router->get('api/messagesUser', 'BoardController@getMsg');
 $router->post('api/sendUser', 'BoardController@sendMsg');
+
+$router->get('gestionnaire/board', 'GestionnaireController@index');
+$router->get('gestionnaire/gestion', 'GestionnaireController@gestion');

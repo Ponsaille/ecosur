@@ -62,60 +62,60 @@
                             <div>
                                 <div class="station">
                                     <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
-                                    <div><?= $piece['piece']->nom ?></div>
-
+                                    <div><a href="/declare-panne?idCemac=<?= $cemac["cemac"]->idCemac ?>&nbObjet=<?= $cemac["cemac"]->nbObjet ?>" style="text-decoration: underline; font-size: 1rem">Déclarer panne</a> | <?= $piece['piece']->nom ?></div>
                                 </div>
 
-                                <?php foreach ($cemac["capteurs"] as $capteur) { ?>
+                                <?php foreach ($cemac["capteurs"] as $capteur) {
+                                    if (!($_SESSION['user_type'] == 1 && in_array($appart["appartement"]->idDomicile, $idHousesWith2ndaryUsers) && $capteur['typeComposant']->icone == "fa-person-booth")) {
+                                        ?>
+                                        <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
+                                            <?php if ($capteur['typeComposant']->icone == "opened-window") { ?>
+                                                <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
+                                            <?php } else { ?>
+                                                <div class="icone"><i
+                                                            class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i>
+                                                </div>
+                                            <?php } ?>
+                                            <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
+                                            <?php if ($capteur['typeComposant']->type == 1 && !($_SESSION['user_type'] == 1 && in_array($appart["appartement"]->idDomicile, $idHousesWith2ndaryUsers))) { ?>
+                                                <div class="interactionCapteur">
+                                                    <label class="custom_checkbox2_grey">
+                                                        <input class="hidden" type="checkbox" name="checkbox"
+                                                               id="checkbox-capteur-<?= $capteur['capteur']->idComposant ?>"
+                                                            <?= $capteur['status'] == true ? 'checked' : '' ?>>
+                                                        <span class="checkbox2_span_grey"
+                                                              onclick="switchCheckbox<?= $capteur['capteur']->idComposant ?>()"></span>
+                                                    </label>
+                                                </div>
 
-                                    <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
-                                        <?php if ($capteur['typeComposant']->icone == "opened-window") { ?>
-                                            <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
-                                        <?php } else { ?>
-                                            <div class="icone"><i
-                                                        class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i>
-                                            </div>
-                                        <?php } ?>
-                                        <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
-                                        <?php if ($capteur['typeComposant']->type == 1) { ?>
-                                            <div class="interactionCapteur">
-                                                <label class="custom_checkbox2_grey">
-                                                    <input class="hidden" type="checkbox" name="checkbox"
-                                                           id="checkbox-capteur-<?= $capteur['capteur']->idComposant ?>"
-                                                        <?= $capteur['status'] == true ? 'checked' : '' ?>>
-                                                    <span class="checkbox2_span_grey"
-                                                          onclick="switchCheckbox<?= $capteur['capteur']->idComposant ?>()"></span>
-                                                </label>
-                                            </div>
-
-                                            <script>
-                                                function switchCheckbox<?= $capteur['capteur']->idComposant ?>() {
-                                                    let checkbox = document.getElementById("checkbox-capteur-<?= $capteur['capteur']->idComposant ?>");
-                                                    if (checkbox.checked === false) {
-                                                        fetch('/composant/activate?id=<?= $capteur['capteur']->idComposant ?>')
-                                                            .then(res => res.json())
-                                                            .then(json => {
-                                                                if (json.status === "200") {
-                                                                    return checkbox.checked = true
-                                                                }
-                                                            });
-                                                    } else if (checkbox.checked === true) {
-                                                        fetch('/composant/desactivate?id=<?= $capteur['capteur']->idComposant  ?>')
-                                                            .then(res => res.json())
-                                                            .then(json2 => {
-                                                                if (json2.status === "200") {
-                                                                    return checkbox.checked = false
-                                                                }
-                                                            });
+                                                <script>
+                                                    function switchCheckbox<?= $capteur['capteur']->idComposant ?>() {
+                                                        let checkbox = document.getElementById("checkbox-capteur-<?= $capteur['capteur']->idComposant ?>");
+                                                        if (checkbox.checked === false) {
+                                                            fetch('/composant/activate?id=<?= $capteur['capteur']->idComposant ?>')
+                                                                .then(res => res.json())
+                                                                .then(json => {
+                                                                    if (json.status === "200") {
+                                                                        return checkbox.checked = true
+                                                                    }
+                                                                });
+                                                        } else if (checkbox.checked === true) {
+                                                            fetch('/composant/desactivate?id=<?= $capteur['capteur']->idComposant  ?>')
+                                                                .then(res => res.json())
+                                                                .then(json2 => {
+                                                                    if (json2.status === "200") {
+                                                                        return checkbox.checked = false
+                                                                    }
+                                                                });
+                                                        }
                                                     }
-                                                }
-                                            </script>
-                                        <?php } ?>
-                                    </div>
-                                <?php } ?>
+                                                </script>
+                                            <?php } ?>
+                                        </div>
+                                    <?php }
+                                } ?>
                             </div>
                         </article>
-
                     <?php } ?>
                 <?php } ?>
             </section>
@@ -285,6 +285,7 @@
                 })
                 chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
                 ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
+
                 let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
                 for (let i = 0; i < (new Date()).getMonth() + 1; i++) {
                     logs["1"].push(logs["1"].shift());

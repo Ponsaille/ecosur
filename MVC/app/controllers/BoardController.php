@@ -20,7 +20,10 @@ class BoardController extends AuthController
         $title = 'Tableau de bord';
 
         $ressource = Board::RessourceAppartementByUser($_SESSION['user_id']);
-        return $this->view('users/users', compact('title', 'ressource'));
+
+        $idHousesWith2ndaryUsers = Board::findIdDomicilesWithSecondaryUsers($_SESSION['user_id']);
+
+        return $this->view('users/users', compact('title', 'ressource', 'idHousesWith2ndaryUsers'));
     }
 
     function userSAV()
@@ -73,13 +76,10 @@ class BoardController extends AuthController
         static::redirect('board');
     }
 
-
-    // Faire une méthode isAllowed($idUtilisateur, $idProperty)
     function isAllowed($idProperty)
     {
         return Properties::userAllowedInProperty($_SESSION['user_id'], $idProperty);
     }
-
 
     function editPage()
     {
@@ -157,7 +157,6 @@ class BoardController extends AuthController
         static::redirect('gestion');
 
     }
-
 
     public function getMsg()
     {
