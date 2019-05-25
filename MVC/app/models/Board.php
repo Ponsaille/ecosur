@@ -37,12 +37,10 @@ class Board extends Model
 
     }
 
-
     public static function findTypeComposantByCapteur($capteur)
     {
         return App::get('database')->select('composants INNER JOIN typeComposant ON composants.idtypeComposant=typeComposant.idtypeComposant AND composants.idComposant=' . $capteur, ['typeComposant.idtypeComposant', 'nom', 'type', 'icone']);
     }
-
 
     public static function RessourceAppartementByUser($userId)
     {
@@ -157,10 +155,7 @@ class Board extends Model
                          ]
 
                      ]
-
-
                  ]
-
          ]
       ]
     ]
@@ -192,12 +187,8 @@ class Board extends Model
                          "idCapteur =>[
                              Objet typeComposant choisis avec ce que tu veux
                          ]
-
                      ]
-
-
                  ]
-
          ]
       ]
     ]
