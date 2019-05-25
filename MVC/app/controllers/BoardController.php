@@ -93,6 +93,11 @@ class BoardController extends AuthController
         static::redirect('');
     }
 
+    function delete() {
+        Users::delete($_SESSION['user_id']);
+        static::redirect('');
+    }
+
     function gestion()
     {
         $properties = Properties::findPropertiesByConnectedUser();

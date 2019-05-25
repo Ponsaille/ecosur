@@ -7,6 +7,7 @@ $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'BoardController@disconnect');
 $router->get('edit-account', 'BoardController@editPage');
 $router->post('edit-user', 'BoardController@edit');
+$router->get('delete-user', 'BoardController@delete');
 $router->get('generateIdTemporaire', 'BoardController@generateIdTemporaire');
 $router->get('useIdTemporaire', 'SavController@useIdTemporaire');
 $router->post('useIdTemporaire', 'SavController@useIdTemporaire');

@@ -31,9 +31,9 @@
                     <span>Pays</span>
                     <input type="text" name="pays" value="<?= rawurldecode($user->pays) ?>">
                 </label>
-                <input class="btn-gray" type="submit" value="Editer"> | <a href="" class="supprimerCapteur">Supprimer le compte</a>
+                <input class="btn-gray" type="submit" value="Editer"> | <a href="/delete-user" onclick="return confirm('Êtes-vous sûr ?')" class="supprimerCapteur">Supprimer le compte</a>
             </form>
         </section>
-
     </div>
+
 <?php require('partials/footer.php'); ?>

@@ -119,6 +119,10 @@ class Users extends Model
         }
     }
 
+    public static function delete($idUser) {
+        return App::get('database')->delete('personne', ['idPersonne = ' . $idUser]);
+    }
+
     public static function addSecondaryUser($idDomicile, $idPersonne, $dateFin, $allowedTypes) {
         $data = [
             'idPersonne' => $idPersonne,
