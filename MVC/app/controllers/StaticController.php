@@ -17,6 +17,7 @@ use App\Model\FAQ;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+
 class StaticController extends Controller
 {
 
@@ -46,7 +47,7 @@ class StaticController extends Controller
             //Server settings
             $mail->SMTPDebug = 2;                                       // Enable verbose debug output
             $mail->isSMTP();                                            // Paramétrer le Mailer pour utiliser SMTP 
-            $mail->Host = 'mail.gmail.com';                             // Spécifier le serveur SMTP
+            $mail->Host = 'smtp.gmail.com';                             // Spécifier le serveur SMTP
             $mail->SMTPAuth = true;                                     // Activer authentication SMTP
             $mail->Username = 'app.g7c@gmail.com';                      // Votre adresse email d'envoi
             $mail->Password = 'lafeteestfinie';                         // Le mot de passe de cette adresse email
