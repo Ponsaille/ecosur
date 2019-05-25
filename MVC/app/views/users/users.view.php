@@ -87,6 +87,7 @@
                                             </div>
 
                                             <script>
+                                                console.log('Pourquoi ca ne mrche pas ?');
                                                 function switchCheckbox<?= $capteur['capteur']->idComposant ?>() {
                                                     let checkbox = document.getElementById("checkbox-capteur-<?= $capteur['capteur']->idComposant ?>");
                                                     if (checkbox.checked === false) {
