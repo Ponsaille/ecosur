@@ -62,8 +62,7 @@
                             <div>
                                 <div class="station">
                                     <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
-                                    <div><?= $piece['piece']->nom ?></div>
-
+                                    <div><a href="/declare-panne?idCemac=<?= $cemac["cemac"]->idCemac ?>&nbObjet=<?= $cemac["cemac"]->nbObjet ?>" style="text-decoration: underline; font-size: 1rem">Déclarer panne</a> | <?= $piece['piece']->nom ?></div>
                                 </div>
 
                                 <?php foreach ($cemac["capteurs"] as $capteur) {
