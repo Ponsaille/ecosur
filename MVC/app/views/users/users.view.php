@@ -31,7 +31,8 @@
         </div>
         <div class="selectionFleche">Actionneurs</div>
         <div>
-            <label class="custom_checkbox"><input class="hidden" type="checkbox" name="checkbox">
+            <label class="custom_checkbox" id="checkbox-stats">
+                <input class="hidden" type="checkbox" name="checkbox">
                 <span class="checkbox_span">
                     <i class="fas fa-check"></i>
                 </span>
@@ -136,6 +137,21 @@
                     }
                 }
             })
+
+            const checkboxStats = document.getElementById('checkbox-stats');
+            const stats = document.getElementsByClassName('stats');
+
+            checkboxStats.addEventListener('change', function(e) {
+                if(e.target.checked) {
+                    for(stat of stats) {
+                        stat.classList.add('stats-active');
+                    }
+                } else {
+                    for(stat of stats) {
+                        stat.classList.remove('stats-active');
+                    }
+                }
+            })
         </script>
     </section>
 </div>
@@ -223,8 +239,8 @@
                     return result;
                 })
             })
-            chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(2) + 'h';
-            ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(2) + 'h';
+            chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
+            ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
             // Sommer tous
             let values = (new Array(12)).fill(0);
             let activated = ["1", "2"];

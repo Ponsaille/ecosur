@@ -575,7 +575,12 @@ article:nth-child(2n+1) {
 
 .stats {
     overflow-x: scroll;
-    overflow-y: none;
+    overflow-y: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+}
+.stats.stats-active {
+    max-height: 1000px;
 }
 
 .stationComplete:nth-child(2n+1) {
