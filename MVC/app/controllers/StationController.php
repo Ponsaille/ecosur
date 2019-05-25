@@ -41,6 +41,7 @@ class StationController extends Controller
             die($e->getMessage());
         }
     }
+
     public function activate(){
         try {
             header('Content-type: application/json');
@@ -60,10 +61,31 @@ class StationController extends Controller
             die($e->getMessage());
         }
     }
+
     public function desactivate (){
         try{
             header('Content-type: application/json');
             if(Composant::desactivate($_GET['id'])) {
+                http_response_code(200);
+                echo json_encode([
+                    'status' => 200
+                ]);
+            } else {
+                http_response_code(403);
+                echo json_encode([
+                    'status' => 403,
+                    'message' => "Déjà activé"
+                ]);
+            }
+        }catch (Exception $e){
+            die ($e->getMessage());
+        }
+    }
+
+    public function getStatus() {
+        try{
+            header('Content-type: application/json');
+            if(Composant::status($_GET['id'])) {
                 http_response_code(200);
                 echo json_encode([
                     'status' => 200

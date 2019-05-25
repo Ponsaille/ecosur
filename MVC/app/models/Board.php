@@ -61,11 +61,12 @@ class Board extends Model
                     $capteurs = [];
                     foreach ($capteursFromBDD as $capteur) {
                         $typeComposant = Board::findTypeComposantByCapteur($capteur->idComposant)[0];
+                        $active = Composant::status($capteur->idComposant);
 
                         $capteurs[$capteur->idComposant] = [
                             "capteur" => $capteur,
-                            "typeComposant" => $typeComposant
-
+                            "typeComposant" => $typeComposant,
+                            "status" => $active
                         ];
                     }
                     $stations[$station->idCemac] = [
