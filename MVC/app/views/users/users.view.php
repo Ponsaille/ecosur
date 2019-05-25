@@ -55,7 +55,7 @@
                 <canvas style="display: block; margin: 0 auto;" width="600px" height="300px"></canvas>
             </article>
 
-            <?php foreach ($appart["pieces"] as $piece) { ?>
+            <?php foreach ($appart["pieces"] as $piece){ ?>
 
             <?php foreach ($piece["cemac"] as $cemac) { ?>
                 <article class="stationComplete">
@@ -64,7 +64,7 @@
                             <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
                             <div><?= $piece['piece']->nom ?></div>
                         </div>
-                    
+
                         <?php foreach($cemac["capteurs"] as $capteur){?>
 
                             <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
@@ -85,8 +85,7 @@
 
         </section>
 
-    <?php }
-        } ?>
+    <?php }} ?>
 
         <script>
             const appartDropdown = document.getElementById('appart-dropdown');
@@ -253,97 +252,96 @@
                     }
                 })
 
-            })
-        chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
-        ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
+    })
+    chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
+    ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
 
-        let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
+    let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
 
-        for (let i = 0; i < (new Date()).getMonth() + 1; i++) {
-            logs["1"].push(logs["1"].shift());
-            logs["2"].push(logs["2"].shift());
-            months.push(months.shift());
-        }
-        months = months.reverse();
+    for(let i = 0; i<(new Date()).getMonth() + 1; i++) {
+    logs["1"].push(logs["1"].shift());
+    logs["2"].push(logs["2"].shift());
+    months.push(months.shift());
+    }
+    months = months.reverse();
 
-        drawStats(
-            canvasStats<?= $appart["appartement"]->idDomicile ?>.getContext("2d"),
-            logs["1"].reverse(),
-            logs["2"].reverse(),
-            months
-        );
+    drawStats(
+    canvasStats<?= $appart["appartement"]->idDomicile ?>.getContext("2d"),
+    logs["1"].reverse(),
+    logs["2"].reverse(),
+    months
+    );
 
 
-        })
-        ;
-        <?php } ?>
-        function drawStats(ctx, values1, values2, xAxis) {
-            let values = values1.map((value, index) => {
-                return value + values2[index];
-            })
-            let margin = 10
-            let barWidth = ctx.canvas.width / values.length - margin * 2;
-            let maxBarHeight = ctx.canvas.height - margin * 2 - 50;
-            let max = Math.max(...values);
-            values.forEach((value, i) => {
-                let ratio = value / max;
-                let barHeight = ratio * maxBarHeight; // Calcul de la barre du chauffage
-                let littleBarHeight = (values1[i] / max) * maxBarHeight; // Calcul de l'ampoule'
-                //Affichage successif des barres
-                ctx.fillStyle = "#45B549";
-                ctx.fillRect(margin + i * ctx.canvas.width / values.length,
-                    ctx.canvas.height - barHeight - 2 - 25,
-                    barWidth,
-                    barHeight
-                );
-                if (values2[i] > 0.01) {
-                    ctx.fillStyle = "#0D5C14";
-                    ctx.font = "12px sans-serif";
-                    ctx.textAlign = "center";
-                    ctx.fillText(
-                        values2[i].toFixed(1) + 'h',
-                        i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
-                        (ctx.canvas.height - (barHeight + littleBarHeight) / 2 - 2 - 25)
-                    );
-                }
-                ctx.fillStyle = "#FFDB0C";
-                ctx.fillRect(margin + i * ctx.canvas.width / values.length,
-                    ctx.canvas.height - littleBarHeight - 2 - 25,
-                    barWidth,
-                    littleBarHeight
-                );
-                if (values1[i] > 0.01) {
-                    ctx.fillStyle = "#A38202";
-                    ctx.font = "12px sans-serif";
-                    ctx.textAlign = "center";
-                    ctx.fillText(
-                        values1[i].toFixed(1) + 'h',
-                        i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
-                        ctx.canvas.height - littleBarHeight / 2 - 2 - 25
-                    );
-                }
-                // Affichage d'une barre par défaut
-                ctx.fillStyle = "#FFF";
-                ctx.fillRect(margin + i * ctx.canvas.width / values.length,
-                    ctx.canvas.height - 2 - 25,
-                    barWidth,
-                    1
-                );
-                // Affichage du total
-                ctx.font = "12px sans-serif";
-                ctx.textAlign = "center";
-                ctx.fillText(
-                    values[i].toFixed(2) + 'h',
-                    i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
-                    ctx.canvas.height - barHeight - 2 - 25 - 10
-                );
-                ctx.fillText(
-                    xAxis[i],
-                    i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
-                    ctx.canvas.height - 10
-                );
-            })
-        }
+    });
+<?php } ?>
+    function drawStats(ctx, values1, values2, xAxis) {
+    let values = values1.map((value, index) => {
+    return value + values2[index];
+    })
+    let margin = 10
+    let barWidth = ctx.canvas.width / values.length - margin * 2;
+    let maxBarHeight = ctx.canvas.height - margin * 2 - 50;
+    let max = Math.max(...values);
+    values.forEach((value, i) => {
+    let ratio = value / max;
+    let barHeight = ratio * maxBarHeight; // Calcul de la barre du chauffage
+    let littleBarHeight = (values1[i]/max) * maxBarHeight; // Calcul de l'ampoule'
+    //Affichage successif des barres
+    ctx.fillStyle = "#45B549";
+    ctx.fillRect(margin + i * ctx.canvas.width / values.length,
+    ctx.canvas.height - barHeight - 2 - 25,
+    barWidth,
+    barHeight
+    );
+    if(values2[i] > 0.01) {
+    ctx.fillStyle = "#0D5C14";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+    values2[i].toFixed(1) + 'h',
+    i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
+    (ctx.canvas.height - (barHeight + littleBarHeight)/2 - 2 - 25)
+    );
+    }
+    ctx.fillStyle = "#FFDB0C";
+    ctx.fillRect(margin + i * ctx.canvas.width / values.length,
+    ctx.canvas.height - littleBarHeight - 2 - 25,
+    barWidth,
+    littleBarHeight
+    );
+    if(values1[i] > 0.01) {
+    ctx.fillStyle = "#A38202";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+    values1[i].toFixed(1) + 'h',
+    i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
+    ctx.canvas.height - littleBarHeight/2 - 2 - 25
+    );
+    }
+    // Affichage d'une barre par défaut
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(margin + i * ctx.canvas.width / values.length,
+    ctx.canvas.height - 2 - 25,
+    barWidth,
+    1
+    );
+    // Affichage du total
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+    values[i].toFixed(2) + 'h',
+    i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
+    ctx.canvas.height - barHeight - 2 - 25 - 10
+    );
+    ctx.fillText(
+    xAxis[i],
+    i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
+    ctx.canvas.height - 10
+    );
+    })
+    }
     </script>
 
 

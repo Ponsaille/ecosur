@@ -11,7 +11,6 @@ use \Exception;
 class Board extends Model
 {
 
-
     public static function findAppartementsByUser($userId)
     {
         return App::get('database')->select('domicile INNER JOIN abonnementproprietaire ON domicile.idDomicile = abonnementproprietaire.idDomicile AND abonnementproprietaire.idPersonne = ' . $userId, ['domicile.idDomicile', 'Titre', 'Adresse', 'code_postal', 'Ville', 'Pays']);

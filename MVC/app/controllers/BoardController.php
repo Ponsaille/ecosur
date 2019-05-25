@@ -73,13 +73,10 @@ class BoardController extends AuthController
         static::redirect('board');
     }
 
-
-    // Faire une méthode isAllowed($idUtilisateur, $idProperty)
     function isAllowed($idProperty)
     {
         return Properties::userAllowedInProperty($_SESSION['user_id'], $idProperty);
     }
-
 
     function editPage()
     {
@@ -157,7 +154,6 @@ class BoardController extends AuthController
         static::redirect('gestion');
 
     }
-
 
     public function getMsg()
     {
