@@ -158,28 +158,28 @@
     </div>
 
     <script>
-
+        
         <?php foreach ($ressource as $appart) { ?>
-
-        const articleStats<?= $appart["appartement"]->idDomicile ?> = document.getElementById('stats-<?= $appart["appartement"]->idDomicile ?>');
-        const canvasStats<?= $appart["appartement"]->idDomicile ?> = articleStats<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('canvas')[0];
-        const chauffage<?= $appart["appartement"]->idDomicile ?> = document.getElementById('chauffage-<?= $appart["appartement"]->idDomicile ?>');
-        const ampoule<?= $appart["appartement"]->idDomicile ?> = document.getElementById('ampoule-<?= $appart["appartement"]->idDomicile ?>');
-        fetch(`/getAppartementStats?id=<?= $appart["appartement"]->idDomicile ?>`)
+            
+            const articleStats<?= $appart["appartement"]->idDomicile ?> = document.getElementById('stats-<?= $appart["appartement"]->idDomicile ?>');
+            const canvasStats<?= $appart["appartement"]->idDomicile ?> = articleStats<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('canvas')[0];
+            const chauffage<?= $appart["appartement"]->idDomicile ?> = document.getElementById('chauffage-<?= $appart["appartement"]->idDomicile ?>');
+            const ampoule<?= $appart["appartement"]->idDomicile ?> = document.getElementById('ampoule-<?= $appart["appartement"]->idDomicile ?>');
+            fetch(`/getAppartementStats?id=<?= $appart["appartement"]->idDomicile ?>`)
             .then(res => res.json())
             .then(logs => {
                 // Trier par mois
                 Object.keys(logs).forEach(idType => {
                     logs[idType] = logs[idType].map(component => {
                         component.logsPerMonths = [];
-                        for (let i = 0; i < 12; i++) {
+                        for(let i = 0; i<12; i++) {
                             component.logsPerMonths[i] = new Array();
                         }
                         const today = new Date();
-                        const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDay());
+                        const lastYear = new Date(today.getFullYear()-1, today.getMonth(), today.getDay());
                         component.logs.forEach(log => {
                             const date = (new Date(log.date))
-                            if (date.getTime() > lastYear.getTime()) {
+                            if(date.getTime() > lastYear.getTime()) {
                                 const month = date.getMonth();
                                 component.logsPerMonths[month].push(log);
                             }
@@ -192,8 +192,8 @@
                     logs[idType] = logs[idType].map(component => {
                         component.logsPerMonths = component.logsPerMonths.map(month => {
                             // Si il est déjà activé au début du mois il faut le mettre désactiver au tout début
-                            if (month.length > 0 && month[month.length - 1].active == "0") {
-                                const lastDate = new Date(month[month.length - 1].date);
+                            if(month.length > 0 && month[month.length-1].active == "0") {
+                                const lastDate = new Date(month[month.length-1].date);
                                 const dateStart = new Date(lastDate.getFullYear(), lastDate.getMonth(), 1, 0, 0).toJSON().slice(0, 19).replace('T', ' ');
                                 month.push({
                                     idComposant: component.idComposant,
@@ -201,8 +201,8 @@
                                     active: "1"
                                 })
                             }
-                            if (month.length > 0 && month[0].active == "1") {
-                                const firstDate = new Date(month[month.length - 1].date);
+                            if(month.length > 0 && month[0].active == "1") {
+                                const firstDate = new Date(month[month.length-1].date);
                                 const dateEnd = new Date(firstDate.getFullYear(), firstDate.getMonth(), 1, 0, 0).toJSON().slice(0, 19).replace('T', ' ');
                                 month.unshift({
                                     idComposant: component.idComposant,
@@ -215,11 +215,11 @@
                         return component;
                     })
                 });
-
+                
                 // Ramener tout à type
                 Object.keys(logs).forEach(idType => {
                     result = [];
-                    for (let i = 0; i < 12; i++) {
+                    for(let i = 0; i<12; i++) {
                         result[i] = new Array();
                     }
                     logs[idType].forEach(component => {
@@ -229,53 +229,35 @@
                     })
                     logs[idType] = result
                 })
-
+                
                 // Calculer
                 Object.keys(logs).forEach(idType => {
                     logs[idType] = logs[idType].map(month => {
                         let result = 0;
-                        for (let i = 0; i < month.length; i += 2) {
-                            result += ((new Date(month[i].date)).getTime() - (new Date(month[i + 1].date)).getTime()) / 1000 / 3600;
+                        for(let i = 0; i<month.length; i+=2) {
+                            result +=  ((new Date(month[i].date)).getTime() - (new Date(month[i+1].date)).getTime()) / 1000 / 3600;
                         }
                         return result;
                     })
                 })
                 chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
                 ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
-                // Sommer tous
-                let values = (new Array(12)).fill(0);
-                let activated = ["1", "2"];
-                Object.keys(logs).forEach(idType => {
-                    if (activated.includes(idType)) {
-                        logs[idType].forEach((month, index) => {
-                            values[index] += month;
-                        })
-                    }
-                })
-
-            })
-        chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
-        ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
-
-        let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
-
-        for (let i = 0; i < (new Date()).getMonth() + 1; i++) {
-            logs["1"].push(logs["1"].shift());
-            logs["2"].push(logs["2"].shift());
-            months.push(months.shift());
-        }
-        months = months.reverse();
-
-        drawStats(
-            canvasStats<?= $appart["appartement"]->idDomicile ?>.getContext("2d"),
-            logs["1"].reverse(),
-            logs["2"].reverse(),
-            months
-        );
-
-
-        })
-        ;
+                let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
+                for(let i = 0; i<(new Date()).getMonth() + 1; i++) {
+                    logs["1"].push(logs["1"].shift());
+                    logs["2"].push(logs["2"].shift());
+                    months.push(months.shift());
+                }
+                months = months.reverse();
+                drawStats(
+                    canvasStats<?= $appart["appartement"]->idDomicile ?>.getContext("2d"), 
+                    logs["1"].reverse(),
+                    logs["2"].reverse(),
+                    months
+                );
+                
+                
+            });
         <?php } ?>
         function drawStats(ctx, values1, values2, xAxis) {
             let values = values1.map((value, index) => {
@@ -288,7 +270,7 @@
             values.forEach((value, i) => {
                 let ratio = value / max;
                 let barHeight = ratio * maxBarHeight; // Calcul de la barre du chauffage
-                let littleBarHeight = (values1[i] / max) * maxBarHeight; // Calcul de l'ampoule'
+                let littleBarHeight = (values1[i]/max) * maxBarHeight; // Calcul de l'ampoule'
                 //Affichage successif des barres
                 ctx.fillStyle = "#45B549";
                 ctx.fillRect(margin + i * ctx.canvas.width / values.length,
@@ -296,14 +278,14 @@
                     barWidth,
                     barHeight
                 );
-                if (values2[i] > 0.01) {
+                if(values2[i] > 0.01) {
                     ctx.fillStyle = "#0D5C14";
                     ctx.font = "12px sans-serif";
                     ctx.textAlign = "center";
                     ctx.fillText(
-                        values2[i].toFixed(1) + 'h',
-                        i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
-                        (ctx.canvas.height - (barHeight + littleBarHeight) / 2 - 2 - 25)
+                        values2[i].toFixed(1) + 'h', 
+                        i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
+                        (ctx.canvas.height - (barHeight + littleBarHeight)/2 - 2 - 25)
                     );
                 }
                 ctx.fillStyle = "#FFDB0C";
@@ -312,14 +294,14 @@
                     barWidth,
                     littleBarHeight
                 );
-                if (values1[i] > 0.01) {
+                if(values1[i] > 0.01) {
                     ctx.fillStyle = "#A38202";
                     ctx.font = "12px sans-serif";
                     ctx.textAlign = "center";
                     ctx.fillText(
-                        values1[i].toFixed(1) + 'h',
-                        i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
-                        ctx.canvas.height - littleBarHeight / 2 - 2 - 25
+                        values1[i].toFixed(1) + 'h', 
+                        i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
+                        ctx.canvas.height - littleBarHeight/2 - 2 - 25
                     );
                 }
                 // Affichage d'une barre par défaut
@@ -333,13 +315,13 @@
                 ctx.font = "12px sans-serif";
                 ctx.textAlign = "center";
                 ctx.fillText(
-                    values[i].toFixed(2) + 'h',
-                    i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
+                    values[i].toFixed(2) + 'h', 
+                    i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
                     ctx.canvas.height - barHeight - 2 - 25 - 10
                 );
                 ctx.fillText(
-                    xAxis[i],
-                    i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
+                    xAxis[i], 
+                    i * ctx.canvas.width / values.length + (ctx.canvas.width/values.length) / 2,
                     ctx.canvas.height - 10
                 );
             })
