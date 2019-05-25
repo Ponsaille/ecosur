@@ -16,102 +16,66 @@
                 </select>
                 <i class="fas fa-angle-down"></i>
             </label>
-            <div>
+
+            <div class="checkbox-container">
                 <label class="custom_checkbox " id="checkboxCapteur">
                     <input class="hidden" type="checkbox" name="checkboxCapteur" checked>
                     <span class="checkbox_span"><i class="fas fa-check"></i></span>
                 </label>
+                <div class="selectionFleche">Capteurs</div>
             </div>
-            <div class="selectionFleche">Capteurs</div>
-            <div>
+            <div class="checkbox-container">
                 <label class="custom_checkbox" id="checkboxActionneur">
                     <input class="hidden" type="checkbox" name="checkboxActionneur" checked>
                     <span class="checkbox_span"><i class="fas fa-check"></i></span>
                 </label>
+                <div class="selectionFleche">Actionneurs</div>
             </div>
-            <div class="selectionFleche">Actionneurs</div>
-            <div>
+            <div class="checkbox-container">
                 <label class="custom_checkbox" id="checkbox-stats">
                     <input class="hidden" type="checkbox" name="checkbox">
                     <span class="checkbox_span">
                     <i class="fas fa-check"></i>
                 </span>
                 </label>
+                <div class="selectionFleche">Statistiques</div>
             </div>
-            <div class="selectionFleche">Statistiques</div>
         </div>
 
         <?php foreach ($ressource as $appart) { ?>
+        <section class="maison" id="appart-<?= $appart["appartement"]->idDomicile ?>">
+            <div class="topSection">
+                <div class="topSectionMaison"><?= $appart["appartement"]->Titre ?></div>
+                <div style="color: #45B549" id="chauffage-<?= $appart["appartement"]->idDomicile ?>"
+                     class="topSectionIcone"><span>...</span> <i class="fas fa-fire"></i></div>
+                <div style="color: #FFDB0C" id="ampoule-<?= $appart["appartement"]->idDomicile ?>"
+                     class="topSectionIcone"><span>...</span> <i class="far fa-lightbulb fa-fw"></i></div>
+            </div>
+            <article id="stats-<?= $appart["appartement"]->idDomicile ?>" class="stationComplete stats">
+                <canvas style="display: block; margin: 0 auto;" width="600px" height="300px"></canvas>
+            </article>
 
-            <section class="maison" id="appart-<?= $appart["appartement"]->idDomicile ?>">
-                <div class="topSection">
-                    <div class="topSectionMaison"><?= $appart["appartement"]->Titre ?></div>
-                    <div id="chauffage-<?= $appart["appartement"]->idDomicile ?>" class="topSectionIcone">
-                        <span>...</span> <i class="fas fa-fire"></i></div>
-                    <div id="ampoule-<?= $appart["appartement"]->idDomicile ?>" class="topSectionIcone"><span>...</span>
-                        <i class="far fa-lightbulb fa-fw"></i></div>
-                </div>
-                <article id="stats-<?= $appart["appartement"]->idDomicile ?>" class="stationComplete stats">
-                    <canvas style="display: block; margin: 0 auto;" width="600px" height="300px"></canvas>
-                </article>
+            <?php foreach ($appart["pieces"] as $piece) { ?>
 
-                <?php foreach ($appart["pieces"] as $piece) { ?>
+            <?php foreach ($piece["cemac"] as $cemac) { ?>
+                <article class="stationComplete">
+                    <div>
+                        <div class="station">
+                            <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
+                            <div><?= $piece['piece']->nom ?></div>
+                        </div>
+                    
+                        <?php foreach($cemac["capteurs"] as $capteur){?>
 
-                    <?php foreach ($piece["cemac"] as $cemac) { ?>
-                        <article class="stationComplete">
-                            <div>
-                                <div class="station">
-                                    <div><?= "Station #" . $cemac["cemac"]->idCemac ?></div>
-                                    <div><?= $piece['piece']->nom ?></div>
-                                </div>
-
-                                <?php foreach ($cemac["capteurs"] as $capteur) { ?>
-
-                                    <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
-                                        <?php if ($capteur['typeComposant']->icone == "opened-window") { ?>
-                                            <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
-                                        <?php } else { ?>
-                                            <div class="icone">
-                                                <i class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i>
-                                            </div>
-                                        <?php } ?>
-                                        <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
-                                        <?php if ($capteur['typeComposant']->type == 1) { ?>
-                                            <div class="interactionCapteur">
-                                                <label class="custom_checkbox2_grey">
-                                                    <input class="hidden" type="checkbox" name="checkbox"
-                                                           id="checkbox-capteur-<?= $capteur['capteur']->idComposant ?>"
-                                                    <?= $capteur['status'] == true ? 'checked' : '' ?>>
-                                                    <span class="checkbox2_span_grey" onclick="switchCheckbox<?= $capteur['capteur']->idComposant ?>()"></span>
-                                                </label>
-                                            </div>
-
-                                            <script>
-                                                function switchCheckbox<?= $capteur['capteur']->idComposant ?>() {
-                                                    let checkbox = document.getElementById("checkbox-capteur-<?= $capteur['capteur']->idComposant ?>");
-                                                    if (checkbox.checked === false) {
-                                                        fetch('/composant/activate?id=<?= $capteur['capteur']->idComposant ?>')
-                                                            .then(res => res.json())
-                                                            .then(json => {
-                                                                 if (json.status === "200") {
-                                                                    return checkbox.checked = true
-                                                                }
-                                                            });
-                                                    } else if (checkbox.checked === true) {
-                                                        fetch('/composant/desactivate?id=<?= $capteur['capteur']->idComposant  ?>')
-                                                            .then(res => res.json())
-                                                            .then(json2 => {
-                                                                if (json2.status === "200") {
-                                                                    return checkbox.checked = false
-                                                                }
-                                                            });
-                                                    }
-                                                }
-                                            </script>
-
-                                        <?php } ?>
-
-                                    </div>
+                            <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
+                                <?php if ($capteur['typeComposant']->icone == "opened-window"){ ?>
+                                    <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
+                                <?php } else { ?>
+                                    <div class="icone"><i class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i></div>
+                                <?php } ?>
+                                <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
+                                <?php if($capteur['typeComposant']->type == 1) { ?>
+                                    <div class="interactionCapteur"><label class="custom_checkbox2_grey"><input class="hidden" type="checkbox" name="checkbox"><span class="checkbox2_span_grey"></span></label></div>
                                 <?php } ?>
                             </div>
                         </article>
@@ -119,9 +83,10 @@
 
                 <?php } ?>
 
-            </section>
+        </section>
 
-        <?php } ?>
+    <?php }
+        } ?>
 
         <script>
             const appartDropdown = document.getElementById('appart-dropdown');
@@ -189,7 +154,7 @@
                 }
             })
         </script>
-        </section>
+
     </div>
 
     <script>
@@ -287,36 +252,84 @@
                         })
                     }
                 })
-                let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
-                for (let i = 0; i < (new Date()).getMonth() + 1; i++) {
-                    values.push(values.shift());
-                    months.push(months.shift());
-                }
-                values = values.reverse();
-                months = months.reverse();
-                drawStats(
-                    canvasStats<?= $appart["appartement"]->idDomicile ?>.getContext("2d"),
-                    values,
-                    months
-                );
+
+            })
+        chauffage<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["2"][(new Date()).getMonth()].toFixed(0) + 'h';
+        ampoule<?= $appart["appartement"]->idDomicile ?>.getElementsByTagName('span')[0].innerText = logs["1"][(new Date()).getMonth()].toFixed(0) + 'h';
+
+        let months = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Dec"]
+
+        for (let i = 0; i < (new Date()).getMonth() + 1; i++) {
+            logs["1"].push(logs["1"].shift());
+            logs["2"].push(logs["2"].shift());
+            months.push(months.shift());
+        }
+        months = months.reverse();
+
+        drawStats(
+            canvasStats<?= $appart["appartement"]->idDomicile ?>.getContext("2d"),
+            logs["1"].reverse(),
+            logs["2"].reverse(),
+            months
+        );
 
 
-            });
+        })
+        ;
         <?php } ?>
-        function drawStats(ctx, values, xAxis) {
+        function drawStats(ctx, values1, values2, xAxis) {
+            let values = values1.map((value, index) => {
+                return value + values2[index];
+            })
             let margin = 10
             let barWidth = ctx.canvas.width / values.length - margin * 2;
             let maxBarHeight = ctx.canvas.height - margin * 2 - 50;
             let max = Math.max(...values);
             values.forEach((value, i) => {
                 let ratio = value / max;
-                let barHeight = ratio * maxBarHeight;
-                ctx.fillStyle = "#FFF";
+                let barHeight = ratio * maxBarHeight; // Calcul de la barre du chauffage
+                let littleBarHeight = (values1[i] / max) * maxBarHeight; // Calcul de l'ampoule'
+                //Affichage successif des barres
+                ctx.fillStyle = "#45B549";
                 ctx.fillRect(margin + i * ctx.canvas.width / values.length,
                     ctx.canvas.height - barHeight - 2 - 25,
                     barWidth,
-                    barHeight + 1
+                    barHeight
                 );
+                if (values2[i] > 0.01) {
+                    ctx.fillStyle = "#0D5C14";
+                    ctx.font = "12px sans-serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText(
+                        values2[i].toFixed(1) + 'h',
+                        i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
+                        (ctx.canvas.height - (barHeight + littleBarHeight) / 2 - 2 - 25)
+                    );
+                }
+                ctx.fillStyle = "#FFDB0C";
+                ctx.fillRect(margin + i * ctx.canvas.width / values.length,
+                    ctx.canvas.height - littleBarHeight - 2 - 25,
+                    barWidth,
+                    littleBarHeight
+                );
+                if (values1[i] > 0.01) {
+                    ctx.fillStyle = "#A38202";
+                    ctx.font = "12px sans-serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText(
+                        values1[i].toFixed(1) + 'h',
+                        i * ctx.canvas.width / values.length + (ctx.canvas.width / values.length) / 2,
+                        ctx.canvas.height - littleBarHeight / 2 - 2 - 25
+                    );
+                }
+                // Affichage d'une barre par défaut
+                ctx.fillStyle = "#FFF";
+                ctx.fillRect(margin + i * ctx.canvas.width / values.length,
+                    ctx.canvas.height - 2 - 25,
+                    barWidth,
+                    1
+                );
+                // Affichage du total
                 ctx.font = "12px sans-serif";
                 ctx.textAlign = "center";
                 ctx.fillText(
@@ -333,4 +346,6 @@
         }
     </script>
 
-<?php require('partials/footer.php'); ?>
+
+<?php
+require('partials/footer.php'); ?>
