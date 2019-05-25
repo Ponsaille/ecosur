@@ -33,12 +33,23 @@ class Board extends Model
     public static function findCapteursByStation($idStation)
     {
         return App::get('database')->select('cemac INNER JOIN composants ON composants.idCemac=cemac.idCemac AND cemac.idCemac= ' . $idStation, ['idComposant', 'idtypeComposant', 'composants.idCemac']);
-
     }
 
     public static function findTypeComposantByCapteur($capteur)
     {
         return App::get('database')->select('composants INNER JOIN typeComposant ON composants.idtypeComposant=typeComposant.idtypeComposant AND composants.idComposant=' . $capteur, ['typeComposant.idtypeComposant', 'nom', 'type', 'icone']);
+    }
+
+    public static function findIdDomicilesWithSecondaryUsers($idPrimaryUser) {
+
+        $all = App::get('database')->select("abonnementproprietaire INNER JOIN utilisateursecondaire ON abonnementproprietaire.idDomicile = utilisateursecondaire.idDomicile", ['utilisateursecondaire.idDomicile'], ["abonnementproprietaire.idPersonne = $idPrimaryUser"]);
+        $onlyIds = [];
+
+        foreach ($all as $i) {
+            array_push($onlyIds, $i->idDomicile);
+        }
+
+        return $onlyIds;
     }
 
     public static function RessourceAppartementByUser($userId)
@@ -100,10 +111,14 @@ class Board extends Model
                     $capteurs = [];
                     foreach ($capteursFromBDD as $capteur) {
                         $typeComposant = Board::findTypeComposantByCapteur($capteur->idComposant)[0];
+                        $active = Composant::status($capteur->idComposant);
 
                         if (in_array($typeComposant->idtypeComposant, $allowedTypes)) {
-                            $capteurs[$capteur->idComposant] = ["capteur" => $capteur,
-                                "typeComposant" => $typeComposant];
+                            $capteurs[$capteur->idComposant] = [
+                                "capteur" => $capteur,
+                                "typeComposant" => $typeComposant,
+                                "status" => $active
+                            ];
                         }
                     }
                     $stations[$station->idCemac] = [

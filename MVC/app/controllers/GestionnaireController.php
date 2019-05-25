@@ -16,11 +16,12 @@ use App\Model\Modifiables;
 use App\Model\TypeComposant;
 use App\Model\FAQ;
 
-class GestionnaireController extends AuthController {
+class GestionnaireController extends AuthController
+{
 
     function __construct()
     {
-        if (!isset($_SESSION['user_type']) || $_SESSION['user_type']!=1) {
+        if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 1) {
             http_response_code(403);
             die($this->view('errors/403'));
         }
@@ -31,7 +32,9 @@ class GestionnaireController extends AuthController {
         $title = 'Tableau de bord';
 
         $ressource = Board::RessourceAppartementByUser($_SESSION['user_id']);
-        return $this->view('users/users', compact('title', 'ressource'));
+        $idHousesWith2ndaryUsers = Board::findIdDomicilesWithSecondaryUsers($_SESSION['user_id']);
+
+        return $this->view('users/users', compact('title', 'ressource', 'idHousesWith2ndaryUsers'));
     }
 
 

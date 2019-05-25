@@ -20,7 +20,10 @@ class BoardController extends AuthController
         $title = 'Tableau de bord';
 
         $ressource = Board::RessourceAppartementByUser($_SESSION['user_id']);
-        return $this->view('users/users', compact('title', 'ressource'));
+
+        $idHousesWith2ndaryUsers = Board::findIdDomicilesWithSecondaryUsers($_SESSION['user_id']);
+
+        return $this->view('users/users', compact('title', 'ressource', 'idHousesWith2ndaryUsers'));
     }
 
     function userSAV()
