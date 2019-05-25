@@ -45,7 +45,7 @@ class StaticController extends Controller
 
         try {
             //Server settings
-            $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+            $mail->SMTPDebug = 0;                                       // Enable verbose debug output
             $mail->isSMTP();                                            // Paramétrer le Mailer pour utiliser SMTP 
             $mail->Host = 'smtp.gmail.com';                             // Spécifier le serveur SMTP
             $mail->SMTPAuth = true;                                     // Activer authentication SMTP
@@ -66,9 +66,12 @@ class StaticController extends Controller
             $mail->Body    = $_POST['body'];
 
             $mail->send();
-            echo 'Message has been sent';
+
+            $title= "Message envoyé";
+            $this->view('public/sentmail', compact('title'));
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $title= "Erreur";
+            $this->view('public/emailnotsent', compact('title'));
         }
     }
 
