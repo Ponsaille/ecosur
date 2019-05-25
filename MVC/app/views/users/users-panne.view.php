@@ -14,7 +14,7 @@
             <div class="chatbox-body" id="chat">
             </div>
             <div class="input-message-btn">
-                <input class="chatbox-message-input" type="text" name="message">
+                <input class="chatbox-message-input" type="text" name="message" id="input-msg" placeholder="Tapez votre message ici...">
                 <button class="send-button" type='int' name="type" id="msg-btn"><i class="fas fa-paper-plane"></i>
                 </button>
             </div>
@@ -52,6 +52,7 @@
 
         const chatBody = document.getElementById("chat");
         const button = document.getElementById("msg-btn");
+        const input = document.getElementById("input-msg");
 
         setInterval(fetchMessages, 500);
 
@@ -63,6 +64,8 @@
                 method: 'POST',
                 body: varForm
             }).then(fetchMessages)
+
+            input.value = "";
         });
     </script>
 
