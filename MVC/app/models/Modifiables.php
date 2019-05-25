@@ -17,7 +17,7 @@ class Modifiables extends Model
     }
 
     public static function update($id, $contenu) {
-        return App::get('database')->update('elementsmodifiables', ["contenu" => htmlspecialchars($contenu)], ["idElementsModifiables=$id"]);
+        return App::get('database')->update('elementsmodifiables', ["contenu" => $contenu], ["idElementsModifiables=$id"]);
     }
 
     public static function orderedByTitre() {

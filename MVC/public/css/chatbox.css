@@ -1,9 +1,9 @@
 .chatbox {
-    width: 30rem;
+    min-width: 20rem;
+    max-width: 60rem;
     padding: 0;
     border: 1px solid #606060;
     align-self: flex-end;
-    margin-left: 2rem;
 }
 
 .chatbox-header {
@@ -25,14 +25,13 @@
     overflow-y: scroll;
     width: 100%;
     height: 500px;
-    padding: 15px;
+    padding: 15px 15px 20px;
 }
 
 .message {
     margin: 15px 2px;
-    padding: 0 10px;
-    border-radius: 5px;
-
+    padding: 3px 10px;
+    border-radius: 15px;
     width: 60%;
 }
 
@@ -70,4 +69,14 @@
     background: transparent;
     border: none;
     font-size: 1.2em;
+    width: 10%;
+    color: #FFFFFF;
+}
+
+.input-message-btn {
+    display: inline-block;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #606060;
 }

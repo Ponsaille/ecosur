@@ -33,6 +33,22 @@ class Pannes extends Model
         return App::get('database')->select('message', ['*'], ["idPanne=$id"]);
     }
 
+    public static function new($idCemac, $nbObjet)
+    {
+
+        $data = [
+            "descriptif" => "La station #" . $nbObjet . " a été déclarée comme défaillante.",
+            "idCemac" => $idCemac
+        ];
+
+        return App::get('database')->insert('panne', $data);
+    }
+
+    public static function end($idPanne)
+    {
+        return App::get('database')->update('panne', ["endDate" => date('Y-m-d h:i:s', time())], ['idPanne = ' . $idPanne]);
+    }
+
     public static function storeMessage($data, $idPersonne, $idPanne)
     {
 

@@ -4,13 +4,13 @@
 
         <section id="FAQ">
             <?php foreach ($faqs as $faq) { ?>
-                
-                <h2><?= $faq->question ?></h2>
-                <p><?= $faq->question ?></p>
-
+                <div class="faq-show">
+                    <h1><?= $faq->question ?></h1>
+                    <p><?= $faq->reponse ?></p>
+                </div>
             <?php } ?>
-            
-            
+
+
         </section>
 
     </div>

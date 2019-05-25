@@ -22,23 +22,23 @@
             <div>
                 <figure>
                     <img src="<?= $modifiables["produit1_logo"]->contenu ?>" alt="">
-                    <hr>
+                    <!-- <hr> -->
                     <figcaption>
                         <?= $modifiables["produit1_text"]->contenu ?>
                     </figcaption>
                 </figure>
                 <figure>
                     <img src="<?= $modifiables["produit2_logo"]->contenu ?>" alt="">
-                    <hr>
+                    <!-- <hr> -->
                     <figcaption>
                         <?= $modifiables["produit2_text"]->contenu ?>
                     </figcaption>
                 </figure>
                 <figure>
-                    <img src="<?= $modifiables["produit2_logo"]->contenu ?>" alt="">
-                    <hr>
+                    <img src="<?= $modifiables["produit3_logo"]->contenu ?>" alt="">
+                    <!-- <hr> -->
                     <figcaption>
-                        <?= $modifiables["produit2_text"]->contenu ?>
+                        <?= $modifiables["produit3_text"]->contenu ?>
                     </figcaption>
                 </figure>
             </div>

@@ -12,6 +12,7 @@
 namespace App\Controllers;
 
 use \App\Core\App;
+use App\Model\Pannes;
 use App\Model\Properties;
 use App\Model\Station;
 use \App\Model\Users;
@@ -20,13 +21,6 @@ use \Exception;
 
 class UsersController extends Controller
 {
-
-    public function board()
-    {
-        $title = "Tableau de bord";
-        return $this->view('users/users', compact('title'));
-    }
-
     public function inscription()
     {
         Users::store($_POST);
@@ -40,13 +34,15 @@ class UsersController extends Controller
         return $this->view('users/__inscription-reussie', compact('title'));
     }
 
-    public function editPage() {
+    public function editPage()
+    {
         $user = Users::find($_SESSION['user_id']);
         $title = "Edition de votre compte";
         return $this->view('users/users-edit', compact('title', 'user'));
     }
 
-    public function edit() {
+    public function edit()
+    {
         Users::edit($_POST);
         static::redirect('edit-account');
         return;
@@ -82,6 +78,7 @@ class UsersController extends Controller
                     break;
                 case 4:
                     $this->redirect('sav');
+                    break;
             }
         } else {
             $title = "Mot de passe erroné";
@@ -89,43 +86,4 @@ class UsersController extends Controller
         }
     }
 
-    public function disconnect()
-    {
-        session_destroy();
-
-        static::redirect('');
-    }
-
-    public function gestion()
-    {
-        $properties = Properties::findPropertiesByConnectedUser();
-
-        $rooms = [];
-        foreach ($properties as $property) {
-            array_push($rooms, Properties::findRoomsByProperty($property->idDomicile));
-        }
-
-        $cemacs = [];
-        foreach ($rooms as $room) {
-            if ($room != null) {
-                for ($j = 0; $j < count($room); $j++) {
-                    array_push($cemacs, Station::findCemacByRoom($room[$j]->idPiece));
-                }
-            }
-        }
-
-        $composants = [];
-        foreach ($cemacs as $cemac) {
-            if ($cemac != null) {
-                for ($k = 0; $k < count($cemac); $k++) {
-                    array_push($composants, Station::findComposantByCemac($cemac[$k]->idCemac));
-                }
-            }
-        }
-
-        $nomsTypesComposants = Station::getNomsTypesComposants();
-
-        $title = "Gestion";
-        return $this->view('users/users-gestion', compact('title', 'properties', 'rooms', 'cemacs', 'composants', 'nomsTypesComposants'));
-    }
 }

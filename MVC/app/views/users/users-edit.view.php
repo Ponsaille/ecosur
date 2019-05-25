@@ -5,35 +5,35 @@
             <form action="/edit-user" method="POST">
                 <label class="half-length">
                     <span>Prénom</span>
-                    <input type="text" name="prenom" value="<?= $user->prenom ?>">
+                    <input type="text" name="prenom" value="<?= rawurldecode($user->prenom) ?>">
                 </label>
                 <label class="half-length">
                     <span>Nom</span>
-                    <input type="text" name="nom" value="<?= $user->nom ?>">
+                    <input type="text" name="nom" value="<?= rawurldecode($user->nom) ?>">
                 </label>
                 <label class="full-length">
                     <span>Email</span>
-                    <input type="text" name="email" value="<?= $user->email ?>">
+                    <input type="text" name="email" value="<?= rawurldecode($user->email) ?>">
                 </label>
                 <label class="full-length">
                     <span>Adresse</span>
-                    <input type="text" name="adresse" value="<?= $user->adresse ?>">
+                    <input type="text" name="adresse" value="<?= rawurldecode($user->adresse) ?>">
                 </label>
                 <label class="half-length">
                     <span>Ville</span>
-                    <input type="text" name="ville" value="<?= $user->ville ?>">
+                    <input type="text" name="ville" value="<?= rawurldecode($user->ville) ?>">
                 </label>
                 <label class="half-length">
                     <span>Code Postal</span>
-                    <input type="text" name="code_postal" value="<?= $user->code_postal ?>">
+                    <input type="text" name="code_postal" value="<?= rawurldecode($user->code_postal) ?>">
                 </label>
                 <label class="full-length">
                     <span>Pays</span>
-                    <input type="text" name="pays" value="<?= $user->pays ?>">
+                    <input type="text" name="pays" value="<?= rawurldecode($user->pays) ?>">
                 </label>
-                <input class="btn-gray" type="submit" value="Editer">
+                <input class="btn-gray" type="submit" value="Editer"> | <a href="/delete-user" onclick="return confirm('Êtes-vous sûr ?')" class="supprimerCapteur">Supprimer le compte</a>
             </form>
         </section>
-
     </div>
+
 <?php require('partials/footer.php'); ?>
