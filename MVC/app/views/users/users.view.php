@@ -134,7 +134,6 @@
                 for (maison of maisons) {
                     maison.classList.add('hidden');
                 }
-                console.log(e.target.value)
                 document.getElementById(`appart-${e.target.value}`).classList.remove('hidden');
             }
         })
@@ -235,7 +234,13 @@
                             }
                             if (month.length > 0 && month[0].active == "1") {
                                 const firstDate = new Date(month[month.length - 1].date);
-                                const dateEnd = new Date(firstDate.getFullYear(), firstDate.getMonth(), 1, 0, 0).toJSON().slice(0, 19).replace('T', ' ');
+                                let dateEnd
+                                if(firstDate.getMonth() == (new Date()).getMonth()) {
+                                    dateEnd = new Date();
+                                    dateEnd.setHours( dateEnd.getHours() - 2 );
+                                } else {
+                                    dateEnd = new Date(firstDate.getFullYear(), firstDate.getMonth() + 1, 0, 0, 0).toJSON().slice(0, 19).replace('T', ' ');
+                                }
                                 month.unshift({
                                     idComposant: component.idComposant,
                                     date: dateEnd,
@@ -247,7 +252,7 @@
                         return component;
                     })
                 });
-
+                
                 // Ramener tout à type
                 Object.keys(logs).forEach(idType => {
                     result = [];
@@ -261,6 +266,12 @@
                     })
                     logs[idType] = result
                 })
+
+                let hey = {};
+                Object.keys(logs).forEach(idType => {
+                    hey[idType] = logs[idType].slice(0);
+                });
+                console.log(hey)
 
                 // Calculer
                 Object.keys(logs).forEach(idType => {
