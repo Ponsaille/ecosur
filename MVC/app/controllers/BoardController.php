@@ -11,7 +11,7 @@ use App\Model\Users;
 use \Exception;
 
 use \App\Model\IdTemporaire;
-use http\Client\Curl\User;
+use App\Model\Composant;
 
 class BoardController extends AuthController
 {
@@ -56,6 +56,15 @@ class BoardController extends AuthController
             "code" => 200,
             "idTemporaire" => $idTemporaire
         ]);
+    }
+
+    public function getAppartementStats() {
+        if(!isset($_GET['id'])) {
+            die('Missing parameters');
+        }
+
+        header('Content-type: application/json');
+        echo json_encode(Composant::getLogsByTypes($_GET['id']));
     }
 
     function newPanne()

@@ -2,6 +2,10 @@
 
 $router->get('', 'StaticController@home');
 $router->get('faq', 'StaticController@faq');
+$router->post('contact', 'StaticController@sendMail');
+
+
+
 $router->post('inscription', 'UsersController@inscription');
 $router->post('connexion', 'UsersController@connection');
 $router->get('disconnect', 'BoardController@disconnect');
@@ -54,6 +58,11 @@ $router->get('panne', 'SavController@showPanne');
 $router->get('end-panne', 'SavController@endPanne');
 $router->get('message', 'SavController@sendMessage');
 $router->post('message', 'SavController@sendMessage');
+
+$router->get('composant/activate','StationController@activate');
+$router->get('composant/desactivate','StationController@desactivate');
+
+$router->get('getAppartementStats','BoardController@getAppartementStats');
 
 $router->post('ajoutUtilisateurSecondaire', 'BoardController@ajoutUtilisateurSecondaire');
 

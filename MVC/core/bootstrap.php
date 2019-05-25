@@ -12,6 +12,12 @@ require 'core/database/QueryBuilder.php';
 require 'app/controllers/index.php';
 require 'app/models/index.php';
 
+
+require 'core/PHPMailer/src/Exception.php';
+require 'core/PHPMailer/src/PHPMailer.php';
+require 'core/PHPMailer/src/SMTP.php';
+
+
 use App\Core\App;
 
 App::bind('config', require 'config.php');

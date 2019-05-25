@@ -489,13 +489,17 @@ select {
 }
 
 .topSection {
-    grid-template-columns: 3fr 0.7fr 0.7fr;
+    grid-template-columns: 3fr 0.3fr 0.3fr;
     display: grid;
     background-color: #606060;
     padding: 10px 10px;
     font-size: 20px;
     color: white;
     margin-top: 30px;
+}
+
+.choixPieces{
+    text-align: right;
 }
 
 .topSectionIcone {
@@ -567,7 +571,16 @@ article:nth-child(2n+1) {
     background-color: #888888;
     color: white;
     font-size: 20px;
+}
 
+.stats {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+}
+.stats.stats-active {
+    max-height: 1000px;
 }
 
 .stationComplete:nth-child(2n+1) {
