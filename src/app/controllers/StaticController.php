@@ -12,10 +12,9 @@
 namespace App\Controllers;
 
 
-
+use \App\Core\App;
 use App\Model\FAQ;
 use App\Model\Modifiables;
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
@@ -48,37 +47,18 @@ class StaticController extends Controller
 
     public function sendMail(){
 
-
-        $mail = new PHPMailer(true);
-        set_time_limit(120);
-
         try {
-            //Server settings
-            $mail->SMTPDebug = 0;                                       // Enable verbose debug output
-            $mail->isSMTP();                                            // Paramétrer le Mailer pour utiliser SMTP 
-            $mail->Host = 'smtp.gmail.com';                             // Spécifier le serveur SMTP
-            $mail->SMTPAuth = true;                                     // Activer authentication SMTP
-            $mail->Username = 'app.g7c@gmail.com';                      // Votre adresse email d'envoi
-            $mail->Password = 'lafeteestfinie';                         // Le mot de passe de cette adresse email
-            $mail->SMTPSecure = 'ssl';                                  // Accepter SSL
-            $mail->Port = 465;
-
-
-            //Recipients
-            $mail->setFrom($_POST['email'], 'client');
-            $mail->addAddress('app.g7c@gmail.com');     // Add a recipient
-            
-
-            // Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'mail contact index';
-            $mail->Body    = $_POST['body'];
-
-            $mail->send();
+            App::get('email')->send(
+                'app.g7c@gmail.com', 
+                'app.g7c@gmail.com', 
+                'mail contact index', 
+                'Vous avez été contacté par: ' . $_POST['email'] . $_POST['body']
+            );
 
             $title= "Message envoyé";
             $this->view('public/sentmail', compact('title'));
         } catch (Exception $e) {
+            die($e->getMessage());
             $title= "Erreur";
             $this->view('public/emailnotsent', compact('title'));
         }
