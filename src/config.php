@@ -7,9 +7,15 @@ return [
         'name' => 'company',
         'username' => 'root',
         'password' => '',
-        'connection' => 'mysql:host=localhost:3306',
+        'connection' => 'mysql:localhost:3306',
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]
+    ],
+    'email' => [
+        'username' => 'app.g7c@gmail.com',
+        'host' => 'smtp.gmail.com',
+        'port' => 465,
+        'password' => 'foo'
     ]
 ];
