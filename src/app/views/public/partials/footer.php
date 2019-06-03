@@ -32,11 +32,11 @@
                 <form action="/connexion" method="POST">
                     <label class="full-length">
                         <span>Email</span>
-                        <input type="text" name="email">
+                        <input type="email" name="email" required>
                     </label>
                     <label class="full-length">
                         <span>Mot de passe</span>
-                        <input type="password" name="password">
+                        <input type="password" name="password" required>
                     </label>
                     <input class="btn-gray" type="submit" value="Se connecter">
                 </form>
@@ -48,35 +48,35 @@
                 <form action="/inscription" method="POST">
                     <label class="half-length">
                         <span>Prénom</span>
-                        <input type="text" name="prenom">
+                        <input type="text" name="prenom" required>
                     </label>
                     <label class="half-length">
                         <span>Nom</span>
-                        <input type="text" name="nom">
+                        <input type="text" name="nom" required>
                     </label>
                     <label class="full-length">
                         <span>Email</span>
-                        <input type="text" name="email">
+                        <input type="email" name="email" required>
                     </label>
                     <label class="full-length">
                         <span>Adresse</span>
-                        <input type="text" name="adresse">
+                        <input type="text" name="adresse" required>
                     </label>
                     <label class="half-length">
                         <span>Ville</span>
-                        <input type="text" name="ville">
+                        <input type="text" name="ville" required>
                     </label>
                     <label class="half-length">
                         <span>Code Postal</span>
-                        <input type="text" name="code_postal">
+                        <input type="text" name="code_postal" required>
                     </label>
                     <label class="full-length">
                         <span>Pays</span>
-                        <input type="text" name="pays">
+                        <input type="text" name="pays" required>
                     </label>
                     <label class="full-length">
                         <span>Mot de passe</span>
-                        <input type="password" name="password">
+                        <input type="password" name="password" required>
                     </label>
                     <input class="btn-gray" type="submit" value="S'inscrire">
                 </form>
