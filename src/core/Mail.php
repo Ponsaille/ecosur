@@ -27,7 +27,7 @@ class Mail {
 
     public function send($from, $to, $subject, $body) {
         //Recipients
-        $this->mail->setFrom($from, 'client');
+        $this->mail->setFrom($from, 'no-reply');
         $this->mail->addAddress($to);     // Add a recipient
         
 
