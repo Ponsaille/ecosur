@@ -15,6 +15,10 @@ $router->get('delete-user', 'BoardController@delete');
 $router->get('generateIdTemporaire', 'BoardController@generateIdTemporaire');
 $router->get('useIdTemporaire', 'SavController@useIdTemporaire');
 $router->post('useIdTemporaire', 'SavController@useIdTemporaire');
+$router->get('recuperation/1', 'StaticController@recuperation');
+$router->post('recuperation/1', 'StaticController@sendRecuperationLink');
+$router->get('recuperation/2', 'StaticController@changeMdpView');
+$router->post('recuperation/2', 'StaticController@changeMdp');
 
 
 $router->get('gestion', 'BoardController@gestion');

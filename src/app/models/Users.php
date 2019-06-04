@@ -119,6 +119,39 @@ class Users extends Model
         }
     }
 
+    public static function updatePassword($password, $idUser)
+    {
+        $data = [
+            'password' => $password
+        ];
+
+        $args = [
+            "password" => FILTER_SANITIZE_ENCODED
+        ];
+
+        $data = filter_var_array($data, $args);
+
+        $errors = [];
+        array_walk($data, function ($val, $key) use (&$errors) {
+            if (!$val) {
+                $errors[] = $key;
+            }
+        });
+
+        if (sizeof($errors) > 0) {
+            die(require "app/views/users/__input-erronnee.view.php");
+        }
+
+        try {
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            App::get('database')->update('personne', $data, ['idPersonne = ' . $idUser]);
+            return true;
+        } catch (Exception $e) {
+            $title = "Informations invalides";
+            die(require "app/views/users/__info-invalide.view.php");
+        }
+    }
+
     public static function delete($idUser) {
         return App::get('database')->delete('personne', ['idPersonne = ' . $idUser]);
     }

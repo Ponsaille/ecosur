@@ -11,3 +11,4 @@ require 'TypeComposant.php';
 require 'FAQ.php';
 require 'IdTemporaire.php';
 require 'Composant.php';
+require 'RecuperationLink.php';

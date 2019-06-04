@@ -38,6 +38,7 @@
                         <span>Mot de passe</span>
                         <input type="password" name="password" required>
                     </label>
+                    <div style="text-align: right; margin-bottom: 5px;"><a href="/recuperation/1">Mot de passe oublié ?</a></div>
                     <input class="btn-gray" type="submit" value="Se connecter">
                 </form>
             </div>

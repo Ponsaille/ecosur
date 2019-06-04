@@ -1,6 +1,6 @@
 <?php require('partials/head.php'); ?>
 
-    <div class="container" style="margin-top: 150px">
+    <div class="container" style="margin-top: 175px">
 
         <section id="">
           <h1>

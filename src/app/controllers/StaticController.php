@@ -12,9 +12,8 @@
 namespace App\Controllers;
 
 
-use \App\Core\App;
-use App\Model\FAQ;
-use App\Model\Modifiables;
+use \App\Core\{App, Request};
+use App\Model\{FAQ, Modifiables, RecuperationLink, Users};
 use PHPMailer\PHPMailer\Exception;
 
 
@@ -65,5 +64,70 @@ class StaticController extends Controller
     }
 
       
-    
+    public function recuperation() {
+        $title = 'Récupération de mail';
+
+        $this->view('public/generateRecup', compact('title'));
+    }
+
+    public function sendRecuperationLink() {
+        $email = $_POST['email'];
+        $personne = Users::findByEmail($email);
+        if($personne->idPersonne) {
+            $token = RecuperationLink::generate($personne->idPersonne);
+            $link = 'http://' . Request::host() . '/recuperation/2?idPersonne='.$personne->idPersonne.'&token='.$token;
+            App::get('email')->send(
+                'app.g7c@gmail.com', 
+                $email, 
+                'Récupération du mot de passe', 
+                "Afin de récupérer votre mot de passe veuillez acceder au lien suivant: <br> <a href='$link'>$link</a>"
+            );
+        }
+        $title = "Lien de récupération envoyé";
+        $this->view('public/recuperationSent', compact('title'));
+    }
+
+    public function changeMdpView() {
+        $key = $_GET['token'];
+        $idPersonne = $_GET['idPersonne'];
+        if(!RecuperationLink::exists($idPersonne, $key)) {
+            $title = "Non autorisé";
+            $this->view('errors/403', compact('title'));
+        } else {
+            $title = "Modifier votre mot de passe";
+            $this->view('public/changePassword', compact('title', 'key', 'idPersonne'));
+        }
+    }
+
+    public function changeMdp() {
+        $key = $_GET['token'];
+        $idPersonne = $_GET['idPersonne'];
+        if(RecuperationLink::useKey($idPersonne, $key)) {
+            if(Users::updatePassword($_POST['password'], $idPersonne)) {
+                $user = Users::find($idPersonne);
+                $_SESSION['user_id'] = $user->idPersonne;
+                $_SESSION['user_type'] = $user->type;
+                switch ($user->type) {
+                    case 0:
+                        $this->redirect('board');
+                        break;
+                    case 1:
+                        $this->redirect('gestionnaire/board');
+                        break;
+                    case 2:
+                        $this->redirect('webmaster');
+                        break;
+                    case 5:
+                        $this->redirect('pdg');
+                        break;
+                    case 4:
+                        $this->redirect('sav');
+                        break;
+                }
+            }
+        } else {
+            $title = "Non autorisé";
+            $this->view('errors/403', compact('title'));
+        }
+    }
 }
