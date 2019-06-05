@@ -74,7 +74,6 @@ class Users extends Model
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             return App::get('database')->insert('personne', $data);
         } catch (Exception $e) {
-            die(var_dump($e->getMessage()));
             $title = "Informations invalides";
             die(require "app/views/users/__info-invalide.view.php");
         }

@@ -17,3 +17,4 @@ require 'PdgController.php';
 require 'SavController.php';
 require 'WebmasterController.php';
 require 'GestionnaireController.php';
+require 'ErrorController.php';

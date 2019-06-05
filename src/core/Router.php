@@ -60,13 +60,16 @@ class Router {
     public function direct($uri, $requestType) {
         
         if(array_key_exists($uri, $this->routes[$requestType])) {
-            
-            return $this->callAction(
-                ...explode('@', $this->routes[$requestType][$uri])
-            );
+            try {
+                return $this->callAction(
+                    ...explode('@', $this->routes[$requestType][$uri])
+                );
+            } catch (Exception $e) {
+                $this->callAction('ErrorController', 'internalError');
+            }
         }
 
-        throw new Exception('No routes defined for this URI.');
+        return $this->callAction('ErrorController', 'noURI');
     }
 
     /**
