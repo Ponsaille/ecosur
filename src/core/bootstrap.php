@@ -17,6 +17,7 @@ require 'core/PHPMailer/src/Exception.php';
 require 'core/PHPMailer/src/PHPMailer.php';
 require 'core/PHPMailer/src/SMTP.php';
 require 'core/Mail.php';
+require 'core/Tomcat.php';
 
 
 use App\Core\App;
