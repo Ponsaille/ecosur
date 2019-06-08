@@ -25,21 +25,22 @@ class Tomcat {
         return array_map(function($log) {
             $trame = [];
             list(
-                $trame['t'], 
-                $trame['o'], 
-                $trame['r'], 
-                $trame['c'], 
-                $trame['n'], 
-                $trame['v'], 
-                $trame['a'], 
-                $trame['x'], 
-                $trame['year'], 
-                $trame['month'], 
-                $trame['day'], 
-                $trame['hour'], 
-                $trame['min'], 
-                $trame['sec']
+                $trame['type'], 
+                $trame['objectNumber'], 
+                $trame['requestType'], 
+                $trame['capteurType'], 
+                $trame['capteurNumber'], 
+                $trame['capteurValue'], 
+                $trame['trameNumber'], 
+                $trame['checksum'], 
+                $year, 
+                $month, 
+                $day, 
+                $hour, 
+                $min, 
+                $sec
             ) = sscanf($log,"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
+            $trame['date'] = "$year-$month-$day $hour:$min:$sec";
             return $trame;
         }, $logs);
     }
