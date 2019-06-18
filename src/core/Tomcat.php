@@ -9,7 +9,7 @@ class Tomcat {
         curl_setopt(
             $ch,
             CURLOPT_URL,
-            "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=007C"
+            "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=TEST"
         );
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -45,4 +45,49 @@ class Tomcat {
         }, $logs);
     }
 
+    public static function getTramesFrom($date='1999-06-05 11:56:50') {
+        $allTrames = static::getTrames();
+
+        $result = [];
+
+        foreach ($allTrames as $trame) {
+            if($trame['date'] >= $date) {
+                $result[] = $trame;   
+            }
+        }
+
+        return $result;
+    }
+
+    public static function actualizeTrame($trameInitial) {
+        $allTrames = static::getTramesFrom($trameInitial['date']);
+
+        $result = [];
+
+        foreach ($allTrames as $trame) {
+            if($trameInitial != $trame) {
+                $result[] = $trame;
+            }
+        }
+
+        return $result;
+    }
+
+    public static function actualizeLogs($trameInitial) {
+        $trames = static::actualizeTrame($trameInitial);
+
+        $result = [];
+
+        foreach ($trames as $trame) {
+            if(array_key_exists($trame['capteurNumber'], $result)) {
+                if(end($result[$trame['capteurNumber']])['capteurValue'] != $trame['capteurValue']) {
+                    $result[$trame['capteurNumber']][] = $trame;
+                }
+            } else {
+                $result[$trame['capteurNumber']][] = $trame;
+            }
+        }
+
+        return $result;
+    }
 }
