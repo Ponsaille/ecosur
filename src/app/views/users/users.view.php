@@ -70,10 +70,13 @@
                                         ?>
                                         <div class="ligneDescriptionCapteur <?= $capteur["typeComposant"]->type == 1 ? 'actionneur' : 'capteur' ?>">
                                             <?php if ($capteur['typeComposant']->icone == "opened-window") { ?>
-                                                <div class="iconeImg"><img src="/public/images/opened-window.png"></div>
+                                                <div class="iconeImg"><img src="/public/images/opened-window.png" <?= $capteur['status'] ? 'style = "filter: invert(59%) sepia(34%) saturate(818%) hue-rotate(72deg) brightness(94%) contrast(89%);"' : '' ?> ></div>
                                             <?php } else { ?>
-                                                <div class="icone"><i
-                                                            class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"></i>
+                                                <div class="icone">
+                                                    <i
+                                                        class="fas <?= $capteur['typeComposant']->icone ?> fa-fw"
+                                                        <?= $capteur['status'] && $capteur['typeComposant']->type == 0 ? 'style = "color: #45B549"' : '' ?>
+                                                    ></i>
                                                 </div>
                                             <?php } ?>
                                             <span class="commentaireIcone"><?= ucfirst($capteur["typeComposant"]->nom) ?></span>
