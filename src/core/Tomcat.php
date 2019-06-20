@@ -90,4 +90,45 @@ class Tomcat {
 
         return $result;
     }
+
+
+    public static function checkSum($str){
+        $hex=[];
+        $sum=0;
+        for ($i=0;$i<strlen($str);$i++){
+            
+            $hex[$i]=ord($str[$i]);
+
+        }
+
+        for ($j=0;$j<sizeof($hex);$j++){
+            $sum=($sum+$hex[$j])%256;
+        }
+
+        return dechex($sum);
+
+    }
+
+    public static function createTrame($type,$objectNumber,$requestType,$capteurType,$capteurNumber,$capteurValue,$trameNumber){
+        
+        $trame=$type.$objectNumber.$requestType.$capteurType.$capteurNumber.$capteurValue.$trameNumber;
+        $checkSum=Tomcat::checkSum($trame);
+        $trame=$trame.$checkSum;
+        return $trame;
+    }
+
+    public static function sendTrame($type,$objectNumber,$requestType,$capteurType,$capteurNumber,$capteurValue,$trameNumber){
+        $trame=Tomcat::createTrame($type,$objectNumber,$requestType,$capteurType,$capteurNumber,$capteurValue,$trameNumber);
+        $ch = curl_init();
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            "http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=007C&TRAME=$trame"
+        );
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_exec($ch);
+        curl_close($ch);
+    }
+
 }
