@@ -4,12 +4,12 @@ namespace App\Core;
 
 class Tomcat {
 
-    public static function getLogs() {
+    public static function getLogs($objectNumber) {
         $ch = curl_init();
         curl_setopt(
             $ch,
             CURLOPT_URL,
-            "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=TEST"
+            "http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=$objectNumber"
         );
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -19,8 +19,8 @@ class Tomcat {
         return str_split($data,33);
     }
 
-    public static function getTrames() {
-        $logs = static::getLogs();
+    public static function getTrames($objectNumber) {
+        $logs = static::getLogs($objectNumber);
 
         return array_map(function($log) {
             $trame = [];
@@ -45,13 +45,13 @@ class Tomcat {
         }, $logs);
     }
 
-    public static function getTramesFrom($date='1999-06-05 11:56:50') {
-        $allTrames = static::getTrames();
+    public static function getTramesFrom($objectNumber, $date='1999-06-05 11:56:50') {
+        $allTrames = static::getTrames($objectNumber);
 
         $result = [];
 
         foreach ($allTrames as $trame) {
-            if($trame['date'] >= $date) {
+            if($trame['date'] > $date) {
                 $result[] = $trame;   
             }
         }
@@ -60,7 +60,7 @@ class Tomcat {
     }
 
     public static function actualizeTrame($trameInitial) {
-        $allTrames = static::getTramesFrom($trameInitial['date']);
+        $allTrames = static::getTramesFrom($trameInitial['objectNumber'], $trameInitial['date']);
 
         $result = [];
 
@@ -73,8 +73,8 @@ class Tomcat {
         return $result;
     }
 
-    public static function actualizeLogs($trameInitial) {
-        $trames = static::actualizeTrame($trameInitial);
+    public static function actualizeLogs($objectNumber, $date='1999-06-05 11:56:50') {
+        $trames = static::getTramesFrom($objectNumber, $date);
 
         $result = [];
 

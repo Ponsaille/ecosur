@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use App\Core\App;
+use App\Core\{App, Tomcat};
 use App\Model\Board;
 
 use \Exception;
@@ -117,5 +117,26 @@ class Composant extends Model
         }, $result);
 
         return $result;
+    }
+
+    public static function actualizeLogs($objectNumber) {
+        try {
+            $lastLog = App::get('database')->select('log', ['*'], ['idComposant > 0 ORDER BY date DESC LIMIT 1'])[0];
+        } catch (Exception $e) {
+            die("Whooooops...");
+        }
+
+        $capteurs = Tomcat::actualizeLogs($objectNumber);
+        foreach ($capteurs as $trames) {
+            foreach ($trames as $trame) {
+                if($trame['date'] > $lastLog->date) {
+                    App::get('database')->insert('log', [
+                        'idComposant' => $trame['capteurNumber'],
+                        'date' => $trame['date'],
+                        'active' => (int)$trame['capteurValue']
+                    ]);
+                }
+            }
+        }
     }
 }
